@@ -8,6 +8,7 @@ import Icon from "../Icon"
 import Link from "../Link"
 
 import { useOnClickOutside } from "../../hooks/useOnClickOutside"
+import { translateMessageId } from "../../utils/translations"
 
 // TODO use framer-motion
 const StyledIcon = styled(Icon)`
@@ -42,6 +43,12 @@ const DropdownList = styled(motion.ul)`
   border: 1px solid ${(props) => props.theme.colors.dropdownBorder};
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+`
+
+const ComponentDropdown = styled(DropdownList)`
+  padding: 0;
+  border: none;
+  background: none;
 `
 
 const listVariants = {
@@ -97,6 +104,15 @@ const NavLink = styled(Link)`
   }
 `
 
+const Online = styled.div`
+  height: 8px;
+  width: 8px;
+  border-radius: 50%;
+  background: ${(props) => props.theme.colors.success400};
+  align-self: flex-start;
+  margin-left: 0.125rem;
+`
+
 const NavDropdown = ({ section, hasSubNav }) => {
   const [isOpen, setIsOpen] = useState(false)
   const intl = useIntl()
@@ -114,33 +130,45 @@ const NavDropdown = ({ section, hasSubNav }) => {
   const ariaLabel = section.ariaLabel || section.text
 
   return (
-    <NavListItem ref={ref} aria-label={intl.formatMessage({ id: ariaLabel })}>
+    <NavListItem ref={ref} aria-label={translateMessageId(ariaLabel, intl)}>
       <DropdownTitle
         onClick={() => setIsOpen(!isOpen)}
         onKeyDown={onKeyDownHandler}
         tabIndex="0"
       >
         <Translation id={section.text} />
-        <StyledIcon isOpen={isOpen} name="chevronDown" />
+        {section.component ? (
+          <Online />
+        ) : (
+          <StyledIcon isOpen={isOpen} name="chevronDown" />
+        )}
       </DropdownTitle>
-      <DropdownList
-        hasSubNav={hasSubNav}
-        animate={isOpen ? "open" : "closed"}
-        variants={listVariants}
-        initial="closed"
-      >
-        {section.items
-          .filter((item) => item.shouldDisplay)
-          .map((item, idx) => {
-            return (
-              <DropdownItem key={idx} onClick={() => setIsOpen(false)}>
-                <NavLink to={item.to} tabIndex="-1">
-                  <Translation id={item.text} />
-                </NavLink>
-              </DropdownItem>
-            )
-          })}
-      </DropdownList>
+
+      {section.items ? (
+        <DropdownList
+          hasSubNav={hasSubNav}
+          animate={isOpen ? "open" : "closed"}
+          variants={listVariants}
+          initial="closed"
+        >
+          {section.items.map((item, idx) => (
+            <DropdownItem key={idx} onClick={() => setIsOpen(false)}>
+              <NavLink to={item.to} tabIndex="-1" isPartiallyActive={false}>
+                <Translation id={item.text} />
+              </NavLink>
+            </DropdownItem>
+          ))}
+        </DropdownList>
+      ) : (
+        <ComponentDropdown
+          hasSubNav={hasSubNav}
+          animate={isOpen ? "open" : "closed"}
+          variants={listVariants}
+          initial="closed"
+        >
+          {section.component}
+        </ComponentDropdown>
+      )}
     </NavListItem>
   )
 }

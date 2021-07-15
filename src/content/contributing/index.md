@@ -7,7 +7,12 @@ sidebar: true
 
 # Contributing to ethereum.org 🦄 {#contributing-to-ethereumorg-}
 
-ethereum.org is an open-source project. So if you want to help improve [our portal to Ethereum](/en/about/), here's how you can help out.
+<InfoBanner shouldCenter emoji=":tada:">
+  Claim your POAP token! If you contributed to ethereum.org in 2020, there's a unique POAP waiting for you.{" "}
+  <a href="#poap">More on POAPs</a>
+</InfoBanner>
+
+ethereum.org is an open-source project. So if you want to help improve [our portal to Ethereum](/about/), here's how you can help out.
 
 ## Ways to contribute {#ways-to-contribute}
 
@@ -22,13 +27,13 @@ ethereum.org is an open-source project. So if you want to help improve [our port
 - [Add developer tools ](/en/contributing/adding-developer-tools/)
   _– Add a developer tool to a relevant page_
 - [Add an exchange](/en/contributing/adding-exchanges/)
-  _– Add an exchange to our [exchange finder](/en/get-eth/#country-picker)_
+  _– Add an exchange to our [exchange finder](/get-eth/#country-picker)_
 - [Improve our research](https://www.notion.so/efdn/Ethereum-org-User-Persona-Memo-b44dc1e89152457a87ba872b0dfa366c)
   _– Let us know your feedback on our research or contribute your own_
 - [Request a feature](https://github.com/ethereum/ethereum-org-website/issues/new?assignees=&labels=Type%3A+Feature&template=feature_request.md&title=)
   _– Let us know about any ideas you have for a new feature or design_
 - [Add a glossary term](/en/contributing/adding-glossary-terms)
-  _– Help us continue to expand the Ethereum [glossary](/en/glossary/)_
+  _– Help us continue to expand the Ethereum [glossary](/glossary/)_
 - [Create/edit content ](/en/contributing/#how-to-update-content)
   _– Suggest new pages or makes tweaks to what's here already_
 
@@ -59,6 +64,19 @@ Decisions about individual PRs, design evolution and major upgrades are made by 
 - [website@ethereum.org](mailto:website@ethereum.org)
 - [@ethdotorg](https://twitter.com/ethdotorg)
 - [Discord server](https://discord.gg/CetY6Y4)
+
+## Claim your contributor POAP {#poap}
+
+If your contribution gets merged into ethereum.org, we'll mint you a unique contributors POAP. A Proof of Attendance Protocol (POAP) token is on-chain proof that you helped make the ecosystem a little more awesome.
+
+[More on POAPs](https://www.poap.xyz/)
+
+### How to claim {#how-to-claim}
+
+1. Join our [Discord server](https://discord.gg/CetY6Y4).
+2. Paste a link to your contribution in the #poaps-🏆 channel.
+3. Wait for a member of our team to send you a link to your minted POAP.
+4. Claim your POAP!
 
 ## Contributors {#contributors}
 

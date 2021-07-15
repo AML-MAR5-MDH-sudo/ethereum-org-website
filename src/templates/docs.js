@@ -10,6 +10,7 @@ import ButtonLink from "../components/ButtonLink"
 import CallToContribute from "../components/CallToContribute"
 import Card from "../components/Card"
 import Codeblock from "../components/Codeblock"
+import FeedbackCard from "../components/FeedbackCard"
 import FileContributors from "../components/FileContributors"
 import InfoBanner from "../components/InfoBanner"
 import Link from "../components/Link"
@@ -17,14 +18,12 @@ import MarkdownTable from "../components/MarkdownTable"
 import PageMetadata from "../components/PageMetadata"
 import Pill from "../components/Pill"
 import TableOfContents from "../components/TableOfContents"
-import Warning from "../components/Warning"
 import SectionNav from "../components/SectionNav"
+import Translation from "../components/Translation"
 import { isLangRightToLeft } from "../utils/translations"
 import {
   Divider,
   Paragraph,
-  H4,
-  H5,
   Header1,
   Header2,
   Header3,
@@ -127,7 +126,7 @@ const H3 = styled(Header3)`
   }
 `
 
-const StyledH4 = styled(H4)`
+const StyledH4 = styled.h4`
   /* Anchor tag styles */
   a {
     position: relative;
@@ -153,7 +152,7 @@ const BackToTop = styled.div`
   }
 `
 
-// Passing components to MDXProvider allows use across all .md/.mdx files
+// Note: you must pass components to MDXProvider in order to render them in markdown files
 // https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxprovider
 const components = {
   a: Link,
@@ -161,14 +160,12 @@ const components = {
   h2: H2,
   h3: H3,
   h4: StyledH4,
-  h5: H5,
   p: Paragraph,
   li: ListItem,
   pre: Codeblock,
   table: MarkdownTable,
   ButtonLink,
   InfoBanner,
-  Warning,
   Card,
   Divider,
   SectionNav,
@@ -184,14 +181,13 @@ const Contributors = styled(FileContributors)`
 `
 
 const DocsPage = ({ data, pageContext }) => {
-  const intl = useIntl()
-  const isRightToLeft = isLangRightToLeft(intl.locale)
+  const { locale } = useIntl()
+  const isRightToLeft = isLangRightToLeft(locale)
 
   const mdx = data.pageData
   const tocItems = mdx.tableOfContents.items
   const isPageIncomplete = mdx.frontmatter.incomplete
 
-  const gitCommits = data.gitData.repository.ref.target.history.edges
   const { editContentUrl } = data.siteData.siteMetadata
   const { relativePath } = pageContext
   const absoluteEditPath = `${editContentUrl}${relativePath}`
@@ -203,34 +199,40 @@ const DocsPage = ({ data, pageContext }) => {
         description={mdx.frontmatter.description}
       />
       <BannerNotification shouldShow={isPageIncomplete}>
-        This page is incomplete. If you’re an expert on the topic, please edit
-        this page and sprinkle it with your wisdom.
+        {/* TODO move to common.json */}
+        <Translation id="banner-page-incomplete" />
       </BannerNotification>
       <ContentContainer>
         <Content>
           <H1 id="top">{mdx.frontmatter.title}</H1>
-          <Contributors gitCommits={gitCommits} editPath={absoluteEditPath} />
-          <TableOfContents
-            items={tocItems}
-            maxDepth={mdx.frontmatter.sidebarDepth}
+          <Contributors
+            relativePath={relativePath}
             editPath={absoluteEditPath}
+          />
+          <TableOfContents
+            editPath={absoluteEditPath}
+            items={tocItems}
             isMobile={true}
+            maxDepth={mdx.frontmatter.sidebarDepth}
           />
           <MDXProvider components={components}>
             <MDXRenderer>{mdx.body}</MDXRenderer>
           </MDXProvider>
           {isPageIncomplete && <CallToContribute editPath={absoluteEditPath} />}
           <BackToTop>
-            <a href="#top">Back to top ↑</a>
+            <a href="#top">
+              <Translation id="back-to-top" /> ↑
+            </a>
           </BackToTop>
+          {locale === "en" && <FeedbackCard />}
           <DocsNav relativePath={relativePath}></DocsNav>
         </Content>
         {mdx.frontmatter.sidebar && tocItems && (
           <DesktopTableOfContents
-            items={tocItems}
-            maxDepth={mdx.frontmatter.sidebarDepth}
             editPath={absoluteEditPath}
+            items={tocItems}
             isPageIncomplete={isPageIncomplete}
+            maxDepth={mdx.frontmatter.sidebarDepth}
           />
         )}
       </ContentContainer>
@@ -239,13 +241,13 @@ const DocsPage = ({ data, pageContext }) => {
 }
 
 export const query = graphql`
-  query DocsPageQuery($slug: String, $relativePath: String) {
+  query DocsPageQuery($relativePath: String) {
     siteData: site {
       siteMetadata {
         editContentUrl
       }
     }
-    pageData: mdx(fields: { slug: { eq: $slug } }) {
+    pageData: mdx(fields: { relativePath: { eq: $relativePath } }) {
       fields {
         slug
       }
@@ -258,34 +260,6 @@ export const query = graphql`
       }
       body
       tableOfContents
-    }
-    gitData: github {
-      repository(name: "ethereum-org-website", owner: "ethereum") {
-        ref(qualifiedName: "master") {
-          target {
-            ... on GitHub_Commit {
-              history(path: $relativePath) {
-                edges {
-                  node {
-                    message
-                    commitUrl
-                    author {
-                      name
-                      email
-                      avatarUrl(size: 100)
-                      user {
-                        url
-                        login
-                      }
-                    }
-                    committedDate
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `

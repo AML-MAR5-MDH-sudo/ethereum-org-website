@@ -17,11 +17,12 @@ const StyledButton = styled(Link)`
 
 const Primary = styled(StyledButton)`
   background-color: ${(props) => props.theme.colors.primary};
-  color: ${(props) => props.theme.colors.buttonColor};
+  color: ${(props) => props.theme.colors.buttonColor} !important;
   border: 1px solid transparent;
 
   &:hover {
     background-color: ${(props) => props.theme.colors.primaryHover};
+    box-shadow: ${(props) => props.theme.colors.cardBoxShadow};
   }
   &:active {
     background-color: ${(props) => props.theme.colors.primaryActive};
@@ -30,13 +31,13 @@ const Primary = styled(StyledButton)`
 
 const Secondary = styled(StyledButton)`
   color: ${(props) => props.theme.colors.text};
-  background-color: ${(props) => props.theme.colors.white600};
   border: 1px solid ${(props) => props.theme.colors.text};
   background-color: transparent;
 
   &:hover {
     color: ${(props) => props.theme.colors.primary};
     border: 1px solid ${(props) => props.theme.colors.primary};
+    box-shadow: ${(props) => props.theme.colors.cardBoxShadow};
   }
   &:active {
     background-color: ${(props) =>
@@ -44,19 +45,15 @@ const Secondary = styled(StyledButton)`
   }
 `
 
-const ButtonLink = ({ to, isSecondary, children, className, ...props }) => {
-  if (isSecondary) {
-    return (
-      <Secondary to={to} hideArrow={true} className={className} {...props}>
-        {children}
-      </Secondary>
-    )
-  }
-  return (
+const ButtonLink = ({ to, isSecondary, children, className, ...props }) =>
+  isSecondary ? (
+    <Secondary to={to} hideArrow={true} className={className} {...props}>
+      {children}
+    </Secondary>
+  ) : (
     <Primary to={to} hideArrow={true} className={className} {...props}>
       {children}
     </Primary>
   )
-}
 
 export default ButtonLink

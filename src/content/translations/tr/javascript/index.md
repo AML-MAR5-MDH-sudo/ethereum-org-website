@@ -44,17 +44,12 @@ Başlamadan önce daha fazla bilgiye mi ihtiyacın var? Bu adrese giderek [ether
 
 **Ethers.js -** **_Complete Ethereum wallet implementation and utilities in JavaScript and TypeScript._**
 
-- [Dökümanlar](https://docs.ethers.io/ethers.js/html/)
+- [Dökümanlar](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_The Ethereum VM implemented in JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_A desktop application for Ethereum tools, extensible with JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Daha fazla kaynak için Göz at [ethereum.org/developers.](/tr/developers/)
 

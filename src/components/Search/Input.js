@@ -4,7 +4,7 @@ import styled from "styled-components"
 import { connectSearchBox } from "react-instantsearch-dom"
 
 import Icon from "../Icon"
-import { getDefaultMessage } from "../../utils/translations"
+import { translateMessageId } from "../../utils/translations"
 
 const Form = styled.form`
   margin: 0;
@@ -40,15 +40,16 @@ const Input = ({ query, setQuery, refine, ...rest }) => {
     refine(value)
     setQuery(value)
   }
+  
+  const handleSubmit = (event) => {
+    event.preventDefault()
+  }
 
   const intl = useIntl()
-  const searchString = intl.formatMessage({
-    id: "search",
-    defaultMessage: getDefaultMessage("search"),
-  })
+  const searchString = translateMessageId("search", intl)
 
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <StyledInput
         type="text"
         placeholder={searchString}

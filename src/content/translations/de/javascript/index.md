@@ -44,17 +44,12 @@ Brauchst du zuerst einen grundsätzlichen Einstieg? Schaue dir [ethereum.org/lea
 
 **Ethers.js -** **_Eine vollständige Ethereum-Wallet-Implementierung und Utilities in JavaScript und TypeScript._**
 
-- [Dokumentation](https://docs.ethers.io/ethers.js/html/)
+- [Dokumentation](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **Web3.js -** **_Ethereum JavaScript API._**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **Eine Desktop-Anwendung für Ethereum-Tools, erweiterbar mit JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Suchst du weitere Informationen? Schau dir [ethereum.org/developers](/de/developers/) an.
 

@@ -5,11 +5,11 @@ lang: en
 sidebar: true
 ---
 
-Ethereum smart contracts are extremely flexible, capable of both holding large quantities of tokens (often in excess of $1B) and running immutable logic based on previously deployed smart contract code. While this has created a vibrant and creative ecosystem of trustless, interconnected smart contracts, it is also the perfect ecosystem to attract attackers looking to profit by exploiting vulnerabilities in smart contracts and unexpected behavior in Ethereum. Smart contract code *usually* cannot be changed to patch security flaws, assets that have been stolen from smart contracts are irrecoverable, and stolen assets are extremely difficult to track. The total of amount of value stolen or lost due to smart contract issues is easily in the $1B. Some of the larger due to smart contract coding errors include:
+Ethereum smart contracts are extremely flexible, capable of both holding large quantities of tokens (often in excess of $1B) and running immutable logic based on previously deployed smart contract code. While this has created a vibrant and creative ecosystem of trustless, interconnected smart contracts, it is also the perfect ecosystem to attract attackers looking to profit by exploiting vulnerabilities in smart contracts and unexpected behavior in Ethereum. Smart contract code _usually_ cannot be changed to patch security flaws, assets that have been stolen from smart contracts are irrecoverable, and stolen assets are extremely difficult to track. The total of amount of value stolen or lost due to smart contract issues is easily in the $1B. Some of the larger due to smart contract coding errors include:
 
-- [Parity multi-sig issue #1 - \$30M lost](https://www.coindesk.com/30-million-ether-reported-stolen-parity-wallet-breach)
-- [Parity multi-sig issue #2 - \$300M locked](https://www.theguardian.com/technology/2017/nov/08/cryptocurrency-300m-dollars-stolen-bug-ether)
-- [TheDAO hack, 3.6M ETH! Over \$1B in today's ETH prices](https://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/)
+- [Parity multi-sig issue #1 - $30M lost](https://www.coindesk.com/30-million-ether-reported-stolen-parity-wallet-breach)
+- [Parity multi-sig issue #2 - $300M locked](https://www.theguardian.com/technology/2017/nov/08/cryptocurrency-300m-dollars-stolen-bug-ether)
+- [TheDAO hack, 3.6M ETH! Over $1B in today's ETH prices](https://hackingdistributed.com/2016/06/18/analysis-of-the-dao-exploit/)
 
 ## Prerequisites {#prerequisites}
 
@@ -35,7 +35,7 @@ At a minimum:
 - Solidity does not emit ANY compiler warnings
 - Your code is well-documented
 
-There is much more to be said for development process, but these items are a good place to start. For more items and detailed explanations, see the [process quality checklist provided by DeFiSafety](https://docs.defisafety.com/audit-process-documentation/process-quality-audit-process). [DefiSafety](https://defisafety.com/) is an unofficial public service publishing reviews of various large, public Ethereum dApps. Part of the DeFiSafety rating system includes how well the project adheres to this process quality checklist. By following these processes:
+There is much more to be said for development process, but these items are a good place to start. For more items and detailed explanations, see the [process quality checklist provided by DeFiSafety](https://docs.defisafety.com/review-process-documentation/process-quality-audit-process). [DefiSafety](https://defisafety.com/) is an unofficial public service publishing reviews of various large, public Ethereum dApps. Part of the DeFiSafety rating system includes how well the project adheres to this process quality checklist. By following these processes:
 
 - You will produce more secure code, via reproducible, automated tests
 - Auditors will be able to review your project more effectively
@@ -77,7 +77,7 @@ To allow a user to withdraw ETH they have previously stored on the contract, thi
 2. Sends them that balance amount in ETH
 3. Resets their balance to 0, so they cannot withdraw their balance again.
 
-If called from a regular account (such as your own Metamask account), this functions as expected: msg.sender.call.value() simply sends your account ETH. However, smart contracts can make calls as well. If a custom, malicous contract is the one calling `withdraw()`, msg.sender.call.value() will not only send `amount` of ETH, it will also implicitly call the contract to begin executing code. Imagine this malicious contract:
+If called from a regular account (such as your own Metamask account), this functions as expected: msg.sender.call.value() simply sends your account ETH. However, smart contracts can make calls as well. If a custom, malicious contract is the one calling `withdraw()`, msg.sender.call.value() will not only send `amount` of ETH, it will also implicitly call the contract to begin executing code. Imagine this malicious contract:
 
 ```solidity
 contract Attacker {
@@ -101,13 +101,13 @@ Calling Attacker.beginAttack() will start a cycle that looks something like:
 0.) Attacker.beginAttack() deposits 1 ETH into Victim
 
   1.) Attacker -> Victim.withdraw()
-  1.) Victim reads balanceOf[msg.sender]
+  1.) Victim reads balances[msg.sender]
   1.) Victim sends ETH to Attacker (which executes default function)
     2.) Attacker -> Victim.withdraw()
-    2.) Victim reads balanceOf[msg.sender]
+    2.) Victim reads balances[msg.sender]
     2.) Victim sends ETH to Attacker (which executes default function)
       3.) Attacker -> Victim.withdraw()
-      3.) Victim reads balanceOf[msg.sender]
+      3.) Victim reads balances[msg.sender]
       3.) Victim sends ETH to Attacker (which executes default function)
         4.) Attacker no longer has enough gas, returns without calling again
       3.) balances[msg.sender] = 0;
@@ -145,7 +145,7 @@ contract ContractCheckVictim {
     }
 
     function deposit() external payable {
-        require(!isContract(msg.sender); // <- NEW LINE
+        require(!isContract(msg.sender)); // <- NEW LINE
         balances[msg.sender] += msg.value;
     }
 
@@ -235,7 +235,7 @@ While there is no substitute for understanding Ethereum security basics and enga
 **MythX -** **_Security analysis API for Ethereum smart contracts._**
 
 - [mythx.io](https://mythx.io/)
-- [Documentation](https://docs.mythx.io/en/latest/)
+- [Documentation](https://docs.mythx.io/)
 
 **Mythril -** **_Security analysis tool for EVM bytecode._**
 

@@ -50,6 +50,7 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   margin: 1rem;
+  width: 100%;
 `
 
 const ModalClose = styled.div`
@@ -62,17 +63,15 @@ const ModalCloseIcon = styled(Icon)`
   cursor: pointer;
 `
 
-const Overlay = ({ isActive }) => {
-  return (
-    <StyledOverlay
-      initial={false}
-      animate={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 1001 : -1 }}
-      transition={{ duration: 0.2 }}
-    />
-  )
-}
+const Overlay = ({ isActive }) => (
+  <StyledOverlay
+    initial={false}
+    animate={{ opacity: isActive ? 1 : 0, zIndex: isActive ? 1001 : -1 }}
+    transition={{ duration: 0.2 }}
+  />
+)
 
-const Modal = ({ children, isOpen, setIsOpen }) => {
+const Modal = ({ children, className, isOpen, setIsOpen }) => {
   const ref = useRef()
 
   // Close modal on outside clicks & `Escape` keypress
@@ -80,19 +79,21 @@ const Modal = ({ children, isOpen, setIsOpen }) => {
   useKeyPress(`Escape`, () => setIsOpen(false))
 
   return (
-    <>
+    <div className={className}>
       <Overlay isActive={isOpen} />
       {isOpen && (
-        <ModalContainer>
-          <StyledModal ref={ref}>
-            <ModalContent>{children}</ModalContent>
+        <ModalContainer className="modal-component-container">
+          <StyledModal className="modal-component" ref={ref}>
+            <ModalContent className="modal-component-content">
+              {children}
+            </ModalContent>
             <ModalClose onClick={() => setIsOpen(false)}>
               <ModalCloseIcon name="close" />
             </ModalClose>
           </StyledModal>
         </ModalContainer>
       )}
-    </>
+    </div>
   )
 }
 

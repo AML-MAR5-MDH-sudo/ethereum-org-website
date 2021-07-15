@@ -11,10 +11,16 @@
   publish = "public"
 
   # Default build command.
-  command = "yarn build"
+  command = "yarn build" # debug with: "yarn build --verbose"
 
   # Directory with the serverless Lambda functions to deploy to AWS.
   functions = "public/lambda"
+
+  # Only build on changes to src/ OR changes to .js and .json files outside src/
+  ignore="git diff --quiet --exit-code dev ./src || if [[ $(git diff --name-only dev .) == *[.](js|json)* ]]; then exit 1; else exit 0; fi"
+
+[build.environment]
+  NODE_VERSION = "12.21.0"
 
 # Production context: all deploys from the Production branch set in your site's
 # deploy contexts will inherit these settings.
@@ -94,11 +100,6 @@
 [[redirects]]
   from = "/beginners"
   to = "/en/what-is-ethereum/"
-
-## All translations
-[[redirects]]
-  from = "/*/beginners"
-  to = "/:splat/what-is-ethereum/"
 
 ## v1.1 translations
 [[redirects]]
@@ -223,6 +224,10 @@
   from = "/delphi/"
   to = "/en/developers/docs/programming-languages/delphi/"
   force = true
+[[redirects]]
+  from = "/dart/"
+  to = "/en/developers/docs/programming-languages/dart/"
+  force = true
 
 # Norwegian update
 ## All translations
@@ -231,9 +236,6 @@
   to = "/nb/:splat"
 
 # EDN updates
-[[redirects]]
-  from = "/en/build/"
-  to = "/en/developers/learning-tools/"
 [[redirects]]
   from = "/en/java/"
   to = "/en/developers/docs/programming-languages/java/"
@@ -256,6 +258,9 @@
   from = "/en/delphi/"
   to = "/en/developers/docs/programming-languages/delphi/"
 [[redirects]]
+  from = "/en/dart/"
+  to = "/en/developers/docs/programming-languages/dart/"
+[[redirects]]
   from = "/en/developers/docs/mining/"
   to = "/en/developers/docs/consensus-mechanisms/pow/mining/"
 
@@ -264,14 +269,33 @@
   from = "/en/eth2/the-beacon-chain/"
   to = "/en/eth2/beacon-chain/"
 
-# English fallback redirect
-# If no page exists at /request-url, redirect to /en/request-url
-# WARNING: this causes the development environment to fail when running `netlify dev`
-# https://github.com/netlify/cli/issues/1299
-# [[redirects]]
-#   from = "/*"
-#   to = "/en/:splat"
-#   force = false
+## All langugages
+[[redirects]]
+  from = "/*/beginners"
+  to = "/:splat/what-is-ethereum/"
+[[redirects]]
+  from = "/*/build"
+  to = "/:splat/developers/learning-tools/"
+[[redirects]]
+  from = "/*/eth2/the-docking"
+  to = "/:splat/eth2/merge/"
+[[redirects]]
+  from = "/*/eth2/the-merge"
+  to = "/:splat/eth2/merge/"
+[[redirects]]
+  from = "/*/eth2/docking"
+  to = "/:splat/eth2/merge/"
+[[redirects]]
+  from = "/*/developers/docs/layer-2-scaling"
+  to = "/:splat/developers/docs/scaling/layer-2-rollups"
+
+# Jobs
+[[redirects]]
+  from = "/*/about/web-developer"
+  to = "/:splat/about/#open-jobs"
+[[redirects]]
+  from = "/*/about/community-lead"
+  to = "/:splat/about/#open-jobs"
 
 # A redirect rule with all the supported properties
 # [[redirects]]

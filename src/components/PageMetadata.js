@@ -5,7 +5,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import { useIntl } from "gatsby-plugin-intl"
 import { Location } from "@reach/router"
 
-import { getDefaultMessage, languageMetadata } from "../utils/translations"
+import { translateMessageId, languageMetadata } from "../utils/translations"
 
 const supportedLanguages = Object.keys(languageMetadata)
 
@@ -59,25 +59,15 @@ const PageMetadata = ({ description, meta, title, image, canonicalUrl }) => {
 
   const intl = useIntl()
 
-  const desc =
-    description ||
-    intl.formatMessage({
-      id: "site-description",
-      defaultMessage: getDefaultMessage("site-description"),
-    })
+  const desc = description || translateMessageId("site-description", intl)
 
-  const siteTitle = intl.formatMessage({
-    id: "site-title",
-    defaultMessage: getDefaultMessage("site-title"),
-  })
+  const siteTitle = translateMessageId("site-title", intl)
 
   return (
     <Location>
       {({ location }) => {
-        {
-          /* Set canonocial URL w/ language path to avoid duplicate content */
-          /* e.g. set ethereum.org/about/ to ethereum.org/en/about/ */
-        }
+        /* Set canonocial URL w/ language path to avoid duplicate content */
+        /* e.g. set ethereum.org/about/ to ethereum.org/en/about/ */
         const { pathname } = location
         let canonicalPath = pathname
         const firstDirectory = canonicalPath.split("/")[1]
@@ -87,9 +77,7 @@ const PageMetadata = ({ description, meta, title, image, canonicalUrl }) => {
         const canonical =
           canonicalUrl || `${site.siteMetadata.url}${canonicalPath}`
 
-        {
-          /* Set fallback ogImage based on path */
-        }
+        /* Set fallback ogImage based on path */
         const siteUrl = site.siteMetadata.url
         let ogImage = ogImageDefault.childImageSharp.fixed.src
         if (pathname.includes("/developers/")) {
@@ -155,7 +143,7 @@ const PageMetadata = ({ description, meta, title, image, canonicalUrl }) => {
               },
               {
                 name: `twitter:image`,
-                content: ogImage,
+                content: ogImageUrl,
               },
               {
                 property: `og:url`,

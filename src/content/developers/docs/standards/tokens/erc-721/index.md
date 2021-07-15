@@ -9,7 +9,7 @@ sidebar: true
 
 **What is a Non-Fungible Token?**
 
-A Non-Fungible Tokens (NFT) is used to identify something or someone in a unique way. This type of Token is perfect to
+A Non-Fungible Token (NFT) is used to identify something or someone in a unique way. This type of Token is perfect to
 be used on platforms that offer collectible items, access keys, lottery tickets, numbered seats for concerts and
 sports matches, etc. This special type of Token has amazing possibilities so it deserves a proper Standard, the ERC-721
 came to solve that!
@@ -36,7 +36,7 @@ The ERC-721 (Ethereum Request for Comments 721), proposed by William Entriken, D
 Nastassia Sachs in January 2018, is a Non-Fungible Token Standard that implements an API for tokens within Smart Contracts.
 
 It provides functionalities like to transfer tokens from one account to another, to get the current token balance of an
-account, to get the owner of an specific token and also the total supply of the token available on the network.
+account, to get the owner of a specific token and also the total supply of the token available on the network.
 Besides these it also has some other functionalities like to approve that an amount of token from an account can be
 moved by a third party account.
 
@@ -83,7 +83,7 @@ $ pip install web3
 
 ```python
 from web3 import Web3
-from web3.utils.events import get_event_data
+from web3._utils.events import get_event_data
 
 
 w3 = Web3(Web3.HTTPProvider("https://cloudflare-eth.com"))
@@ -177,7 +177,7 @@ logs = w3.eth.getLogs({
 #       https://etherscan.io/address/0x06012c8cf97BEaD5deAe237070F9587f8E7A266d#events
 #       Click to expand the event's logs and copy its "tokenId" argument
 
-recent_tx = [get_event_data(tx_event_abi, log)["args"] for log in logs]
+recent_tx = [get_event_data(w3.codec, tx_event_abi, log)["args"] for log in logs]
 
 kitty_id = recent_tx[0]['tokenId'] # Paste the "tokenId" here from the link above
 is_pregnant = ck_contract.functions.isPregnant(kitty_id).call()
@@ -224,25 +224,25 @@ ck_event_signatures = [
 pregnant_logs = w3.eth.getLogs({
     "fromBlock": w3.eth.blockNumber - 120,
     "address": w3.toChecksumAddress(ck_token_addr),
-    "topics": [ck_extra_events_abi[0]]
+    "topics": [ck_event_signatures[0]]
 })
 
-recent_pregnants = [get_event_data(ck_extra_events_abi[0], log)["args"] for log in pregnant_logs]
+recent_pregnants = [get_event_data(w3.codec, ck_extra_events_abi[0], log)["args"] for log in pregnant_logs]
 
 # Here is a Birth Event:
 # - https://etherscan.io/tx/0x3978028e08a25bb4c44f7877eb3573b9644309c044bf087e335397f16356340a
 birth_logs = w3.eth.getLogs({
     "fromBlock": w3.eth.blockNumber - 120,
     "address": w3.toChecksumAddress(ck_token_addr),
-    "topics": [ck_extra_events_abi[1]]
+    "topics": [ck_event_signatures[1]]
 })
 
-recent_births = [get_event_data(ck_extra_events_abi[1], log)["args"] for log in birth_logs]
+recent_births = [get_event_data(w3.codec, ck_extra_events_abi[1], log)["args"] for log in birth_logs]
 ```
 
 ## Popular NFTs {#popular-nfts}
 
-- [Etherscan NFT Tracker](https://etherscan.io/tokens-nft) list the top NFT on Ethereum by tranfers volume.
+- [Etherscan NFT Tracker](https://etherscan.io/tokens-nft) list the top NFT on Ethereum by transfers volume.
 - [CryptoKitties](https://www.cryptokitties.co/) is a game centered around breedable, collectible, and oh-so-adorable
   creatures we call CryptoKitties.
 - [Sorare](https://sorare.com/) is a global fantasy football game where you can collect limited editions collectibles,
@@ -260,9 +260,3 @@ recent_births = [get_event_data(ck_extra_events_abi[1], log)["args"] for log in 
 - [EIP-721: ERC-721 Non-Fungible Token Standard](https://eips.ethereum.org/EIPS/eip-721)
 - [OpenZeppelin - ERC-721 Docs](https://docs.openzeppelin.com/contracts/3.x/erc721)
 - [OpenZeppelin - ERC-721 Implementation](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC721/ERC721.sol)
-
-## Related topics {#related-topics}
-
-- [ERC-20](/developers/docs/standards/tokens/erc-20/)
-- [ERC-777](/developers/docs/standards/tokens/erc-777/)
-- [ERC-1155](/developers/docs/standards/tokens/erc-1155/)

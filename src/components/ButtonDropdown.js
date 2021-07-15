@@ -8,11 +8,15 @@ import Link from "./Link"
 import Translation from "./Translation"
 import { ButtonSecondary } from "./SharedStyledComponents"
 import { useOnClickOutside } from "../hooks/useOnClickOutside"
+import { translateMessageId } from "../utils/translations"
 
 const Container = styled.div`
   position: relative;
+  display: flex;
+  flex-direction: column;
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     width: 100%;
+    flex-direction: column-reverse;
   }
 `
 
@@ -34,6 +38,7 @@ const DropdownList = styled(motion.ul)`
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     width: 100%;
     text-align: center;
+    position: initial;
   }
 `
 
@@ -58,9 +63,8 @@ const listVariants = {
 const Button = styled(ButtonSecondary)`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   min-width: 240px;
-  margin-top: 0;
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     width: 100%;
     justify-content: center;
@@ -111,9 +115,7 @@ const ButtonDropdown = ({ list, className }) => {
     <Container
       className={className}
       ref={ref}
-      aria-label={`Select ${intl.formatMessage({
-        id: list.text,
-      })}`}
+      aria-label={`Select ${translateMessageId(list.text, intl)}`}
     >
       <Button
         onClick={() => setIsOpen(!isOpen)}
@@ -128,15 +130,13 @@ const ButtonDropdown = ({ list, className }) => {
         variants={listVariants}
         initial="closed"
       >
-        {list.items.map((item, idx) => {
-          return (
-            <DropdownItem key={idx} onClick={() => setIsOpen(false)}>
-              <NavLink to={item.to} tabIndex="-1">
-                <Translation id={item.text} />
-              </NavLink>
-            </DropdownItem>
-          )
-        })}
+        {list.items.map((item, idx) => (
+          <DropdownItem key={idx} onClick={() => setIsOpen(false)}>
+            <NavLink to={item.to} tabIndex="-1">
+              <Translation id={item.text} />
+            </NavLink>
+          </DropdownItem>
+        ))}
       </DropdownList>
     </Container>
   )

@@ -44,17 +44,12 @@ Trenger du en mer grunnleggende informasjon først? Sjekk ut [ethereum.org/learn
 
 **Ethers.js -** **_Komplett Ethereum wallet implementering og verktøyer i JavaScript og TypeScript._**
 
-- [Dokumentasjon](https://docs.ethers.io/ethers.js/html/)
+- [Dokumentasjon](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_Ethereum VM implementert i JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_Et skrivebordsprogram for Ethereum tools,, utvidbar med JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Ser du etter flere ressurser? Sjekk ut [ethereum.org/developers.](/developers/)
 

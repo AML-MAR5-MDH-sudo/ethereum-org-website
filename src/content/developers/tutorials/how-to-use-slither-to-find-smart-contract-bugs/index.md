@@ -11,7 +11,7 @@ source: Building secure contracts
 sourceUrl: https://github.com/crytic/building-secure-contracts/tree/master/program-analysis/slither
 ---
 
-## How to use Slither
+## How to use Slither {#how-to-use-slither}
 
 The aim of this tutorial is to show how to use Slither to automatically find bugs in smart contracts.
 
@@ -232,7 +232,3 @@ A `Function` or a `Modifier` object has:
 - `variables_written (list(Variable))`: List of variables written
 - `state_variables_read (list(StateVariable))`: List of state variables read (subset of variables`read)
 - `state_variables_written (list(StateVariable))`: List of state variables written (subset of variables`written)
-
-### Example: Print Basic Information {#example-print-basic-information}
-
-[print_basic_information.py](./examples/print_basic_information.py) shows how to print basic information about a project.

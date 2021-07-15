@@ -45,17 +45,12 @@ sidebarDepth: 1
 
 **Ethers.js -** **_JavaScript와 TypeScript로 작성된 완전한 이더리움 지갑 구현체 및 각종 유틸리티_**
 
-- [개발 문서](https://docs.ethers.io/ethers.js/html/)
+- [개발 문서](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_JavaScript로 구현된 이더리움 VM_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**이더리움 그리드(Ethereum Grid) -** **\_JavaScript로 확장 가능한 이더리움 도구용 데스크톱 애플리케이션**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 더 많은 참고 자료를 확인하고 싶으신가요? [ethereum.org/developers](/ko/developers/)를 확인해 보세요.
 

@@ -4,7 +4,7 @@ import { useIntl } from "gatsby-plugin-intl"
 import Img from "gatsby-image"
 import { graphql } from "gatsby"
 
-import { getDefaultMessage } from "../utils/translations"
+import { translateMessageId } from "../utils/translations"
 import Translation from "../components/Translation"
 import CardList from "../components/CardList"
 import EthExchanges from "../components/EthExchanges"
@@ -14,7 +14,6 @@ import Link from "../components/Link"
 import ButtonLink from "../components/ButtonLink"
 import PageMetadata from "../components/PageMetadata"
 import CalloutBanner from "../components/CalloutBanner"
-import Warning from "../components/Warning"
 import {
   Content,
   Divider,
@@ -152,6 +151,10 @@ const CodeBox = styled.div`
   }
 `
 
+const StyledEthPriceCard = styled(EthPriceCard)`
+  margin-bottom: 2rem;
+`
+
 const Code = styled.p`
   font-family: monospace;
   color: #ffffff;
@@ -168,6 +171,10 @@ const CodeLabel = styled.p`
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     margin: 0rem;
   }
+`
+
+const AllCapsTranslation = styled(Translation)`
+  text-transform: uppercase;
 `
 
 const GetETHPage = ({ data }) => {
@@ -203,7 +210,7 @@ const GetETHPage = ({ data }) => {
     },
     {
       title: "Loopring",
-      link: "https://loopring.io/trade/ETH-USDT",
+      link: "https://exchange.loopring.io/",
       image: data.loopring.childImageSharp.fixed,
     },
     {
@@ -237,33 +244,27 @@ const GetETHPage = ({ data }) => {
   return (
     <Page>
       <PageMetadata
-        title={intl.formatMessage({
-          id: "page-get-eth-meta-title",
-          defaultMessage: getDefaultMessage("page-get-eth-meta-title"),
-        })}
-        description={intl.formatMessage({
-          id: "page-get-eth-meta-description",
-          defaultMessage: getDefaultMessage("page-get-eth-meta-description"),
-        })}
+        title={translateMessageId("page-get-eth-meta-title", intl)}
+        description={translateMessageId("page-get-eth-meta-description", intl)}
       />
 
       <HeroContainer>
         <Hero
           fluid={data.hero.childImageSharp.fluid}
-          alt="Get ETH hero image"
+          alt={translateMessageId("page-get-eth-hero-image-alt", intl)}
           loading="eager"
         />
         <Header>
-          <Title>
+          <h1>
             <Translation id="page-get-eth-where-to-buy-title" />
-          </Title>
+          </h1>
           <Subtitle>
             <Translation id="page-get-eth-where-to-buy-desc" />
           </Subtitle>
           <SubtitleTwo>
             <Translation id="page-get-eth-where-to-buy-desc-2" />
           </SubtitleTwo>
-          <EthPriceCard />
+          <StyledEthPriceCard />
           <ButtonLink to="#country-picker">
             <Translation id="page-get-eth-search-by-country" />
           </ButtonLink>
@@ -272,42 +273,25 @@ const GetETHPage = ({ data }) => {
       <CardContainer>
         <StyledCard
           emoji=":office_building:"
-          title={intl.formatMessage({
-            id: "page-get-eth-CEX",
-            defaultMessage: getDefaultMessage("page-get-eth-CEX"),
-          })}
-          description={intl.formatMessage({
-            id: "page-get-eth-CEX-desc",
-            defaultMessage: getDefaultMessage("page-get-eth-CEX-desc"),
-          })}
+          title={translateMessageId("page-get-eth-cex", intl)}
+          description={translateMessageId("page-get-eth-cex-desc", intl)}
         />
         <StyledCard
           emoji=":busts_in_silhouette:"
-          title={intl.formatMessage({
-            id: "page-get-eth-DEX",
-            defaultMessage: getDefaultMessage("page-get-eth-DEX"),
-          })}
-          description={intl.formatMessage({
-            id: "page-get-eth-DEX-desc",
-            defaultMessage: getDefaultMessage("page-get-eth-DEX-desc"),
-          })}
+          title={translateMessageId("page-get-eth-dex", intl)}
+          description={translateMessageId("page-get-eth-dex-desc", intl)}
         >
           <Link to="#dex">
-            <Translation id="page-get-eth-Try-Dex" />
+            <Translation id="page-get-eth-try-dex" />
           </Link>
         </StyledCard>
         <StyledCard
           emoji=":robot:"
-          title={intl.formatMessage({
-            id: "page-get-eth-wallets",
-            defaultMessage: getDefaultMessage("page-get-eth-wallets"),
-          })}
-          description={intl.formatMessage({
-            id: "page-get-eth-wallets-purchasing",
-            defaultMessage: getDefaultMessage(
-              "page-get-eth-wallets-purchasing"
-            ),
-          })}
+          title={translateMessageId("page-get-eth-wallets", intl)}
+          description={translateMessageId(
+            "page-get-eth-wallets-purchasing",
+            intl
+          )}
         >
           <Link to="/wallets/">
             <Translation id="page-get-eth-wallets-link" />
@@ -316,35 +300,26 @@ const GetETHPage = ({ data }) => {
         <Content>
           <p>
             <em>
-              <Translation id="page-get-eth-disclaimer" />{" "}
-              <Link to="/en/contributing/adding-products/">
-                <Translation id="page-get-eth-dapps-link" />
-              </Link>{" "}
-              <Translation id="page-get-eth-and" />{" "}
-              <Link to="/en/contributing/adding-exchanges/">
-                <Translation id="page-get-eth-other-link" />
-              </Link>{" "}
-              <Translation id="page-get-eth-policies" />{" "}
+              <Translation id="listing-policy-disclaimer" />{" "}
               <Link to="https://github.com/ethereum/ethereum-org-website/issues/new/choose">
-                <Translation id="page-get-eth-raise-issue-link" />
+                <Translation id="listing-policy-raise-issue-link" />
               </Link>
-              <Translation id="page-get-eth-." />
             </em>
           </p>
+          <InfoBanner emoji=":wave:" shouldCenter={true} mt={`2rem`}>
+            <Translation id="page-get-eth-new-to-eth" />{" "}
+            <Link to="/eth/">
+              <Translation id="page-get-eth-whats-eth-link" />
+            </Link>
+          </InfoBanner>
         </Content>
       </CardContainer>
-      <InfoBanner emoji=":wave:">
-        <Translation id="page-get-eth-new-to-eth" />{" "}
-        <Link to="/eth/">
-          <Translation id="page-get-eth-whats-eth-link" />
-        </Link>
-      </InfoBanner>
       <GradientContainer id="country-picker">
         <EthExchanges />
       </GradientContainer>
       <Content id="dex">
         <h2>
-          <Translation id="page-get-eth-DEX's" />
+          <Translation id="page-get-eth-dexs" />
         </h2>
       </Content>
       <TwoColumnContent>
@@ -353,17 +328,16 @@ const GetETHPage = ({ data }) => {
             <Translation id="page-get-eth-what-are-DEX's" />
           </h3>
           <p>
-            <Translation id="page-get-eth-DEX's-desc" />
+            <Translation id="page-get-eth-dexs-desc" />
           </p>
           <p>
-            <Translation id="page-get-eth-DEX's-desc-2" />{" "}
+            <Translation id="page-get-eth-dexs-desc-2" />{" "}
             <Link to="/learn/#smart-contracts">
               <Translation id="page-get-eth-smart-contract-link" />
             </Link>
-            .
           </p>
           <p>
-            <Translation id="page-get-eth-DEX's-desc-3" />
+            <Translation id="page-get-eth-dexs-desc-3" />
           </p>
           <p>
             <Translation id="page-get-eth-need-wallet" />
@@ -387,9 +361,9 @@ const GetETHPage = ({ data }) => {
             <Translation id="page-get-eth-swapping" />
           </p>
           <CardList content={tokenSwaps} />
-          <Warning>
+          <InfoBanner isWarning={true}>
             <Translation id="page-get-eth-warning" />
-          </Warning>
+          </InfoBanner>
         </RightColumn>
       </TwoColumnContent>
       <Divider />
@@ -419,20 +393,19 @@ const GetETHPage = ({ data }) => {
           <p>
             <Translation id="page-get-eth-protect-eth-desc" />
           </p>
+          <Link to="/wallets/">
+            <Translation id="page-get-eth-your-address-wallet-link" />
+          </Link>
           <h3>
             <Translation id="page-get-eth-your-address" />
           </h3>
           <p>
-            <Translation id="page-get-eth-your-address-desc" />{" "}
-            <Link to="/wallets/">
-              <Translation id="page-get-eth-your-address-wallet-link" />
-            </Link>
-            <Translation id="page-get-eth-your-address-desc-2" />
+            <Translation id="page-get-eth-your-address-desc" />
           </p>
           <CodeBox>
             <Code>0x0125e2478d69eXaMpLe81766fef5c120d30fb53f</Code>
             <CodeLabel>
-              <Translation id="page-get-eth-do-not-copy" />
+              <AllCapsTranslation id="page-get-eth-do-not-copy" />
             </CodeLabel>
           </CodeBox>
           <p>
@@ -448,15 +421,16 @@ const GetETHPage = ({ data }) => {
       </TwoColumnContent>
       <Divider />
       <CalloutBanner
-        title={intl.formatMessage({
-          id: "page-get-eth-use-your-eth",
-          defaultMessage: getDefaultMessage("page-get-eth-use-your-eth"),
-        })}
-        description={intl.formatMessage({
-          id: "page-get-eth-use-your-eth-dapps",
-          defaultMessage: getDefaultMessage("page-get-eth-use-your-eth-dapps"),
-        })}
+        title={translateMessageId("page-get-eth-use-your-eth", intl)}
+        description={translateMessageId(
+          "page-get-eth-use-your-eth-dapps",
+          intl
+        )}
         image={data.dapps.childImageSharp.fluid}
+        alt={translateMessageId(
+          "page-index-sections-individuals-image-alt",
+          intl
+        )}
         maxImageWidth={600}
       >
         <div>

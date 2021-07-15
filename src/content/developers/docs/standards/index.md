@@ -10,9 +10,9 @@ incomplete: true
 
 The Ethereum community has adopted many standards that help keep projects (such as [Ethereum clients](/developers/docs/nodes-and-clients/) and wallets) interoperable across implementations, and ensure smart contracts and dapps remain composable.
 
-Typically standards are introduced as [Ethereum Improvement Proposals](/en/eips/) (EIPs), which are discussed by community members through a [standard process](https://eips.ethereum.org/EIPS/eip-1).
+Typically standards are introduced as [Ethereum Improvement Proposals](/eips/) (EIPs), which are discussed by community members through a [standard process](https://eips.ethereum.org/EIPS/eip-1).
 
-- [Introduction to EIPs](/en/eips/)
+- [Introduction to EIPs](/eips/)
 - [List of EIPs](https://eips.ethereum.org/)
 - [EIP github repo](https://github.com/ethereum/EIPs)
 - [EIP discussion board](https://ethereum-magicians.org/c/eips)
@@ -28,8 +28,8 @@ Certain EIPs relate to application-level standards (e.g. a standard smart-contra
 
 ### Token standards {#token-standards}
 
-- [ERC20 - A standard interface for tokens](/developers/docs/standards/tokens/erc-20/)
-- [ERC721 - A standard interface for non-fungible tokens](/developers/docs/standards/tokens/erc-721/)
+- [ERC-20](/developers/docs/standards/tokens/erc-20/) - A standard interface for fungible (interchangeable) tokens, like voting tokens, staking tokens or virtual currencies.
+- [ERC-721](/developers/docs/standards/tokens/erc-721/) - A standard interface for non-fungible tokens, like a deed for artwork or a song.
 
 Learn more about [token standards](/developers/docs/standards/tokens/).
 

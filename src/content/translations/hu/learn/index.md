@@ -21,11 +21,11 @@ Ezen az oldalon található információk mellett számos, közösség által k�
 
 - [EthHub](https://docs.ethhub.io) _Átfogó tudásbázis mindenről, ami Ethereum_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _Egy oktató jellegű anyag Ethereumról kezdőknek_
-- [Ethereum.wiki](https://ethereum.wiki) _Egy közösség által épített wiki az Ethereum technológiájáról_
+- [Ethereum.wiki](https://eth.wiki) _Egy közösség által épített wiki az Ethereum technológiájáról_
 - [Kauri](https://kauri.io) _Technikai cikkek és útmutatók Ethereumról és kapcsolódó projektekről_
 - [Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _Videók és beszélgetések Ethereumról_
 - [Week in Ethereum News](https://weekinethereumnews.com/) _Egy heti rendszerességű hírlevél, mely összefoglalja a legfontosabb fejlesztéseket az ökoszisztémán keresztül_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _Egy rendszeres hírlevél az ETH 2.0 fejlesztéséről_
+- [What’s new in ETH 2.0](https://eth2.news) _Egy rendszeres hírlevél az ETH 2.0 fejlesztéséről_
 - [ethresear.ch forum](https://ethresear.ch/) _Mélyebb technikai beszélgetések Ethereumról az ETH 2.0 szempontjából és azontúl_
 - [ETHGlobal](https://ethglobal.co) _Egy Ethereum hackathon sorozat - vegyél részt a hozzád legközelebb eső helyen!_
 

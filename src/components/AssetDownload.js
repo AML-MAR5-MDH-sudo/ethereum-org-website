@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 import Emoji from "./Emoji"
 
+import Translation from "../components/Translation"
 import ButtonLink from "./ButtonLink"
 import Link from "./Link"
 
@@ -58,6 +59,7 @@ const ButtonContainer = styled.div`
 
 // TODO add ability to download SVGs
 const AssetDownload = ({
+  alt,
   artistName,
   artistUrl,
   children,
@@ -66,7 +68,6 @@ const AssetDownload = ({
   shouldHide = false,
   title,
 }) => {
-  // const baseUrl = `http://localhost:8888`
   const baseUrl = `https://ethereum.org`
   const downloadUri = src ? src : image.fluid.src
   const downloadUrl = `${baseUrl}${downloadUri}`
@@ -78,14 +79,14 @@ const AssetDownload = ({
         {children && <ImageContainer>{children}</ImageContainer>}
         {!children && (
           <ImageContainer>
-            <Image fluid={image.fluid} />
+            <Image fluid={image.fluid} alt={alt} />
           </ImageContainer>
         )}
         {artistName && (
           <Caption>
             <ArtistSubtitle>
               <Emoji text=":artist_palette:" mr={`0.5em`} />
-              Artist:
+              <Translation id="page-assets-download-artist" />
             </ArtistSubtitle>
             {artistUrl && <Link to={artistUrl}>{artistName}</Link>}
             {!artistUrl && <span>{artistName}</span>}
@@ -93,7 +94,9 @@ const AssetDownload = ({
         )}
       </div>
       <ButtonContainer>
-        <ButtonLink to={downloadUrl}>Download</ButtonLink>
+        <ButtonLink to={downloadUrl}>
+          <Translation id="page-assets-download-download" />
+        </ButtonLink>
       </ButtonContainer>
     </Container>
   )

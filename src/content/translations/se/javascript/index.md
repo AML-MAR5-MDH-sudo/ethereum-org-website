@@ -44,17 +44,12 @@ Behöver du en mer grundläggande introduktion först? Kolla in [ethereum.org/se
 
 **Ethers.js -** **_Fullständig Ethereum-plånboksimplementering och verktyg i JavaScript och TypeScript_**
 
-- [Dokumentation](https://docs.ethers.io/ethers.js/html/)
+- [Dokumentation](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_Ethereum VM implementerad i JavaScript_**
 
 - [Github](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **En skrivbordsapp för Ethereum-verktyg, expanderbar med JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [Github](https://github.com/ethereum/grid)
 
 Letar du efter fler resurser? Kolla in [ethereum.org/se/developers.](/se/developers/)
 

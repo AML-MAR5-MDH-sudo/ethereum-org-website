@@ -44,17 +44,12 @@ sidebar: true
 
 **Ethers.js -** **_JavaScript 和 TypeScript 中完整的以太坊钱包实现和实用工具。_**
 
-- [相关文档](https://docs.ethers.io/ethers.js/html/)
+- [相关文档](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_在 JavaScript 中实现以太坊虚拟机（VM）_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_以太坊工具的桌面应用程序，可用 JavaScript 扩展。**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 想要获取更多的资源？ 请浏览 [ethereum.org/developers](/zh/developers/)。
 

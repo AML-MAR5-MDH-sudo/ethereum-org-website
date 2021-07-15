@@ -5,8 +5,6 @@ const supportedLanguages = translations.supportedLanguages
 const defaultLanguage = `en`
 const siteUrl = `https://ethereum.org`
 
-const READ_ONLY_GITHUB_TOKEN = `b809cbd0bd021c349291f0425871ea981a2e290f`
-
 module.exports = {
   siteMetadata: {
     // `title` & `description` pulls from respective ${lang}.json files in PageMetadata.js
@@ -30,8 +28,9 @@ module.exports = {
         languages: supportedLanguages,
         // language file path
         defaultLanguage,
-        // redirect to `/en/` when connecting `/`
-        redirect: false,
+        // redirect to `/${lang}/` when connecting to `/`
+        // based on user's browser language preference
+        redirect: true,
       },
     },
     // Web app manifest
@@ -44,7 +43,7 @@ module.exports = {
         background_color: `#fff`,
         theme_color: `#1c1ce1`,
         display: `standalone`,
-        icon: `src/assets/eth-home-icon.png`,
+        icon: `src/assets/favicon.png`,
       },
     },
     // Matomo analtyics
@@ -131,6 +130,17 @@ module.exports = {
       options: {
         // process all `.md` files as MDX
         extensions: [`.mdx`, `.md`],
+        // Workaround to fix `backgroundColor` bug:
+        // https://github.com/gatsbyjs/gatsby/issues/25272
+        plugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              backgroundColor: `transparent`,
+              maxWidth: 1200,
+            },
+          },
+        ],
         // Note: in order for MDX to work with gatsby-remark-plugins
         // The plugin must be listed top-level & in gatsbyRemarkPlugins
         // See: https://www.gatsbyjs.org/docs/mdx/plugins/
@@ -146,6 +156,7 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
+              backgroundColor: `transparent`,
               maxWidth: 1200,
             },
           },
@@ -195,18 +206,6 @@ module.exports = {
         path: `${__dirname}/src/data`,
       },
     },
-    // Source GitHub API
-    {
-      resolve: `gatsby-source-graphql`,
-      options: {
-        typeName: `GitHub`,
-        fieldName: `github`,
-        url: `https://api.github.com/graphql`,
-        headers: {
-          Authorization: `Bearer ${READ_ONLY_GITHUB_TOKEN}`,
-        },
-      },
-    },
     // Process files within /src/data/
     `gatsby-transformer-csv`,
     // Add git information on File fields from latest commit: date, author and email
@@ -220,4 +219,9 @@ module.exports = {
     // Needed for `gatsby-image`
     `gatsby-transformer-sharp`,
   ],
+  // https://www.gatsbyjs.com/docs/reference/release-notes/v2.28/#feature-flags-in-gatsby-configjs
+  flags: {
+    PRESERVE_WEBPACK_CACHE: true,
+    FAST_DEV: true, // DEV_SSR, QUERY_ON_DEMAND & LAZY_IMAGES
+  },
 }

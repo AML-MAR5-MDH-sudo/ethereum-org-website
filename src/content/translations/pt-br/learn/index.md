@@ -21,11 +21,11 @@ Além das informações nesta página, há muitos recursos construídos pela com
 
 - [EthHub](https://docs.ethhub.io) _Um site com grande base de conhecimento global sobre todas as coisas da Ethereum_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _Um site educacional sobre Ethereum direcionado para iniciantes_
-- [Ethereum.wiki](https://ethereum.wiki) _Uma wiki construída pela comunidade sobre a tecnologia Ethereum_
+- [Ethereum.wiki](https://eth.wiki) _Uma wiki construída pela comunidade sobre a tecnologia Ethereum_
 - [Kauri](https://kauri.io) _Artigos técnicos e tutoriais para Ethereum e projetos relacionados_
 - [Fundação Ethereum YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _Vídeos e palestras sobre Ethereum_
 - [Week in Ethereum News](https://weekinethereumnews.com/) _Uma newsletter semanal cobrindo os principais desenvolvimentos do ecossistema como um todo_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _Um boletim de notícias regular sobre o desenvolvimento do ETH 2.0_
+- [What’s new in ETH 2.0](https://eth2.news) _Um boletim de notícias regular sobre o desenvolvimento do ETH 2.0_
 - [ethresear.ch forum](https://ethresear.ch/) _Discussões mais profundas sobre Ethereum para ETH 2.0 e além_
 - [ETHGlobal](https://ethglobal.co) _Uma série global de hackathons sobre Ethereum - Veja uma perto de você!_
 
@@ -86,7 +86,7 @@ Há muitos esforços sendo feitos para tornar a Ethereum mais “escalável” m
 
 "Layer 1" refere-se a melhorar o núcleo de protocolo da Ethereum. O projeto principal para melhorar o protocolo central da Ethereum é [ETH 2.0](./#eth-2-0).
 
-"Layer 2" refere-se à tecnologias que são construídas "no topo" do protocolo de Ethereum base, permitindo maior escalabilidade sem comprometer a segurança. Também existem tecnologias "off-chain", como as "side chains" (correntes paralelas), que permitem uma maior escalabilidade através da criação de um conjunto diferente de compromissos em matéria de segurança.
+"Layer 2" refere-se à tecnologias que são construídas "no topo" do protocolo de Ethereum base, permitindo maior escalabilidade sem comprometer a segurança. Também existem tecnologias "off-chain", como as "sidechains" (correntes paralelas), que permitem uma maior escalabilidade através da criação de um conjunto diferente de compromissos em matéria de segurança.
 
 - [Making Sense of Layer 2](https://medium.com/l4-media/making-sense-of-ethereums-layer-2-scaling-solutions-state-channels-plasma-and-truebit-22cb40dcc2f4) _Feb 12, 2018 - Josh Stark_
 - [The Case for Ethereum Scalability](https://medium.com/connext/the-case-for-ethereum-scalability-d2a8035f880f) _Jan 18, 2019 - Hunter Hillman, Steven McKie, and Eric Olszewski_

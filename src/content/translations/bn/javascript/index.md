@@ -44,17 +44,12 @@ sidebar: true
 
 **Ethers.js -** **_সম্পূর্ণ ইথেরিয়াম ওয়ালেট বাস্তবায়ন এবং জাভাস্ক্রিপ্ট ও টাইপস্ক্রিপ্ট-এ ইউটিলিটি।_**
 
-- [নথিপত্র](https://docs.ethers.io/ethers.js/html/)
+- [নথিপত্র](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_জাভাস্ক্রিপ্টে বাস্তবায়িত এথেরিয়াম ভিএম_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**ইথেরিয়াম গ্রিড -** **\_ইথেরিয়াম টুলগুলির জন্য একটি ডেস্কটপ অ্যাপ্লিকেশন, জাভাস্ক্রিপ্টের সাথে প্রসারণযোগ্য।**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 আরও সংস্থান খুঁজছেন? ক্লিক করুন [ethereum.org/developers](/bn/developers/)
 

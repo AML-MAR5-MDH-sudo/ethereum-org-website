@@ -1,6 +1,5 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { useIntl } from "gatsby-plugin-intl"
 import { Link } from "gatsby"
 import styled from "styled-components"
 
@@ -10,6 +9,7 @@ const Aside = styled.aside`
   padding: 0rem;
   text-align: right;
   margin-bottom: 2rem;
+  overflow-y: auto;
 `
 
 const OuterList = styled(motion.ul)`
@@ -25,11 +25,6 @@ const OuterList = styled(motion.ul)`
   padding-left: 1rem;
 
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    border-left: 0;
-    padding-top: 1rem;
-    padding-left: 0rem;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
     display: none;
   }
 `
@@ -83,32 +78,18 @@ const TableOfContentsLink = ({ depth, item }) => {
   )
 }
 
-const ItemsList = ({ items, depth, maxDepth }) => {
-  if (depth > maxDepth || !items) {
-    return null
-  }
-  return items.map((item, index) => {
-    if (item.items) {
-      return (
+const ItemsList = ({ items, depth, maxDepth }) =>
+  depth <= maxDepth && !!items
+    ? items.map((item, index) => (
         <ListItem key={index}>
           <div>
             <TableOfContentsLink depth={depth} item={item} />
           </div>
         </ListItem>
-      )
-    }
-    return (
-      <ListItem key={index}>
-        <div>
-          <TableOfContentsLink depth={depth} item={item} />
-        </div>
-      </ListItem>
-    )
-  })
-}
+      ))
+    : null
 
 const Eth2TableOfContents = ({ items, maxDepth, className }) => {
-  const intl = useIntl()
   if (!items) {
     return null
   }

@@ -21,11 +21,11 @@ sidebarDepth: 1
 
 - [EthHub](https://docs.ethhub.io) _База знань з усіх питань, що стосуються Ethereum_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _Навчальний ресурс з Ethereum, орієнтований на початківців_
-- [Ethereum.wiki](https://ethereum.wiki) _Створена спільнотою вікі-сторінка про технології Ethereum_
+- [Ethereum.wiki](https://eth.wiki) _Створена спільнотою вікі-сторінка про технології Ethereum_
 - [Kauri](https://kauri.io) _Технічні статті та навчальні посібники з Ethereum і пов'язані проекти_
 - [Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _Відеоматеріали та дискусії про Ethereum_
 - [Щотижневі новини Ethereum](https://weekinethereumnews.com/) _Щотижневий інформаційний бюлетень, що висвітлює ключові події в екосистемі_
-- [Що нового у ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _Регулярний інформаційний бюлетень про розробку ETH 2.0_
+- [Що нового у ETH 2.0](https://eth2.news) _Регулярний інформаційний бюлетень про розробку ETH 2.0_
 - [ethresear.ch forum](https://ethresear.ch/) _Глибокі технічні дискусії з Ethereum для ETH 2.0 і не тільки_
 - [ETHGlobal](https://ethglobal.co) _Серія мозкових штурмів з Ethereum — завітайте на один із них поруч з вами!_
 

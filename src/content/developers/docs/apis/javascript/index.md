@@ -7,13 +7,13 @@ sidebar: true
 
 In order for a web app to interact with the Ethereum blockchain (i.e. read blockchain data and/or send transactions to the network), it must connect to an Ethereum node.
 
-For this purpose, every Ethereum client implements the JSON-RPC specification, so there are a uniform set of endpoints that applications can rely on.
+For this purpose, every Ethereum client implements the [JSON-RPC](/developers/docs/apis/json-rpc/) specification, so there are a uniform set of [endpoints](/developers/docs/apis/json-rpc/endpoints/) that applications can rely on.
 
 If you want to use JavaScript to connect with an Ethereum node, it's possible to use vanilla JavaScript but several convenience libraries exist within the ecosystem that make this much easier. With these libraries, developers can write intuitive, one-line methods to initialize JSON RPC requests (under the hood) that interact with Ethereum.
 
 ## Prerequisites {#prerequisites}
 
-As well as understanding JavaScript, it might be helpful to understand the [Ethereum stack](/developers/docs/ethereum-stack/) and [Ethereum clients](/docs/nodes-and-clients/).
+As well as understanding JavaScript, it might be helpful to understand the [Ethereum stack](/developers/docs/ethereum-stack/) and [Ethereum clients](/developers/docs/nodes-and-clients/).
 
 ## Why use a library? {#why-use-a-library}
 
@@ -159,7 +159,7 @@ Once set up you'll be able to:
 
 Javascript client libraries allow your application to call smart contract functions by reading the Application Binary Interface (ABI) of a compiled contract.
 
-The ABI essentially explains the contract's functions in a JSON format and allows you to use it like a normal JavaScipt object.
+The ABI essentially explains the contract's functions in a JSON format and allows you to use it like a normal JavaScript object.
 
 So the following Solidity contract:
 
@@ -253,7 +253,7 @@ ethers.utils.formatEther(balance)
 
 **Ethers.js -** **_Complete Ethereum wallet implementation and utilities in JavaScript and TypeScript._**
 
-- [Documentation](https://docs.ethers.io/ethers.js/html/)
+- [Documentation](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **The Graph -** **_A protocol for indexing Ethereum and IPFS data and querying it using GraphQL._**
@@ -274,6 +274,7 @@ ethers.utils.formatEther(balance)
 - [GitHub](https://github.com/0xProject/0x-monorepo/tree/development/packages/web3-wrapper)
 
 **Alchemyweb3 -** **_Wrapper around Web3.js with automatic retries and enhanced apis._**
+
 - [Documentation](https://docs.alchemyapi.io/documentation/alchemy-web3)
 - [GitHub](https://github.com/alchemyplatform/alchemy-web3)
 
@@ -283,8 +284,8 @@ _Know of a community resource that helped you? Edit this page and add it!_
 
 ## Related topics {#related-topics}
 
-- [Nodes and clients](/en/developers/docs/nodes-and-clients/)
-- [Development frameworks](/en/developers/docs/frameworks/)
+- [Nodes and clients](/developers/docs/nodes-and-clients/)
+- [Development frameworks](/developers/docs/frameworks/)
 
 ## Related tutorials {#related-tutorials}
 

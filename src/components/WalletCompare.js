@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql } from "gatsby"
-import { useIntl } from "gatsby-plugin-intl"
+import { useIntl, navigate } from "gatsby-plugin-intl"
 import styled from "styled-components"
+import { shuffle } from "lodash"
 
 import ButtonLink from "./ButtonLink"
 import Emoji from "./Emoji"
@@ -14,6 +15,7 @@ import { Content } from "./SharedStyledComponents"
 
 import { getLocaleTimestamp } from "../utils/time"
 import { trackCustomEvent } from "../utils/matomo"
+import { translateMessageId } from "../utils/translations"
 
 const Container = styled.div`
   margin-top: 2rem;
@@ -83,8 +85,8 @@ const ClearLink = styled.button`
 export const walletCardImage = graphql`
   fragment walletCardImage on File {
     childImageSharp {
-      fixed(width: 80) {
-        ...GatsbyImageSharpFixed
+      fluid(maxWidth: 64) {
+        ...GatsbyImageSharpFluid
       }
     }
   }
@@ -92,12 +94,11 @@ export const walletCardImage = graphql`
 
 const ResultsContainer = styled.div`
   margin-top: 0rem;
-  text-align: center;
 `
 
 const ResultsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 `
 
@@ -157,9 +158,11 @@ const walletFeatures = [
   },
 ]
 
-const WalletCompare = () => {
-  const [state, setState] = useState({ selectedFeatureIds: [], wallets: [] })
-
+const WalletCompare = ({ location }) => {
+  const [state, setState] = useState({
+    selectedFeatureIds: [],
+    wallets: [],
+  })
   // image variables must match `id` column in src/data/wallets.csv
   const data = useStaticQuery(graphql`
     query {
@@ -168,7 +171,6 @@ const WalletCompare = () => {
           id
           name
           url
-          description
           brand_color
           has_mobile
           has_desktop
@@ -204,10 +206,16 @@ const WalletCompare = () => {
       argent: file(relativePath: { eq: "wallets/argent.png" }) {
         ...walletCardImage
       }
-      authereum: file(relativePath: { eq: "wallets/authereum.png" }) {
+      bitcoindotcom: file(relativePath: { eq: "wallets/bitcoindotcom.png" }) {
         ...walletCardImage
       }
       coinbase: file(relativePath: { eq: "wallets/coinbase.png" }) {
+        ...walletCardImage
+      }
+      coinomi: file(relativePath: { eq: "wallets/coinomi.png" }) {
+        ...walletCardImage
+      }
+      dcent: file(relativePath: { eq: "wallets/dcent.png" }) {
         ...walletCardImage
       }
       dharma: file(relativePath: { eq: "wallets/dharma.png" }) {
@@ -216,7 +224,16 @@ const WalletCompare = () => {
       enjin: file(relativePath: { eq: "wallets/enjin.png" }) {
         ...walletCardImage
       }
+      fortmatic: file(relativePath: { eq: "wallets/fortmatic.png" }) {
+        ...walletCardImage
+      }
       gnosis: file(relativePath: { eq: "wallets/gnosis.png" }) {
+        ...walletCardImage
+      }
+      guarda: file(relativePath: { eq: "wallets/guarda.png" }) {
+        ...walletCardImage
+      }
+      hyperpay: file(relativePath: { eq: "wallets/hyperpay.png" }) {
         ...walletCardImage
       }
       imtoken: file(relativePath: { eq: "wallets/imtoken.png" }) {
@@ -225,10 +242,19 @@ const WalletCompare = () => {
       ledger: file(relativePath: { eq: "wallets/ledger.png" }) {
         ...walletCardImage
       }
+      linen: file(relativePath: { eq: "wallets/linen.png" }) {
+        ...walletCardImage
+      }
+      mathwallet: file(relativePath: { eq: "wallets/mathwallet.png" }) {
+        ...walletCardImage
+      }
       metamask: file(relativePath: { eq: "wallets/metamask.png" }) {
         ...walletCardImage
       }
       monolith: file(relativePath: { eq: "wallets/monolith.png" }) {
+        ...walletCardImage
+      }
+      multis: file(relativePath: { eq: "wallets/multis.png" }) {
         ...walletCardImage
       }
       mycrypto: file(relativePath: { eq: "wallets/mycrypto.png" }) {
@@ -246,6 +272,9 @@ const WalletCompare = () => {
       rainbow: file(relativePath: { eq: "wallets/rainbow.png" }) {
         ...walletCardImage
       }
+      samsung: file(relativePath: { eq: "wallets/samsung.png" }) {
+        ...walletCardImage
+      }
       squarelink: file(relativePath: { eq: "wallets/squarelink.png" }) {
         ...walletCardImage
       }
@@ -261,25 +290,50 @@ const WalletCompare = () => {
       trust: file(relativePath: { eq: "wallets/trust.png" }) {
         ...walletCardImage
       }
+      unstoppable: file(relativePath: { eq: "wallets/unstoppable.png" }) {
+        ...walletCardImage
+      }
       zengo: file(relativePath: { eq: "wallets/zengo.png" }) {
+        ...walletCardImage
+      }
+      walleth: file(relativePath: { eq: "wallets/walleth.png" }) {
+        ...walletCardImage
+      }
+      tokenpocket: file(relativePath: { eq: "wallets/tokenpocket.png" }) {
         ...walletCardImage
       }
     }
   `)
 
+  const intl = useIntl()
+
   useEffect(() => {
+    // Fetch filters on load
+    const queryParamFilters = new URLSearchParams(location.search || "").get(
+      "filters"
+    ) // Comma separated string
+    const selectedFeatureIds = queryParamFilters
+      ? queryParamFilters.split(",")
+      : []
+
     const nodes = data.allWallets.nodes
-    const wallets = nodes
-      .map((node) => {
+    const wallets = shuffle(
+      nodes.map((node) => {
         node.image = data[node.id]
-        node.randomNumber = Math.floor(Math.random() * nodes.length)
+        node.alt = translateMessageId(
+          `page-find-wallet-${node.id}-logo-alt`,
+          intl
+        )
+        node.description = translateMessageId(
+          `page-find-wallet-description-${node.id}`,
+          intl
+        )
         return node
       })
-      .sort((a, b) => a.randomNumber - b.randomNumber)
-    setState({ selectedFeatureIds: state.selectedFeatureIds, wallets })
-  }, [data, state.selectedFeatureIds])
+    )
+    setState({ selectedFeatureIds, wallets })
+  }, [data, intl, location.search])
 
-  const intl = useIntl()
   let lastUpdated
   // TODO remove conditionals once file is registered in git
   if (data.timestamp.parent.fields) {
@@ -289,8 +343,28 @@ const WalletCompare = () => {
     )
   }
 
+  const updatePath = (selectedFeatureIds) => {
+    // Update URL path with new filter query params
+    let newPath = "/wallets/find-wallet/"
+    if (selectedFeatureIds.length > 0) {
+      newPath += "?filters="
+      for (const id of selectedFeatureIds) {
+        newPath += `${id},`
+      }
+      newPath = newPath.substr(0, newPath.length - 1)
+    }
+    // Apply new path without refresh if within `window`
+    if (window) {
+      newPath = `/${intl.locale}` + newPath
+      window.history.pushState(null, "", newPath)
+    } else {
+      navigate(newPath)
+    }
+  }
+
   const clearFilters = () => {
-    setState({ selectedFeatureIds: [], wallets: state.wallets })
+    setState({ ...state, selectedFeatureIds: [] })
+    updatePath([])
   }
 
   // Add feature filter (or remove if already selected)
@@ -303,16 +377,14 @@ const WalletCompare = () => {
     } else {
       selectedFeatureIds.push(featureId)
 
-      const feature = walletFeatures.filter(
-        (feature) => feature.id === featureId
-      )[0].title
       trackCustomEvent({
         eventCategory: `Wallet feature`,
         eventAction: `Selected`,
-        eventName: feature,
+        eventName: featureId,
       })
     }
     setState({ selectedFeatureIds, wallets: state.wallets })
+    updatePath(selectedFeatureIds)
   }
 
   let filteredWallets = state.wallets.filter((wallet) => {
@@ -384,27 +456,23 @@ const WalletCompare = () => {
           )}
           <TagsContainer>
             <TagContainer>
-              {selectedFeatures.map((feature) => {
-                return (
-                  <Tag
-                    name={feature.title}
-                    key={feature.id}
-                    onSelect={handleSelect}
-                    value={feature.id}
-                  />
-                )
-              })}
-              {remainingFeatures.map((feature) => {
-                return (
-                  <Tag
-                    name={feature.title}
-                    key={feature.id}
-                    onSelect={handleSelect}
-                    value={feature.id}
-                    isActive={false}
-                  />
-                )
-              })}
+              {selectedFeatures.map((feature) => (
+                <Tag
+                  name={feature.title}
+                  key={feature.id}
+                  onSelect={handleSelect}
+                  value={feature.id}
+                />
+              ))}
+              {remainingFeatures.map((feature) => (
+                <Tag
+                  name={feature.title}
+                  key={feature.id}
+                  onSelect={handleSelect}
+                  value={feature.id}
+                  isActive={false}
+                />
+              ))}
             </TagContainer>
             {hasSelectedFeatures && (
               <ClearLink onClick={clearFilters}>
@@ -429,16 +497,16 @@ const WalletCompare = () => {
         )}
         <ResultsContainer>
           <ResultsGrid>
-            {filteredWallets.map((wallet) => {
-              return <WalletCard wallet={wallet} key={wallet.id} />
-            })}
+            {filteredWallets.map((wallet) => (
+              <WalletCard wallet={wallet} key={wallet.id} />
+            ))}
           </ResultsGrid>
         </ResultsContainer>
         <Disclaimer>
           <p>
             <em>
               <Translation id="page-find-wallet-not-endorsements" />{" "}
-              <Link to="/contributing/adding-products/">
+              <Link to="/en/contributing/adding-products/">
                 <Translation id="page-find-wallet-listing-policy" />
               </Link>
               <Translation id="page-find-wallet-add-wallet" />{" "}

@@ -45,17 +45,12 @@ Tarvitsetko perusteellisempaa aloitusta? Katso [ethereum.org/fi/learn](/learn/) 
 
 **Ethers.js -** **_Kokonainen Ethereum-lompakkototeutus ja työkalut JavaScriptillä ja TypeScriptillä._**
 
-- [Dokumentaatio](https://docs.ethers.io/ethers.js/html/)
+- [Dokumentaatio](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_Ethereum VM toteutettu JavaScriptillä_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_Työpöytäsovellus Ethereumin työkaluille, laajennettavissa JavaScriptillä.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Etsitkö lisää resursseja? Katso [ethereum.org/fi/developers](/developers/).
 

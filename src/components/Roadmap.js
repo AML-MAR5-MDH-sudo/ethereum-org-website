@@ -1,37 +1,22 @@
 import React, { useState, useEffect } from "react"
+import { useIntl } from "gatsby-plugin-intl"
 import styled from "styled-components"
 import axios from "axios"
 
+import Translation from "../components/Translation"
 import Link from "./Link"
-import { FakeLinkExternal, H2, H3 } from "./SharedStyledComponents"
+import { FakeLinkExternal } from "./SharedStyledComponents"
+
+import { translateMessageId } from "../utils/translations"
+
+import { CardItem as Item } from "./SharedStyledComponents"
 
 const Section = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 2rem;
   margin-bottom: 2rem;
-`
-
-const Item = styled(Link)`
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 1rem 1rem 1rem 0;
-  padding: 0.8rem;
-  flex: 0 1 240px;
-  list-style: none;
-  border-radius: 0.5rem;
   width: 100%;
-  border: 1px dotted ${(props) => props.theme.colors.lightBorder};
-  box-shadow: 0 1px 4px ${(props) => props.theme.colors.boxShadow};
-  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-  color: ${(props) => props.theme.colors.text};
-
-  &:hover {
-    box-shadow: 0 4px 8px ${(props) => props.theme.colors.boxShadowHover};
-    border: 1px dotted ${(props) => props.theme.colors.primary};
-  }
 `
 
 const ErrorMsg = styled.div`
@@ -61,8 +46,9 @@ const IssueSection = ({ issues }) => {
 }
 
 const Roadmap = () => {
+  const intl = useIntl()
   const issue = {
-    title: "Loading...",
+    title: translateMessageId("loading", intl),
   }
   const blankIssues = Array(6).fill(issue)
   const [issues, setIssues] = useState({
@@ -108,12 +94,12 @@ const Roadmap = () => {
             .slice(0, 6)
 
           const implemented = issues
-            .filter((issue) => {
-              return (
+            .filter(
+              (issue) =>
                 issue.state === "closed" &&
-                "allcontributors[bot]" !== issue.user.login
-              )
-            })
+                "allcontributors[bot]" !== issue.user.login &&
+                !!issue.pull_request
+            )
             .slice(0, 6)
           setIssues({
             planned,
@@ -125,8 +111,8 @@ const Roadmap = () => {
       .catch((error) => {
         console.error(error)
         const errorIssue = {
-          title: "Loading error.",
-          errorMsg: "Please refresh the page.",
+          title: translateMessageId("loading-error", intl),
+          errorMsg: translateMessageId("refresh", intl),
         }
         const errorIssues = Array(3).fill(errorIssue)
         setIssues({
@@ -135,83 +121,93 @@ const Roadmap = () => {
           implemented: errorIssues,
         })
       })
-  }, [])
+  }, [intl])
 
   return (
     <div>
       <p>
-        Ever since the launch of ethereum.org, we strive to be transparent about
-        how we operate. This is one of our core values because we believe
-        transparency is crucial to Ethereum's success.
+        <Translation id="page-about-p-1" />
       </p>
       <p>
-        The{" "}
         <Link to="https://github.com/ethereum/ethereum-org-website/blob/master/LICENSE">
-          source code of this repository is licensed under the MIT License
+          <Translation id="page-about-link-1" />
         </Link>
         .
       </p>
       <p>
-        We use{" "}
+        <Translation id="page-about-p-2" />{" "}
         <Link to="https://github.com/ethereum/ethereum-org-website">
-          GitHub
+          <Translation id="page-about-link-2" />
         </Link>
-        as our primary project management tool. We organize our tasks in 3
-        categories:
+        <Translation id="page-about-p-3" />
       </p>
       <ul>
-        <li>in progress</li>
-        <li>planned</li>
-        <li>implemented</li>
+        <li>
+          <Translation id="page-about-li-1" />
+        </li>
+        <li>
+          <Translation id="page-about-li-2" />
+        </li>
+        <li>
+          <Translation id="page-about-li-3" />
+        </li>
       </ul>
       <p>
-        We do our best to keep the community informed what the status is of a
-        specific task.
+        <Translation id="page-about-p-4" />
       </p>
-      <H3>Work in progress</H3>
+      <h3>
+        <Translation id="page-about-h3" />
+      </h3>
       <p>
-        Tasks that we're implementing.{" "}
+        <Translation id="page-about-p-5" />{" "}
         <Link to="https://github.com/ethereum/ethereum-org-website/labels/Status%3A%20In%20Progress">
-          View the full list of tasks in progress on Github{" "}
+          <Translation id="page-about-link-3" />{" "}
         </Link>
         .
       </p>
       <IssueSection issues={issues.inProgress} />
-      <H3>Planned features</H3>
+      <h3>
+        <Translation id="page-about-h3-2" />
+      </h3>
       <p>
-        Tasks we've queued up to implement next.{" "}
+        <Translation id="page-about-p-6" />{" "}
         <Link to="https://github.com/ethereum/ethereum-org-website/issues?q=is%3Aissue+is%3Aopen+label%3A%22Status%3A+Up+Next%22">
-          View the full list of tasks in progress on Github
+          <Translation id="page-about-link-3" />
         </Link>
         .
       </p>
       <IssueSection issues={issues.planned} />
-      <H3>Implemented features</H3>
+      <h3>
+        <Translation id="page-about-h3-1" />
+      </h3>
       <p>
-        Recently completed tasks.{" "}
+        <Translation id="page-about-p-7" />{" "}
         <Link to="https://github.com/ethereum/ethereum-org-website/issues?q=is%3Aissue+is%3Aclosed">
-          View the full list of implemented tasks on Github{" "}
+          <Translation id="page-about-link-6" />{" "}
         </Link>
         .
       </p>
       <IssueSection issues={issues.implemented} />
-      <H2>Request a feature</H2>
+      <h2>
+        <Translation id="page-about-h2" />
+      </h2>
       <p>
-        Do you have an idea for how to improve ethereum.org? We'd love to
-        collaborate with you!
+        <Translation id="page-about-p-8" />
       </p>
       <ul>
         <li>
-          <Link to="https://discord.gg/bTCfS8C">Join our Discord server</Link>
+          <Link to="https://discord.gg/bTCfS8C">
+            <Translation id="page-about-link-4" />
+          </Link>
         </li>
         <li>
           <Link to="https://github.com/ethereum/ethereum-org-website/issues/new/choose">
-            Create an issue on Github
+            <Translation id="page-about-link-7" />
           </Link>
         </li>
         <li>
           <Link to="https://twitter.com/ethdotorg">
-            Reach out to us on Twitter
+            <Translation id="page-about-link-5" />
           </Link>
         </li>
       </ul>

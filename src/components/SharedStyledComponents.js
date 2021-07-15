@@ -1,6 +1,6 @@
 import styled from "styled-components"
+import { margin } from "styled-system"
 
-import { Mixins } from "../theme"
 import Card from "./Card"
 import Link from "./Link"
 
@@ -150,24 +150,6 @@ export const FakeLinkExternal = styled.div`
   }
 `
 
-// Headers
-
-export const H1 = styled.h1`
-  ${Mixins.textLevel1}
-`
-export const H2 = styled.h2`
-  ${Mixins.textLevel2}
-`
-export const H3 = styled.h3`
-  ${Mixins.textLevel3}
-`
-export const H4 = styled.h4`
-  ${Mixins.textLevel4}
-`
-export const H5 = styled.h5`
-  ${Mixins.textLevel5}
-`
-
 export const CardContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -177,7 +159,7 @@ export const CardContainer = styled.div`
 
 export const CardGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 2rem;
 `
 
@@ -205,7 +187,6 @@ const Button = styled.button`
   text-decoration: none;
   display: inline-block;
   white-space: nowrap;
-  margin-top: 0.5rem;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   border-radius: 0.25em;
@@ -215,6 +196,7 @@ const Button = styled.button`
     opacity: 0.4;
     cursor: not-allowed;
   }
+  ${margin}
 `
 
 export const ButtonPrimary = styled(Button)`
@@ -231,13 +213,14 @@ export const ButtonPrimary = styled(Button)`
 `
 
 export const ButtonSecondary = styled(Button)`
-  background-color: transparent;
   color: ${(props) => props.theme.colors.text};
   border: 1px solid ${(props) => props.theme.colors.text};
+  background-color: transparent;
 
   &:hover {
     color: ${(props) => props.theme.colors.primary};
     border: 1px solid ${(props) => props.theme.colors.primary};
+    box-shadow: ${(props) => props.theme.colors.cardBoxShadow};
   }
   &:active {
     background-color: ${(props) =>
@@ -279,14 +262,10 @@ export const Paragraph = styled.p`
 `
 
 export const Header1 = styled.h1`
-  ${Mixins.textLevel1}
-
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    font-size: 2.5rem;
-  }
+  font-weight: 700; // This overrides base h1 styling of 400
 
   /* Prevent nav overlap */
-    &:before {
+  &:before {
     content: "";
     display: block;
     height: 140px;
@@ -301,7 +280,7 @@ export const Header1 = styled.h1`
 `
 
 export const Header2 = styled.h2`
-  ${Mixins.textLevel2}
+  font-weight: 700; // This overrides base h2 styling of 600
 
   /* Needed to fix issues of header padding overlapping links */
   /* https://github.com/confluenza/confluenza/pull/17 */
@@ -317,7 +296,8 @@ export const Header2 = styled.h2`
   }
 
   /* Anchor tag styles */
-  a {
+  /* Selected specifically for mdx rendered side icon link */
+  a.header-anchor {
     position: relative;
     display: none;
     margin-left: -1.5em;
@@ -331,20 +311,14 @@ export const Header2 = styled.h2`
   }
 
   &:hover {
-    a {
+    a.header-anchor {
       display: initial;
       fill: ${(props) => props.theme.colors.primary};
     }
-  }
-
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    font-size: 1.25rem;
   }
 `
 
 export const Header3 = styled.h3`
-  ${Mixins.textLevel3}
-
   /* Needed to fix issues of header padding overlapping links */
   /* https://github.com/confluenza/confluenza/pull/17 */
   position: inherit !important;
@@ -359,7 +333,8 @@ export const Header3 = styled.h3`
   }
 
   /* Anchor tag styles */
-  a {
+  /* Selected specifically for mdx rendered side icon link */
+  a.header-anchor {
     position: relative;
     display: none;
     margin-left: -1.5em;
@@ -373,7 +348,7 @@ export const Header3 = styled.h3`
   }
 
   &:hover {
-    a {
+    a.header-anchor {
       display: initial;
       fill: ${(props) => props.theme.colors.primary};
     }
@@ -381,7 +356,7 @@ export const Header3 = styled.h3`
 `
 
 export const Header4 = styled.h4`
-  ${Mixins.textLevel4}
+  font-weight: 600; // This overrides base h2 styling of 400
 
   /* Needed to fix issues of header padding overlapping links */
   /* https://github.com/confluenza/confluenza/pull/17 */
@@ -434,3 +409,27 @@ export const dropdownIconContainerVariant = {
   },
   closed: { rotate: -90, y: 0 },
 }
+
+// Common styled item card for languages/about
+
+export const CardItem = styled(Link)`
+  text-decoration: none;
+  margin: 1rem 1rem 1rem 0;
+  padding: 1rem;
+  flex: 0 1 240px;
+  list-style: none;
+  border-radius: 2px;
+  width: 100%;
+  border: 1px solid ${(props) => props.theme.colors.lightBorder};
+  transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+  color: ${(props) => props.theme.colors.text};
+
+  &:hover {
+    box-shadow: ${(props) => props.theme.colors.cardBoxShadow};
+    border: 1px solid ${(props) => props.theme.colors.black300};
+  }
+  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
+    flex: 1 1 240px;
+    margin: 1rem 0;
+  }
+`

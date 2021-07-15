@@ -7,20 +7,19 @@ import { cloneDeep } from "lodash"
 
 import NavDropdown from "./Dropdown"
 import MobileNavMenu from "./Mobile"
+import NakedButton from "../NakedButton"
 import Link from "../Link"
 import Icon from "../Icon"
 import Search from "../Search"
 import Translation from "../Translation"
-import { NavLink } from "../../components/SharedStyledComponents"
-
-import { getLangContentVersion } from "../../utils/translations"
+import { NavLink } from "../SharedStyledComponents"
+import { translateMessageId } from "../../utils/translations"
 
 const NavContainer = styled.div`
-  position: fixed;
+  position: sticky;
+  top: 0;
   z-index: 1000;
-  width: 100vw;
-  /* xl breakpoint (1440px) + 72px (2rem padding on each side) */
-  max-width: 1504px;
+  width: 100%;
 `
 
 const StyledNav = styled.nav`
@@ -50,12 +49,9 @@ const NavContent = styled.div`
   width: 100%;
   max-width: ${(props) => props.theme.breakpoints.xl};
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
   }
-`
-const NavMobileButton = styled.span`
-  outline: none;
 `
 
 const InnerContent = styled.div`
@@ -115,14 +111,11 @@ const HomeLogo = styled(Img)`
   }
 `
 
-// Todo: opacity -> nudge on hover?
-
 const Span = styled.span`
   padding-left: 0.5rem;
 `
 
-const ThemeToggle = styled.span`
-  cursor: pointer;
+const ThemeToggle = styled(NakedButton)`
   margin-left: 1rem;
   display: flex;
   align-items: center;
@@ -132,18 +125,10 @@ const NavIcon = styled(Icon)`
   fill: ${(props) => props.theme.colors.text};
 `
 
-const MenuIcon = styled(Icon)`
-  fill: ${(props) => props.theme.colors.text};
-  display: none;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    display: block;
-    cursor: pointer;
-  }
-`
-
 // TODO display page title on mobile
 const Nav = ({ handleThemeChange, isDarkTheme, path }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   const data = useStaticQuery(graphql`
     query {
@@ -157,257 +142,176 @@ const Nav = ({ handleThemeChange, isDarkTheme, path }) => {
     }
   `)
   const intl = useIntl()
-  const contentVersion = getLangContentVersion(intl.locale)
 
   const linkSections = [
     {
-      text: "page-beginners",
-      to: `/what-is-ethereum/`,
-      shouldDisplay: contentVersion < 1.1,
-    },
-    {
-      text: "page-use",
-      to: `/use/`,
-      shouldDisplay: contentVersion < 1.1,
-    },
-    {
-      text: "page-learn",
-      to: `/learn/`,
-      shouldDisplay: contentVersion < 1.1,
-    },
-    {
-      text: "page-home-section-individuals-item-two",
-      ariaLabel: "nav-use-aria-label",
-      shouldDisplay: contentVersion > 1.1,
+      text: "use-ethereum",
+      ariaLabel: "use-ethereum-menu",
       items: [
         {
-          text: "page-home-section-individuals-item-one",
-          to: "/what-is-ethereum/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-four",
-          to: "/eth/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-six",
-          to: "/get-eth/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-find-wallet-explore-dapps",
-          to: "/dapps/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-five",
+          text: "ethereum-wallets",
           to: "/wallets/",
-          shouldDisplay: contentVersion > 1,
+        },
+        {
+          text: "get-eth",
+          to: "/get-eth/",
+        },
+        {
+          text: "decentralized-applications-dapps",
+          to: "/dapps/",
+        },
+        {
+          text: "page-stablecoins-title",
+          to: "/stablecoins/",
+        },
+        {
+          text: "page-stake-eth",
+          to: "/eth2/staking/",
         },
       ],
     },
     {
-      text: "page-home-section-learn-title",
-      ariaLabel: "nav-learn-aria-label",
-      shouldDisplay: contentVersion > 1.1,
+      text: "learn",
+      ariaLabel: "learn-menu",
       items: [
         {
-          text: "page-home-section-individuals-item-three",
-          to: "/learn/",
-          shouldDisplay: contentVersion > 1.1,
+          text: "what-is-ethereum",
+          to: "/what-is-ethereum/",
         },
         {
-          text: "footer-ethereum-whitepaper",
+          text: "what-is-ether",
+          to: "/eth/",
+        },
+        {
+          text: "defi-page",
+          to: "/defi/",
+        },
+        {
+          text: "dao-page",
+          to: "/dao/",
+        },
+        {
+          text: "nft-page",
+          to: "/nft/",
+        },
+        {
+          text: "history-of-ethereum",
+          to: "/history/",
+        },
+        {
+          text: "ethereum-whitepaper",
           to: "/whitepaper/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "footer-eips",
+          text: "ethereum-2-0",
+          to: "/eth2/",
+        },
+        {
+          text: "ethereum-glossary",
+          to: "/glossary/",
+        },
+        {
+          text: "eips",
           to: "/eips/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "page-eth2",
-          to: "/eth2/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-glossary",
-          to: "/glossary/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-      ],
-    },
-    {
-      text: "page-individuals",
-      ariaLabel: "page-individuals-aria-label",
-      shouldDisplay: contentVersion === 1.1,
-      items: [
-        {
-          text: "page-home-section-individuals-item-one",
-          to: "/what-is-ethereum/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-four",
-          to: "/eth/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-six",
-          to: "/get-eth/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-home-section-individuals-item-two",
-          to: "/dapps/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-five",
-          to: "/wallets/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-home-section-individuals-item-three",
+          text: "guides-and-resources",
           to: "/learn/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "page-community",
-          to: "/community/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-eth2",
-          to: "/eth2/",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-glossary",
-          to: "/glossary/",
-          shouldDisplay: contentVersion > 1.1,
         },
       ],
     },
     {
-      text: "page-developers",
+      text: "developers",
       ariaLabel: "page-developers-aria-label",
-      shouldDisplay: contentVersion === 1.1,
       items: [
         {
-          text: "get-started",
-          to: "/build/",
-          shouldDisplay: contentVersion > 1,
-        },
-        {
-          text: "ethereum-studio",
-          to: "https://studio.ethereum.org/",
-          shouldDisplay: true,
-        },
-        {
-          text: "developer-resources",
+          text: "developers-home",
           to: "/developers/",
-          shouldDisplay: true,
-        },
-      ],
-    },
-    {
-      text: "page-developers",
-      ariaLabel: "page-developers-aria-label",
-      shouldDisplay: contentVersion > 1.1,
-      items: [
-        {
-          text: "page-developers-home",
-          to: "/developers/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "edn-docs-title",
+          text: "documentation",
           to: "/developers/docs/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "edn-tutorials",
+          text: "tutorials",
           to: "/developers/tutorials/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "edn-learning-tools",
+          text: "learn-by-coding",
           to: "/developers/learning-tools/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "edn-local-env",
+          text: "set-up-local-env",
           to: "/developers/local-environment/",
-          shouldDisplay: contentVersion > 1.1,
         },
       ],
     },
     {
-      text: "page-enterprise",
-      to: "/enterprise/",
-      shouldDisplay: contentVersion === 1.1,
-    },
-    {
-      text: "page-enterprise",
-      ariaLabel: "page-enterprise-aria-label",
-      shouldDisplay: contentVersion > 1.1,
+      text: "enterprise",
+      ariaLabel: "enterprise-menu",
       items: [
         {
-          text: "page-enterprise-public",
+          text: "mainnet-ethereum",
           to: "/enterprise/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          text: "page-enterprise-private",
+          text: "private-ethereum",
           to: "/enterprise/private-ethereum/",
-          shouldDisplay: contentVersion > 1.1,
         },
       ],
     },
     {
-      text: "page-community",
-      to: "/community/",
-      shouldDisplay: contentVersion > 1.1,
+      text: "community",
+      ariaLabel: "community-menu",
+      items: [
+        {
+          text: "ethereum-community",
+          to: "/community/",
+        },
+        {
+          text: "grants",
+          to: "/community/grants/",
+        },
+      ],
     },
   ]
   const ednLinks = [
     {
-      text: "edn-home",
+      text: "home",
       to: "/developers/",
       isPartiallyActive: false,
-      shouldDisplay: contentVersion > 1.1,
     },
     {
-      text: "edn-docs",
+      text: "docs",
       to: "/developers/docs/",
-      shouldDisplay: contentVersion > 1.1,
     },
     {
-      text: "edn-tutorials",
+      text: "tutorials",
       to: "/developers/tutorials/",
-      shouldDisplay: contentVersion > 1.1,
     },
     {
-      text: "edn-learning-tools",
+      text: "learn-by-coding",
       to: "/developers/learning-tools/",
-      shouldDisplay: contentVersion > 1.1,
     },
     {
-      text: "edn-local-env",
+      text: "set-up-local-env",
       to: "/developers/local-environment/",
-      shouldDisplay: contentVersion > 1.1,
     },
   ]
-  let mobileLinkSections = cloneDeep(linkSections)
 
-  const handleMenuToggle = () => {
-    setIsMenuOpen(!isMenuOpen)
+  let mobileLinkSections = cloneDeep(linkSections)
+  const handleMenuToggle = (item) => {
+    if (item === "menu") {
+      setIsMenuOpen(!isMenuOpen)
+    } else if (item === "search") {
+      setIsSearchOpen(!isSearchOpen)
+    } else {
+      setIsMenuOpen(false)
+      setIsSearchOpen(false)
+    }
   }
 
-  const shouldShowSubNav = path.includes("/developers/") && contentVersion > 1.1
+  const shouldShowSubNav = path.includes("/developers/")
 
   return (
     <NavContainer>
@@ -416,42 +320,37 @@ const Nav = ({ handleThemeChange, isDarkTheme, path }) => {
           <HomeLogoNavLink to="/">
             <HomeLogo
               fixed={data.file.childImageSharp.fixed}
-              alt={intl.formatMessage({ id: "ethereum-logo" })}
+              alt={translateMessageId("ethereum-logo", intl)}
             />
           </HomeLogoNavLink>
           {/* Desktop */}
           <InnerContent>
             <LeftItems>
-              {linkSections
-                .filter((section) => section.shouldDisplay)
-                .map((section, idx) => {
-                  if (section.items) {
-                    return (
-                      <NavDropdown
-                        section={section}
-                        key={idx}
-                        hasSubNav={shouldShowSubNav}
-                      />
-                    )
-                  }
-                  return (
-                    <NavListItem key={idx}>
-                      <NavLink
-                        to={section.to}
-                        isPartiallyActive={section.isPartiallyActive}
-                      >
-                        <Translation id={section.text} />
-                      </NavLink>
-                    </NavListItem>
-                  )
-                })}
+              {linkSections.map((section, idx) =>
+                section.items || section.component ? (
+                  <NavDropdown
+                    section={section}
+                    key={idx}
+                    hasSubNav={shouldShowSubNav}
+                  />
+                ) : (
+                  <NavListItem key={idx}>
+                    <NavLink
+                      to={section.to}
+                      isPartiallyActive={section.isPartiallyActive}
+                    >
+                      <Translation id={section.text} />
+                    </NavLink>
+                  </NavListItem>
+                )
+              )}
             </LeftItems>
             <RightItems>
               <Search />
               <ThemeToggle onClick={handleThemeChange}>
                 <NavIcon name={isDarkTheme ? "darkTheme" : "lightTheme"} />
               </ThemeToggle>
-              <RightNavLink to="/en/languages/">
+              <RightNavLink to="/languages/">
                 <NavIcon name="language" />
                 <Span>
                   <Translation id="languages" />
@@ -461,35 +360,26 @@ const Nav = ({ handleThemeChange, isDarkTheme, path }) => {
           </InnerContent>
           {/* Mobile */}
           <MobileNavMenu
-            isOpen={isMenuOpen}
+            isMenuOpen={isMenuOpen}
+            isSearchOpen={isSearchOpen}
             isDarkTheme={isDarkTheme}
             toggleMenu={handleMenuToggle}
             toggleTheme={handleThemeChange}
             linkSections={mobileLinkSections}
           />
-          <NavMobileButton
-            onClick={handleMenuToggle}
-            onKeyDown={handleMenuToggle}
-            role="button"
-            tabIndex="0"
-          >
-            <MenuIcon name="menu" />
-          </NavMobileButton>
         </NavContent>
       </StyledNav>
       {shouldShowSubNav && (
         <SubNav>
-          {ednLinks.map((link, idx) => {
-            return (
-              <NavLink
-                key={idx}
-                to={link.to}
-                isPartiallyActive={link.isPartiallyActive}
-              >
-                <Translation id={link.text} />
-              </NavLink>
-            )
-          })}
+          {ednLinks.map((link, idx) => (
+            <NavLink
+              key={idx}
+              to={link.to}
+              isPartiallyActive={link.isPartiallyActive}
+            >
+              <Translation id={link.text} />
+            </NavLink>
+          ))}
         </SubNav>
       )}
     </NavContainer>

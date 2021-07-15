@@ -14,7 +14,7 @@ address: "0x19dE91Af973F404EDF5B4c093983a7c6E3EC8ccE"
 
 I guess you are as excited as us to [deploy](/developers/docs/smart-contracts/deploying/) and interact with your first [smart contract](/developers/docs/smart-contracts/) on the Ethereum blockchain.
 
-Don’t worry, as it’s our fist smart contract, we’ll deploy it on a [local test network](/developers/docs/networks/) so it does not cost anything for you to deploy and play as much as you’d like with it.
+Don’t worry, as it’s our first smart contract, we’ll deploy it on a [local test network](/developers/docs/networks/) so it does not cost anything for you to deploy and play as much as you’d like with it.
 
 ## Writing our contract {#writing-our-contract}
 
@@ -25,7 +25,8 @@ First step is to [visit Remix](https://remix.ethereum.org/) and create a new fil
 In the new file, we’ll paste the following code.
 
 ```solidity
-pragma solidity 0.5.17;
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.5.17;
 
 contract Counter {
 
@@ -52,7 +53,7 @@ If you’re used to programing you can easily guess what this program does. Here
 - Line 9: The first function will modify the state of the contract and `increment()` our variable `count`.
 - Line 14: The second function is just a getter to be able to read the value of the `count` variable outside of the smart contract. Note that, as we defined our `count` variable as public this is not necessary but is shown as an example.
 
-This is all for our first simple smart contract. As you may not it’s really looks like a class in OOP languages like Java or C++. It’s now time to play with our contract.
+This is all for our first simple smart contract. As you may know, it looks like a class from OOP languages like Java or C++. It’s now time to play with our contract.
 
 ## Deploying our contract {#deploying-our-contract}
 
@@ -76,7 +77,7 @@ Then navigate to the deploy and run transactions screen:
 
 Once you are on the "deploy and run" transactions screen, double check that your contract name appears and click on Deploy. As you can see on the top of the page, the current environment is “Javascript VM” that means that we’ll deploy and interact with our smart contract on a local test blockchain to be able to test faster and without any fees.
 
-![The deploy button in the Remix solidity compiler](./remix-deploy.png)
+![The deploy button in the Remix solidity compiler](./remix-deploy-button.png)
 
 Once you've clicked the “Deploy” button, you’ll see your contract appear on the bottom. Click the arrow on the left to expand it so we’ll see the content of our contract. This is our variable `counter`, our `increment()` function and the getter `getCounter()`.
 

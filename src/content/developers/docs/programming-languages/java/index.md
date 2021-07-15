@@ -14,14 +14,14 @@ Use Ethereum to create decentralized applications (or "dapps") that utilize the 
 
 **Take your first steps to integrating Java with Ethereum**
 
-Need a more basic primer first? Check out [ethereum.org/learn](/en/learn/) or [ethereum.org/developers.](/en/developers/)
+Need a more basic primer first? Check out [ethereum.org/learn](/learn/) or [ethereum.org/developers.](/developers/)
 
 - [Blockchain Explained](https://kauri.io/article/d55684513211466da7f8cc03987607d5/blockchain-explained)
 - [Understanding Smart Contracts](https://kauri.io/article/e4f66c6079e74a4a9b532148d3158188/ethereum-101-part-5-the-smart-contract)
 - [Write your First Smart Contract](https://kauri.io/article/124b7db1d0cf4f47b414f8b13c9d66e2/remix-ide-your-first-smart-contract)
 - [Learn How to Compile and Deploy Solidity](https://kauri.io/article/973c5f54c4434bb1b0160cff8c695369/understanding-smart-contract-compilation-and-deployment)
 
-## Working with Ethereum clients
+## Working with Ethereum clients {#working-with-ethereum-clients}
 
 Learn how to use [Web3J](https://github.com/web3j/web3j) and Hyperledger Besu, two leading Java Ethereum Clients
 
@@ -51,7 +51,7 @@ Learn how to use [Web3J](https://github.com/web3j/web3j) and Hyperledger Besu, t
 - [Eventeum (Event Listener)](https://github.com/ConsenSys/eventeum)
 - [Mahuta (IPFS Dev Tools)](https://github.com/ConsenSys/mahuta)
 
-Looking for more resources? Check out [ethereum.org/developers.](/en/developers/)
+Looking for more resources? Check out [ethereum.org/developers.](/developers/)
 
 ## Java Community Contributors {#java-community-contributors}
 

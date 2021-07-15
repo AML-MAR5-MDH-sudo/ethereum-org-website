@@ -1,32 +1,32 @@
 ---
-title: Learn about Ethereum
+title: Community guides and resources
 description: A set of technical and non-technical articles, guides, and resources to learn about Ethereum.
 lang: en
 sidebar: true
 sidebarDepth: 2
 ---
 
-# Learn about Ethereum {#learn-about-ethereum}
+# Community guides and resources {#learn-about-ethereum}
 
-**Welcome to ethereum.org/learn, a set of resources to help you learn more about Ethereum.** This page includes technical **and** non-technical articles, guides, and resources. If you’re totally new to Ethereum, [we suggest you start here](/en/what-is-ethereum/).
+**Welcome to ethereum.org/learn, a set of resources to help you learn more about Ethereum.** This page includes technical **and** non-technical articles, guides, and resources. If you’re totally new to Ethereum, [we suggest you start here](/what-is-ethereum/).
 
 Here are some excellent starting points:
 
 - [Decentralizing Everything](https://www.youtube.com/watch?v=WSN5BaCzsbo&feature=youtu.be) _Sep 18, 2017 - Vitalik Buterin (Video)_
 - [Why Decentralization Matters](https://medium.com/s/story/why-decentralization-matters-5e3f79f7638e) _Feb 18, 2018 - Chris Dixon_
-- [The Year in Ethereum 2019](https://medium.com/@jjmstark/the-year-in-ethereum-2019-242012e4276d) _Jan 22, 2020 - Josh Stark & Evan Van Ness_
+- [The Year in Ethereum 2020](https://jjmstark.medium.com/the-year-in-ethereum-2020-98123e5f160d) _Jan 20, 2021 - Josh Stark and Evan Van Ness_
 - [Ethereum is game-changing technology, literally](https://medium.com/@virgilgr/ethereum-is-game-changing-technology-literally-d67e01a01cf8) _Mar 29, 2019 - Virgil Griffith_
 
 In addition to the information on this page, there are many community-built resources worth exploring:
 
 - [EthHub](https://docs.ethhub.io) _Comprehensive knowledge base for all things Ethereum_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _An educational resource about Ethereum targeted at beginners_
-- [Ethereum.wiki](https://ethereum.wiki) _A community-built wiki about Ethereum’s technology_
+- [Ethereum.wiki](https://eth.wiki) _A community-built wiki about Ethereum’s technology_
 - [Kauri](https://kauri.io) _Technical articles and tutorials for Ethereum and related projects_
 - [Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _Videos and talks about Ethereum_
 - [Week in Ethereum News](https://weekinethereumnews.com/) _A weekly newsletter covering key developments across the ecosystem_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _A regular newsletter about ETH 2.0 development_
-- [ethresear.ch forum](https://ethresear.ch/) _Deeper technical discussions on Ethereum for ETH 2.0 and beyond_
+- [What’s new in ETH 2.0](https://eth2.news) _A regular newsletter about Eth2 development_
+- [ethresear.ch forum](https://ethresear.ch/) _Deeper technical discussions on Ethereum for Eth2 and beyond_
 - [ETHGlobal](https://ethglobal.co) _An Ethereum hackathon series - attend one near you!_
 
 ## How Ethereum works {#how-ethereum-works}
@@ -37,15 +37,20 @@ High-level explanations of Ethereum and blockchain technology generally.
 - [A Gentle Introduction to Ethereum](https://bitsonblocks.net/2016/10/02/gentle-introduction-ethereum/) _Oct 2, 2016 - Antony Lewis_
 - [Introduction to Blockchain through Cryptoeconomics - Part 1](https://medium.com/blockchain-at-berkeley/introduction-to-blockchain-through-cryptoeconomics-part-1-bitcoin-369f245067f9) _Jan 26, 2018 - Zubin Koticha_
 - [Introduction to Blockchain through Cryptoeconomics - Part 2](https://medium.com/mechanism-labs/introduction-to-bitcoin-through-cryptoeconomics-part-2-proof-of-work-and-nakamoto-consensus-1252f6a6c012) _July 19, 2018 - Zubin Koticha_
-- [Ethereum's original Whitepaper](/en/whitepaper/)
+- [Understanding Ethereum](https://allan-gulley.medium.com/understanding-ethereum-819c2096b613?sk=c89f3aa5a4fd8b5fa0dae3042a3fa011) _Apr 27, 2021 - Allan Gulley_
+- [Ethereum's original Whitepaper](/whitepaper/)
 
 ## Smart Contracts {#smart-contracts}
 
 A “smart contract” is simply a piece of code that is running on Ethereum. It’s called a “contract” because code that runs on Ethereum can control valuable things like ETH or other digital assets.
 
-- Want to learn how to program on Ethereum with smart contracts? [ethereum.org/developers](/en/developers/)
+- Want to learn how to program on Ethereum with smart contracts? [ethereum.org/developers](/developers/)
 - [What is a Smart Contract?](https://github.com/ethereumbook/ethereumbook/blob/develop/07smart-contracts-solidity.asciidoc#what-is-a-smart-contract) _Nov 12, 2018 - Andreas M. Antonopoulos, Gavin Wood_
 - [What are Smart Contracts/Decentralized Applications?](https://docs.ethhub.io/ethereum-basics/what-is-ethereum/#what-are-smart-contracts-and-decentralized-applications) _Updated often - Ethhub_
+
+## Ethereum development {#ethereum-development}
+
+Aspiring Ethereum developer? Check out our developer portal. It's got documentation, tutorials, and other resources for learning how to build Ethereum products. [View developer portal](/developers/learning-tools/)
 
 ## Proof of Work and Mining {#proof-of-work-and-mining}
 
@@ -78,32 +83,13 @@ There are many efforts underway to make Ethereum more “scalable” by improvin
 
 “Layer 2” refers to technologies that are built “on top” of the base Ethereum protocol, enabling greater scalability without compromising on security. There are also “off-chain” technologies like side-chains, which enable greater scalability by making a different set of security tradeoffs.
 
-- [Making Sense of Layer 2](https://medium.com/l4-media/making-sense-of-ethereums-layer-2-scaling-solutions-state-channels-plasma-and-truebit-22cb40dcc2f4) _Feb 12, 2018 - Josh Stark_
-- [challenges.ethereum.org](https://challenges.ethereum.org)
-- [The Case for Ethereum Scalability](https://medium.com/connext/the-case-for-ethereum-scalability-d2a8035f880f) _Jan 18, 2019 - Hunter Hillman, Steven McKie, and Eric Olszewski_
-- [5 Ways to Scale your Ethereum Dapp](https://kauri.io/article/7ccaaa2fe7f344d5bf53807cb5c01530) _Apr 23, 2019 - Andreas Wallendahl_
-
-### Payment & State Channels {#payment--state-channels}
-
-- [State Channels - an explanation](https://www.jeffcoleman.ca/state-channels/) _Nov 6, 2015 - Jeff Coleman_
-- [Basics of State Channels](https://education.district0x.io/general-topics/understanding-ethereum/basics-state-channels/) _District0x_
-- [State Channels](https://docs.ethhub.io/ethereum-roadmap/layer-2-scaling/state-channels/) _Updated often - EthHub_
-
-### Sidechains {#sidechains}
-
-- [Scaling Ethereum Dapps through Sidechains](https://medium.com/loom-network/dappchains-scaling-ethereum-dapps-through-sidechains-f99e51fff447) _Feb 8, 2018 - Georgios Konstantopoulos_
-
-### Plasma {#plasma}
-
-- [Understanding Plasma, Part 1: The Basics](https://www.theblockcrypto.com/2019/02/07/understanding-plasma-part-1-the-basics/) _Feb 7, 2019 - Daniel Goldman_
-- [Understanding Plasma](https://education.district0x.io/general-topics/understanding-ethereum/understanding-plasma/) _District0x_
-- [Learn Plasma - A learning resource for the Plasma framework](https://www.learnplasma.org/en/)
+[More on Layer 2](/developers/docs/scaling/layer-2-rollups/)
 
 ## Eth2 {#eth-2-0}
 
 Eth2 (also known as “Serenity”) refers to the next major upgrade of the core Ethereum protocol. It combines several improvements to Ethereum’s core protocol, or “Layer 1”.
 
-[Learn everything you need to know about Eth2](/en/eth2/).
+[Learn everything you need to know about Eth2](/eth2/).
 
 ## ETH 1.x {#eth-1x}
 

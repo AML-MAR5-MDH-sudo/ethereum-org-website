@@ -6,26 +6,26 @@ sidebar: true
 sidebarDepth: 2
 ---
 
-For Ethereum to work in a decentralized way it needs a distributed network of nodes that can verify blocks and transaction data. You need an application, known as a client, on your device to "run" a node.
+Ethereum is a distributed network of computers running software (known as nodes) that can verify blocks and transaction data. You need an application, known as a client, on your computer to "run" a node.
 
 ## Prerequisites {#prerequisites}
 
-You should understand the concept of a decentralized network before diving deeper and running your own instance of an Ethereum client. Take a look at our [introduction to Ethereum](/en/developers/docs/intro-to-ethereum/).
+You should understand the concept of a peer-to-peer network and the [basics of the EVM](/developers/docs/evm/) before diving deeper and running your own instance of an Ethereum client. Take a look at our [introduction to Ethereum](/developers/docs/intro-to-ethereum/).
 
 ## What are nodes and clients? {#what-are-nodes-and-clients}
 
-"Node" refers to a piece of software known as a client. A client is an implementation of Ethereum that verifies all transactions in each block, keeping the network secure and the data accurate.
+"Node" refers to a running piece of client software. A client is an implementation of Ethereum that verifies all transactions in each block, keeping the network secure and the data accurate.
 
 You can see a real-time view of the Ethereum network by looking at this [map of nodes](https://etherscan.io/nodetracker).
 
-Many [implementations of Ethereum clients](/developers/docs/nodes-and-clients/#clients) exist in a variety of languages. What these client implementations have in common is they all follow a formal specification. This specification dictates how the Ethereum network and blockchain functions. 
+Many [Ethereum clients](/developers/docs/nodes-and-clients/#clients) exist, in a variety of programming languages such as Go, Rust, JavaScript, Python, C# .NET and Java. What these implementations have in common is they all follow a formal specification (originally the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf)). This specification dictates how the Ethereum network and blockchain functions.
 
 ![Eth1x client](./client-diagram.png)
 Simplified diagram of what Ethereum client features.
 
 ## Node types {#node-types}
 
-If you want to run your own node, you should understand that there are different types of node that consume data differently. In fact, clients can run 3 different types of node - light, full and archive. There are also options of different sync strategies which enables faster synchronization time. Synchronization refers to how quickly it can get the most up-to-date information on Ethereum's state.
+If you want to [run your own node](/developers/docs/nodes-and-clients/run-a-node/), you should understand that there are different types of node that consume data differently. In fact, clients can run 3 different types of node - light, full and archive. There are also options of different sync strategies which enables faster synchronization time. Synchronization refers to how quickly it can get the most up-to-date information on Ethereum's state.
 
 ### Full node {#full-node}
 
@@ -45,7 +45,7 @@ If you want to run your own node, you should understand that there are different
 - Stores everything kept in the full node and builds an archive of historical states. Needed if you want to query something like an account balance at block #4,000,000.
 - These data represent units of terabytes which makes archive nodes less attractive for average users but can be handy for services like block explorers, wallet vendors, and chain analytics.
 
-Syncing clients in any mode other than archive will result in pruned blockchain data. This means, there is no archive of all historical state but the full node is able to build them on demand.
+Syncing clients in any mode other than archive will result in pruned blockchain data. This means, there is no archive of all historical states but the full node is able to build them on demand.
 
 ## Why should I run an Ethereum node? {#why-should-i-run-an-ethereum-node}
 
@@ -65,27 +65,24 @@ Running your own node enables you to use Ethereum in a truly private, self-suffi
 
 A diverse set of nodes is important for Ethereum’s health, security and operational resiliency.
 
-- They provide access to blockchain data for lightweight clients that depend on it. In high peaks of usage, there need to be enough full nodes to help light nodes sync. Light nodes don't store the whole blockchain, instead they verify data via the [state roots in block headers](/en/developers/docs/blocks/#block-anatomy). They can request more information from blocks if they need it.
+- They provide access to blockchain data for lightweight clients that depend on it. In high peaks of usage, there need to be enough full nodes to help light nodes sync. Light nodes don't store the whole blockchain, instead they verify data via the [state roots in block headers](/developers/docs/blocks/#block-anatomy). They can request more information from blocks if they need it.
 - Full nodes enforce the proof-of-work consensus rules so they can’t be tricked into accepting blocks that don't follow them. This provides extra security in the network because if all the nodes were light nodes, which don't do full verification, miners could attack the network and, for example, create blocks with higher rewards.
 
 If you run a full node, the whole Ethereum network benefits from it.
 
 ## Running your own node {#running-your-own-node}
 
+Interested in running your own Ethereum client? Learn how to [spin up your own node](/developers/docs/nodes-and-clients/run-a-node/)!
+
 ### Projects {#projects}
 
 [**Select a client and follow their instructions**](#clients)
 
-**Ethereum Grid -** **_A desktop application for downloading, configuring, and running Ethereum clients and tools._**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
-
-**ethnode -** **_Run an Ethereum node (Geth or Parity) for local development._**
+**ethnode -** **_Run an Ethereum node (Geth or OpenEthereum) for local development._**
 
 - [GitHub](https://github.com/vrde/ethnode)
 
-**DAppNode -** **_An operating system for running Web3 nodes, including Ethereum, on a dedicated machine._**
+**DAppNode -** **_An operating system GUI for running Web3 nodes, including Ethereum and the beacon chain, on a dedicated machine._**
 
 - [dappnode.io](https://dappnode.io)
 
@@ -98,27 +95,27 @@ If you run a full node, the whole Ethereum network benefits from it.
 
 ## Alternatives {#alternatives}
 
-Running your own node can be difficult and you don’t always need to run your own instance. In this case, you can use a third party API provider like [Infura](https://infura.io), [Alchemy](https://alchemyapi.io), or [QuikNode](https://www.quiknode.io). Alternatively [ArchiveNode](https://archivenode.io/) is a community-funded Archive node that hopes to bring archive data on the Ethereum blockchain to independent developers who otherwise couldn't afford it.
+Running your own node can be difficult and you don’t always need to run your own instance. In this case, you can use a third party API provider like [Infura](https://infura.io), [Alchemy](https://alchemyapi.io), or [QuikNode](https://www.quiknode.io). Alternatively [ArchiveNode](https://archivenode.io/) is a community-funded Archive node that hopes to bring archive data on the Ethereum blockchain to independent developers who otherwise couldn't afford it. For an overview of using these services, check out [nodes as a services](/developers/docs/nodes-and-clients/nodes-as-a-service/).
 
-If somebody runs an Ethereum node with a public API in your community, you can point your light wallets (like MetaMask) to a community node [via Custom RPC](https://metamask.zendesk.com/hc/en-us/articles/360015290012-Using-a-Local-Node) and gain more privacy than with some random tusted third party.
+If somebody runs an Ethereum node with a public API in your community, you can point your light wallets (like MetaMask) to a community node [via Custom RPC](https://metamask.zendesk.com/hc/en-us/articles/360015290012-Using-a-Local-Node) and gain more privacy than with some random trusted third party.
 
 On the other hand, if you run a client, you can share it with your friends who might need it.
 
 ## Clients {#clients}
 
-Ethereum is designed to offer different clients, developed by different teams using different programming languages. This makes the network stronger and more diverse. The ideal goal is to achieve diversity without any client dominating to reduce any single points of failure.
+The Ethereum community maintains multiple open-source clients, developed by different teams using different programming languages. This makes the network stronger and more diverse. The ideal goal is to achieve diversity without any client dominating to reduce any single points of failure.
 
-This table summarises the different clients. All of them are actively worked on, maintained, and pass [client tests](https://github.com/ethereum/tests).
+This table summarizes the different clients. All of them are actively worked on and pass [client tests](https://github.com/ethereum/tests).
 
-| Client                                                       | Language | Operating systems     | Networks                                   | Sync strategies         | State pruning   |
-| ------------------------------------------------------------ | -------- | --------------------- | ------------------------------------------ | ----------------------- | --------------- |
-| [Geth](https://geth.ethereum.org/)                           | Go       | Linux, Windows, macOS | Mainnet, Görli, Rinkeby, Ropsten           | Fast, Full              | Archive, Pruned |
-| [OpenEthereum](https://github.com/openethereum/openethereum) | Rust     | Linux, Windows, macOS | Mainnet, Kovan, Ropsten, and more          | Warp, Full              | Archive, Pruned |
-| [Nethermind](http://nethermind.io/)                          | C#, .NET | Linux, Windows, macOS | Mainnet, Görli, Ropsten, Rinkeby, and more | Fast, Full              | Archive, Pruned |
-| [Besu](https://pegasys.tech/solutions/hyperledger-besu/)     | Java     | Linux, Windows, macOS | Mainnet, Rinkeby, Ropsten, and Görli       | Fast, Full              | Archive, Pruned |
-| [Trinity](https://trinity.ethereum.org/)                     | Python   | Linux, macOS          | Mainnet, Görli, Ropsten, and more          | Full, Beam, Fast/Header | Archive         |
+| Client                                                       | Language   | Operating systems     | Networks                                   | Sync strategies  | State pruning   |
+| ------------------------------------------------------------ | ---------- | --------------------- | ------------------------------------------ | ---------------- | --------------- |
+| [Geth](https://geth.ethereum.org/)                           | Go         | Linux, Windows, macOS | Mainnet, Görli, Rinkeby, Ropsten           | Fast, Full, Snap | Archive, Pruned |
+| [OpenEthereum](https://github.com/openethereum/openethereum) | Rust       | Linux, Windows, macOS | Mainnet, Kovan, Ropsten, and more          | Warp, Full       | Archive, Pruned |
+| [Nethermind](http://nethermind.io/)                          | C#, .NET   | Linux, Windows, macOS | Mainnet, Görli, Ropsten, Rinkeby, and more | Fast, Full       | Archive, Pruned |
+| [Besu](https://pegasys.tech/solutions/hyperledger-besu/)     | Java       | Linux, Windows, macOS | Mainnet, Rinkeby, Ropsten, and Görli       | Fast, Full       | Archive, Pruned |
+| [Erigon](https://github.com/ledgerwatch/erigon)              | Go / Multi | Linux, Windows, macOS | Mainnet, Görli, Rinkeby, Ropsten           | Full             | Archive, Pruned |
 
-For more on supported networks, read up on [Ethereum networks](/en/developers/docs/networks/).
+For more on supported networks, read up on [Ethereum networks](/developers/docs/networks/).
 
 ### Advantages of different implementations {#advantages-of-different-implementations}
 
@@ -144,7 +141,7 @@ Nethermind is an Ethereum implementation created with the C# .NET tech stack, ru
 
 - an optimized virtual machine
 - state access
-- networking and rich features like Prometheus/Graphana dashboards, seq enterprise logging support, JSON RPC tracing, and analytics plugins.
+- networking and rich features like Prometheus/Grafana dashboards, seq enterprise logging support, JSON RPC tracing, and analytics plugins.
 
 Nethermind also has [detailed documentation](https://docs.nethermind.io), strong dev support, an online community and 24/7 support available for premium users.
 
@@ -152,12 +149,16 @@ Nethermind also has [detailed documentation](https://docs.nethermind.io), strong
 
 Hyperledger Besu is an enterprise-grade Ethereum client for public and permissioned networks. It runs all of the Ethereum mainnet features, from tracing to GraphQL, has extensive monitoring and is supported by ConsenSys, both in open community channels and through commercial SLAs for enterprises. It is written in Java and is Apache 2.0 licensed.
 
+#### Erigon {#erigon}
+
+Erigon is a completely re-architected implementation of Ethereum, currently written in Go but with implementations in other languages planned. Erigon's goal is to provide a faster, more modular, and more optimized implementation of Ethereum. It can perform a full archive node sync using less than 2TB of disk space, in under 3 days.
+
 ### Sync modes {#sync-modes}
 
 - Full – downloads all blocks (including headers, transactions and receipts) and generates the state of the blockchain incrementally by executing every block.
 - Fast (Default) – downloads all blocks (including headers, transactions and receipts), verifies all headers, and downloads the state and verifies it against the headers.
 - Light – downloads all block headers, block data, and verifies some randomly.
-- Warp sync – Every 5,000 blocks, nodes will take a consensus-critical snapshot of that block’s state. Any node can fetch these snapshots over the network, enabling a fast sync. [More on Warp](https://openethereum.github.io/wiki/Warp-Sync-Snapshot-Format)
+- Warp sync – Every 5,000 blocks, nodes will take a consensus-critical snapshot of that block’s state. Any node can fetch these snapshots over the network, enabling a fast sync. [More on Warp](https://openethereum.github.io/Warp-Sync-Snapshot-Format.html)
 - Beam sync – A sync mode that allows you to get going faster. It doesn't require long waits to sync, instead it back-fills data over time. [More on Beam](https://medium.com/@jason.carver/intro-to-beam-sync-a0fd168be14a)
 - Header sync – you can use a trusted checkpoint to start syncing from a more recent header and then leave it up to a background process to fill the gaps eventually
 
@@ -167,9 +168,13 @@ You define the type of sync when you get set up, like so:
 
 `geth --syncmode "light"`
 
-**Setting up header sync in Trinity**
+For further details check the tutorial on [running Geth light node](/developers/tutorials/run-light-node-geth/).
 
-`trinity --sync-from-checkpoint eth://block/byhash/0xa65877df954e1ff2012473efee8287252eee956c0d395a5791f1103a950a1e21?score=15,835,269,727,022,672,760,774`
+**Setting up full sync with archive in [Besu](https://besu.hyperledger.org/)**
+
+`besu --sync-mode=FULL`
+
+Like any other configuration, it can be defined with the startup flag or in the config file. Another example is [Nethermind](https://docs.nethermind.io/nethermind/) which prompts you to choose sync mode during first initialization and creates config.
 
 ## Hardware {#hardware}
 
@@ -194,31 +199,33 @@ Before installing any client, please ensure your computer has enough resources t
 - Fast SSD with at least 500 GB free space
 - 25+ MBit/s bandwidth
 
-Depending on which software and sync mode are you going to use, hundreds of GBs of disk space is need. Approximate numbers and growth can be found below.
+The sync mode you choose will affect space requirements but we've estimated the disk space you'll need for each client below.
 
 | Client       | Disk size (fast sync) | Disk size (full archive) |
 | ------------ | --------------------- | ------------------------ |
-| Geth         | 400GB+                | 4.7TB+                   |
-| OpenEthereum | 280GB+                | 4.6TB+                   |
-| Nethermind   | 200GB+                | 3TB+                     |
-| Besu         | 750GB+                | 4TB+                     |
+| Geth         | 400GB+                | 6TB+                     |
+| OpenEthereum | 280GB+                | 6TB+                     |
+| Nethermind   | 200GB+                | 5TB+                     |
+| Besu         | 750GB+                | 5TB+                     |
+| Erigon       | N/A                   | 1TB+                     |
+
+- Note: Erigon does not Fast Sync, but Full Pruning is possible (~500GB)
 
 ![A chart showing that GB needed for a full sync is trending up](./full-sync.png)
 
 ![A chart showing that GB needed for an archive sync is trending up](./archive-sync.png)
 
-These charts show how storage requirements are always changing. For the most up-to-date data for Geth and Parity, see the [full sync data](https://etherscan.io/chartsync/chaindefault) and [archive sync data](https://etherscan.io/chartsync/chainarchive).
+These charts show how storage requirements are always changing. For the most up-to-date data for Geth and OpenEthereum, see the [full sync data](https://etherscan.io/chartsync/chaindefault) and [archive sync data](https://etherscan.io/chartsync/chainarchive).
 
 ### Ethereum on a single-board computer {#ethereum-on-a-single-board-computer}
 
-The most convenient and cheap way of running Ethereum node is to use a single board computer with ARM architecture like Raspberry Pi. [Ethereum on ARM](https://twitter.com/EthereumOnARM) provides images of Geth, Parity, Nethermind, and Besu clients. Here's a simple tutorial on [how to build and setup an ARM client](/en/developers/tutorials/run-node-raspberry-pi/).
+The most convenient and cheap way of running Ethereum node is to use a single board computer with ARM architecture like Raspberry Pi. [Ethereum on ARM](https://twitter.com/EthereumOnARM) provides images of Geth, OpenEthereum, Nethermind, and Besu clients. Here's a simple tutorial on [how to build and setup an ARM client](/developers/tutorials/run-node-raspberry-pi/).
 
 Small, affordable and efficient devices like these are ideal for running a node at home.
 
-
 ## Eth2 clients {#eth2-clients}
 
-There are new clients to support the [Eth2 upgrades](/eth2/beacon-chain/). They will run the Beacon Chain and support the new [proof-of-stake](/developers/docs/consensus-mechanisms/pos/) consensus mechanism. 
+There are new clients to support the [Eth2 upgrades](/eth2/beacon-chain/). They will run the Beacon Chain and support the new [proof-of-stake](/developers/docs/consensus-mechanisms/pos/) consensus mechanism.
 
 [View Eth2 clients](/eth2/get-involved/#clients).
 
@@ -234,8 +241,8 @@ There is a lot of instructions and information about Ethereum clients on the int
 
 ## Related topics {#related-topics}
 
-- [Blocks](/en/developers/docs/blocks/)
-- [Networks](/en/developers/docs/networks/)
+- [Blocks](/developers/docs/blocks/)
+- [Networks](/developers/docs/networks/)
 
 ## Related tutorials {#related-tutorials}
 

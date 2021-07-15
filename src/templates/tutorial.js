@@ -16,7 +16,6 @@ import MarkdownTable from "../components/MarkdownTable"
 import PageMetadata from "../components/PageMetadata"
 import Pill from "../components/Pill"
 import TableOfContents from "../components/TableOfContents"
-import Warning from "../components/Warning"
 import SectionNav from "../components/SectionNav"
 import { isLangRightToLeft } from "../utils/translations"
 import CallToContribute from "../components/CallToContribute"
@@ -27,7 +26,6 @@ import {
   Header2,
   Header3,
   Header4,
-  H5,
   ListItem,
 } from "../components/SharedStyledComponents"
 import Emoji from "../components/Emoji"
@@ -128,7 +126,7 @@ const H4 = styled(Header4)`
   }
 `
 
-// Passing components to MDXProvider allows use across all .md/.mdx files
+// Note: you must pass components to MDXProvider in order to render them in markdown files
 // https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxprovider
 const components = {
   a: Link,
@@ -136,14 +134,12 @@ const components = {
   h2: H2,
   h3: H3,
   h4: H4,
-  h5: H5,
   p: Paragraph,
   li: ListItem,
   pre: Codeblock,
   table: MarkdownTable,
   ButtonLink,
   InfoBanner,
-  Warning,
   Card,
   Divider,
   SectionNav,
@@ -167,7 +163,6 @@ const TutorialPage = ({ data, pageContext }) => {
   const pageData = data.pageData
   const tocItems = pageData.tableOfContents.items
 
-  const gitCommits = data.gitData.repository.ref.target.history.edges
   const { editContentUrl } = data.siteData.siteMetadata
   const { relativePath } = pageContext
   const absoluteEditPath = `${editContentUrl}${relativePath}`
@@ -191,7 +186,7 @@ const TutorialPage = ({ data, pageContext }) => {
         <MDXProvider components={components}>
           <MDXRenderer>{pageData.body}</MDXRenderer>
         </MDXProvider>
-        <Contributors gitCommits={gitCommits} editPath={absoluteEditPath} />
+        <Contributors relativePath={relativePath} editPath={absoluteEditPath} />
       </ContentContainer>
       {pageData.frontmatter.sidebar && tocItems && (
         <DesktopTableOfContents
@@ -207,13 +202,13 @@ const TutorialPage = ({ data, pageContext }) => {
 export default TutorialPage
 
 export const query = graphql`
-  query TutorialPageQuery($slug: String, $relativePath: String) {
+  query TutorialPageQuery($relativePath: String) {
     siteData: site {
       siteMetadata {
         editContentUrl
       }
     }
-    pageData: mdx(fields: { slug: { eq: $slug } }) {
+    pageData: mdx(fields: { relativePath: { eq: $relativePath } }) {
       fields {
         slug
       }
@@ -233,34 +228,6 @@ export const query = graphql`
       body
       tableOfContents
       timeToRead
-    }
-    gitData: github {
-      repository(name: "ethereum-org-website", owner: "ethereum") {
-        ref(qualifiedName: "master") {
-          target {
-            ... on GitHub_Commit {
-              history(path: $relativePath) {
-                edges {
-                  node {
-                    message
-                    commitUrl
-                    author {
-                      name
-                      email
-                      avatarUrl(size: 100)
-                      user {
-                        url
-                        login
-                      }
-                    }
-                    committedDate
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 `

@@ -27,7 +27,7 @@ like:
 
 ## Prerequisites {#prerequisites}
 
-Before diving into frameworks, we recommend you first read through our introduction to [dapps](/en/developers/docs/dapps/) and the [Ethereum stack](/en/developers/docs/ethereum-stack/).
+Before diving into frameworks, we recommend you first read through our introduction to [dapps](/developers/docs/dapps/) and the [Ethereum stack](/developers/docs/ethereum-stack/).
 
 ## Available frameworks {#available-frameworks}
 
@@ -36,26 +36,26 @@ Before diving into frameworks, we recommend you first read through our introduct
 - [trufflesuite.com](https://www.trufflesuite.com/)
 - [GitHub](https://github.com/trufflesuite/truffle)
 
+**Hardhat -** **_Ethereum development environment for professionals_**
+
+- [hardhat.org](https://hardhat.org)
+- [GitHub](https://github.com/nomiclabs/hardhat)
+
+**Brownie -** **_Python-based development environment and testing framework._**
+
+- [Documentation](https://eth-brownie.readthedocs.io/en/latest/)
+- [GitHub](https://github.com/eth-brownie/brownie)
+
 **Embark -** **_A development environment, testing framework, and other tools integrated with Ethereum, IPFS, and Whisper._**
 
 - [Documentation](https://embark.status.im/docs/)
 - [GitHub](https://github.com/embark-framework/embark)
 
-**Epirus -** **_A platform for developing, deploying and monitoring blockchain applications on the JVM_**
+**Web3j -** **_A platform for developing blockchain applications on the JVM_**
 
-- [Homepage](https://www.web3labs.com/epirus)
-- [Documentation](https://docs.epirus.io)
-- [GitHub](https://github.com/epirus-io/epirus-cli)
-
-**Etherlime -** **_Ethers.js based framework for dapp development (Solidity & Vyper), deployment, debugging, testing and more._**
-
-- [Docs](https://etherlime.readthedocs.io/en/latest/)
-- [GitHub](https://github.com/LimeChain/etherlime)
-
-**Hardhat -** **_Ethereum development environment for professionals_**
-
-- [hardhat.org](https://hardhat.org)
-- [GitHub](https://github.com/nomiclabs/hardhat)
+- [Homepage](https://www.web3labs.com/web3j-sdk)
+- [Documentation](https://docs.web3j.io)
+- [GitHub](https://github.com/web3j/web3j)
 
 **OpenZeppelin SDK -** **_The Ultimate Smart Contract Toolkit: A suite of tools to help you develop, compile, upgrade, deploy and interact with smart contracts._**
 
@@ -63,30 +63,30 @@ Before diving into frameworks, we recommend you first read through our introduct
 - [GitHub](https://github.com/OpenZeppelin/openzeppelin-sdk)
 - [Community Forum](https://forum.openzeppelin.com/c/support/17)
 
-**Brownie -** **_Python-based development environment and testing framework._**
-
-- [Documentation](https://eth-brownie.readthedocs.io/en/latest/)
-- [GitHub](https://github.com/eth-brownie/brownie)
-
-**Create Eth App -** **_Create Ethereum-powered apps with one command. Comes with a wide offerring of UI frameworks and DeFi templates to choose from._**
+**Create Eth App -** **_Create Ethereum-powered apps with one command. Comes with a wide offering of UI frameworks and DeFi templates to choose from._**
 
 - [GitHub](https://github.com/paulrberg/create-eth-app)
 - [Templates](https://github.com/PaulRBerg/create-eth-app/tree/develop/templates)
 
-**scaffold-eth -** **_Hardhat + Create Eth App: everything you need to get started building decentralized applications powered by smart contracts._**
+**Scaffold-Eth -** **_Ethers.js + Hardhat + React components and hooks for web3: everything you need to get started building decentralized applications powered by smart contracts._**
 
 - [GitHub](https://github.com/austintgriffith/scaffold-eth)
 
 **The Graph -** **_The Graph for querying blockchain data efficiently_**
 
 - [Website](https://thegraph.com/)
-- [Tutorial](/en/developers/tutorials/the-graph-fixing-web3-data-querying/)
+- [Tutorial](/developers/tutorials/the-graph-fixing-web3-data-querying/)
 
 **Alchemy -** **_Ethereum Development Platform._**
 
 - [alchemyapi.io](https://alchemyapi.io/)
 - [GitHub](https://github.com/alchemyplatform)
 - [Discord](https://discord.gg/kwqVnrA)
+
+**Etherlime -** **_Ethers.js based framework for dapp development (Solidity & Vyper), deployment, debugging, testing and more._**
+
+- [Docs](https://etherlime.readthedocs.io/en/latest/)
+- [GitHub](https://github.com/LimeChain/etherlime)
 
 ## Further reading {#further-reading}
 

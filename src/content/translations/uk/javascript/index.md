@@ -45,17 +45,12 @@ sidebarDepth: 1
 
 **Ethers.js —** **_повна реалізація гаманця Ethereum та інших службових програм на JavaScript і TypeScript._**
 
-- [Документація](https://docs.ethers.io/ethers.js/html/)
+- [Документація](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm —** **_ВМ Ethereum, реалізована на JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid —** **класична програма для інструментів Ethereum, які можна розширити за допомогою JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Шукаєте більше ресурсів? Завітайте на [ethereum.org/developers.](/uk/developers/)
 

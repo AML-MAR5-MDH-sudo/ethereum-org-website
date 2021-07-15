@@ -30,7 +30,7 @@ We have some core principles that help us do this.
 
 We want our users to have their interest piqued and their questions answered. So our portal needs to combine information, "magic moments" and links to the brilliant community resources that exist out there. The purpose of our content is to be an “onboarding portal” and not a substitute for the extensive resources that already exist. We're keen to support and integrate with community built resources, giving them more visibility and making them more discoverable.
 
-[Ethereum's community](/en/community/) is at the heart of this: we need to not just serve the community, but work with them and incorporate their feedback. The website isn't just for the community we have now but for the community we hope to grow into. We must remember our community is global, containing people from many languages, regions, and cultures.
+[Ethereum's community](/community/) is at the heart of this: we need to not just serve the community, but work with them and incorporate their feedback. The website isn't just for the community we have now but for the community we hope to grow into. We must remember our community is global, containing people from many languages, regions, and cultures.
 
 ### 2. ethereum.org is always evolving 🛠 {#core-principles-2}
 
@@ -58,3 +58,11 @@ Make sure you read the principles if you'd like to [contribute to the site](/en/
 ## Roadmap {#roadmap}
 
 <Roadmap />
+
+## Open jobs {#open-jobs}
+
+Although this website is open-source and anyone can work on it, we do have a team dedicated to ethereum.org and other Ethereum Foundation web projects.
+
+We'll post any job openings here. If you don't see a role here for you, head over to [Discord](https://discord.gg/CetY6Y4) and let us know how you'd like to work with us!
+
+Looking beyond the ethereum.org team? [Check out other Ethereum related jobs](/community/#ethereum-jobs).

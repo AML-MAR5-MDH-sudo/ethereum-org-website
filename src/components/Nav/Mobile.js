@@ -1,14 +1,35 @@
-import React, { useState } from "react"
+import React from "react"
 import styled from "styled-components"
 import { useIntl } from "gatsby-plugin-intl"
 import { motion } from "framer-motion"
 
-import Translation from "../Translation"
+import Emoji from "../Emoji"
 import Icon from "../Icon"
 import Link from "../Link"
+import NakedButton from "../NakedButton"
 import Search from "../Search"
-import Emoji from "../Emoji"
-import { NavLink } from "../../components/SharedStyledComponents"
+import Translation from "../Translation"
+import { NavLink } from "../SharedStyledComponents"
+import { translateMessageId } from "../../utils/translations"
+
+const Container = styled.div`
+  display: none;
+  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
+    display: flex;
+  }
+`
+
+const MenuIcon = styled(Icon)`
+  fill: ${(props) => props.theme.colors.text};
+`
+
+const MenuButton = styled(NakedButton)`
+  margin-left: 1rem;
+`
+
+const OtherIcon = styled(MenuIcon)`
+  margin-right: 1rem;
+`
 
 const MobileModal = styled(motion.div)`
   position: fixed;
@@ -20,13 +41,13 @@ const MobileModal = styled(motion.div)`
 `
 
 const mobileModalVariants = {
-  open: { display: "block" },
-  closed: { display: "none" },
+  open: { display: "block", opacity: 1 },
+  closed: { display: "none", opacity: 0 },
 }
 
 const MenuContainer = styled(motion.div)`
   background: ${(props) => props.theme.colors.background};
-  z-index: 100;
+  z-index: 99;
   position: fixed;
   left: 0;
   top: 0;
@@ -41,6 +62,43 @@ const mobileMenuVariants = {
   open: { x: 0, transition: { duration: 0.8 } },
 }
 
+const GlyphButton = styled.svg`
+  margin: 0 0.125rem;
+  width: 1.5rem;
+  height: 2.5rem;
+  position: relative;
+  stroke-width: 2px;
+  z-index: 100;
+  & > path {
+    stroke: ${(props) => props.theme.colors.text};
+    fill: none;
+  }
+  &:hover {
+    color: ${(props) => props.theme.colors.primary};
+    & > path {
+      stroke: ${(props) => props.theme.colors.primary};
+    }
+  }
+`
+
+const hamburgerSvg =
+  "M 2 13 l 10 0 l 0 0 l 10 0 M 4 19 l 8 0 M 12 19 l 8 0 M 2 25 l 10 0 l 0 0 l 10 0"
+const glyphSvg =
+  "M 2 19 l 10 -14 l 0 0 l 10 14 M 2 19 l 10 7 M 12 26 l 10 -7 M 2 22 l 10 15 l 0 0 l 10 -15"
+const closeSvg =
+  "M 2 13 l 0 -3 l 20 0 l 0 3 M 7 14 l 10 10 M 7 24 l 10 -10 M 2 25 l 0 3 l 20 0 l 0 -3"
+
+const glyphPathVariants = {
+  closed: {
+    d: hamburgerSvg,
+    transition: { duration: 0.4 },
+  },
+  open: {
+    d: [hamburgerSvg, glyphSvg, glyphSvg, glyphSvg, closeSvg],
+    transition: { duration: 1.2 },
+  },
+}
+
 const SearchContainer = styled(MenuContainer)`
   z-index: 101;
   padding: 1rem;
@@ -48,15 +106,10 @@ const SearchContainer = styled(MenuContainer)`
   flex-direction: column;
 `
 
-const searchContainerVariants = {
-  closed: { y: `-100%`, transition: { duration: 0.2 } },
-  open: { y: 0, transition: { duration: 0.8 } },
-}
-
 const SearchHeader = styled.h3`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  cursor: pointer;
 
   & > svg {
     fill: ${(props) => props.theme.colors.text};
@@ -65,10 +118,7 @@ const SearchHeader = styled.h3`
 
 const CloseIconContainer = styled.span`
   z-index: 102;
-  position: absolute;
   cursor: pointer;
-  top: 1.5rem;
-  right: 1.5rem;
 
   & > svg {
     fill: ${(props) => props.theme.colors.text};
@@ -93,7 +143,7 @@ const NavListItem = styled.li`
 const StyledNavLink = styled(NavLink)`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin: 0;
 `
 
 const SectionTitle = styled.div`
@@ -106,7 +156,7 @@ const SectionItems = styled.ul`
 `
 
 const SectionItem = styled.li`
-  margin: 0;
+  margin-bottom: 1rem;
   list-style-type: none;
   list-style-image: none;
   opacity: 0.7;
@@ -174,18 +224,11 @@ const BottomItemText = styled.div`
   letter-spacing: 0.04em;
   margin-top: 0.5rem;
   text-transform: uppercase;
+  text-align: center;
   opacity: 0.7;
   &:hover {
     opacity: 1;
   }
-`
-
-const MenuIcon = styled(Icon)`
-  fill: ${(props) => props.theme.colors.text};
-`
-
-const ChevronLeftIcon = styled(Icon)`
-  transform: rotate(90deg);
 `
 
 const BlankSearchState = styled.div`
@@ -205,82 +248,86 @@ const BlankSearchState = styled.div`
 `
 
 const MobileNavMenu = ({
-  isOpen,
+  isMenuOpen,
+  isSearchOpen,
+  isHelpOpen,
   isDarkTheme,
   toggleMenu,
   toggleTheme,
   linkSections,
 }) => {
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
   const intl = useIntl()
 
-  const handleClose = () => {
-    toggleMenu()
-    setIsSearchOpen(false)
-  }
-
+  const isOpen = isMenuOpen || isSearchOpen || isHelpOpen
   return (
-    <>
+    <Container>
+      <MenuButton
+        onClick={() => toggleMenu("search")}
+        aria-label={translateMessageId("aria-toggle-search-button", intl)}
+      >
+        <OtherIcon name="search" />
+      </MenuButton>
+      <MenuButton
+        onClick={() => toggleMenu("menu")}
+        aria-label={translateMessageId("aria-toggle-menu-button", intl)}
+      >
+        <GlyphButton viewBox="0 0 24 40">
+          <motion.path
+            variants={glyphPathVariants}
+            initial={false}
+            animate={isOpen ? "open" : "closed"}
+          />
+        </GlyphButton>
+      </MenuButton>
       <MobileModal
         animate={isOpen ? "open" : "closed"}
         variants={mobileModalVariants}
         initial="closed"
-        onClick={handleClose}
-      ></MobileModal>
+        onClick={toggleMenu}
+      />
       <MenuContainer
-        animate={isOpen ? "open" : "closed"}
+        aria-hidden={!isMenuOpen}
+        animate={isMenuOpen ? "open" : "closed"}
         variants={mobileMenuVariants}
         initial="closed"
       >
         <MenuItems>
-          {linkSections
-            .filter((section) => section.shouldDisplay)
-            .map((section, idx) => {
-              if (section.items) {
-                return (
-                  <NavListItem
-                    key={idx}
-                    aria-label={`Select ${intl.formatMessage({
-                      id: section.text,
-                    })}`}
-                  >
-                    <SectionTitle>
-                      <Translation id={section.text} />
-                    </SectionTitle>
-                    <SectionItems>
-                      {section.items
-                        .filter((item) => item.shouldDisplay)
-                        .map((item, idx) => {
-                          return (
-                            <StyledNavLink
-                              to={item.to}
-                              isPartiallyActive={item.isPartiallyActive}
-                              key={idx}
-                            >
-                              <SectionItem onClick={toggleMenu}>
-                                <Translation id={item.text} />
-                              </SectionItem>
-                            </StyledNavLink>
-                          )
-                        })}
-                    </SectionItems>
-                  </NavListItem>
-                )
-              }
-              return (
-                <NavListItem onClick={toggleMenu} key={idx}>
-                  <NavLink
-                    to={section.to}
-                    isPartiallyActive={section.isPartiallyActive}
-                  >
-                    <Translation id={section.text} />
-                  </NavLink>
-                </NavListItem>
-              )
-            })}
+          {linkSections.map((section, idx) =>
+            section.items ? (
+              <NavListItem
+                key={idx}
+                aria-label={`Select ${translateMessageId(section.text, intl)}`}
+              >
+                <SectionTitle>
+                  <Translation id={section.text} />
+                </SectionTitle>
+                <SectionItems>
+                  {section.items.map((item, idx) => (
+                    <SectionItem key={idx} onClick={toggleMenu}>
+                      <StyledNavLink
+                        to={item.to}
+                        isPartiallyActive={item.isPartiallyActive}
+                      >
+                        <Translation id={item.text} />
+                      </StyledNavLink>
+                    </SectionItem>
+                  ))}
+                </SectionItems>
+              </NavListItem>
+            ) : (
+              <NavListItem onClick={toggleMenu} key={idx}>
+                <NavLink
+                  to={section.to}
+                  isPartiallyActive={section.isPartiallyActive}
+                >
+                  <Translation id={section.text} />
+                </NavLink>
+              </NavListItem>
+            )
+          )}
         </MenuItems>
         <BottomMenu>
-          <BottomItem onClick={() => setIsSearchOpen(!isSearchOpen)}>
+          <BottomItem onClick={() => toggleMenu("search")}>
             <MenuIcon name="search" />
             <BottomItemText>
               <Translation id="search" />
@@ -293,7 +340,7 @@ const MobileNavMenu = ({
             </BottomItemText>
           </BottomItem>
           <BottomItem onClick={toggleMenu}>
-            <BottomLink to="/en/languages/">
+            <BottomLink to="/languages/">
               <MenuIcon name="language" />
               <BottomItemText>
                 <Translation id="languages" />
@@ -301,26 +348,25 @@ const MobileNavMenu = ({
             </BottomLink>
           </BottomItem>
         </BottomMenu>
-        <SearchContainer
-          animate={isSearchOpen ? "open" : "closed"}
-          variants={searchContainerVariants}
-          initial="closed"
-        >
-          <SearchHeader onClick={() => setIsSearchOpen(false)}>
-            <ChevronLeftIcon name="chevronDown" />
-            <Translation id="search" />
-          </SearchHeader>
-          <Search handleSearchSelect={handleClose} />
-          <BlankSearchState>
-            <Emoji text=":sailboat:" size={3} />
-            <Translation id="search-box-blank-state-text" />
-          </BlankSearchState>
-        </SearchContainer>
-        <CloseIconContainer onClick={handleClose}>
-          <Icon name="close" />
-        </CloseIconContainer>
       </MenuContainer>
-    </>
+      <SearchContainer
+        animate={isSearchOpen ? "open" : "closed"}
+        variants={mobileMenuVariants}
+        initial="closed"
+      >
+        <SearchHeader>
+          <Translation id="search" />
+          <CloseIconContainer onClick={() => toggleMenu("search")}>
+            <Icon name="close" />
+          </CloseIconContainer>
+        </SearchHeader>
+        <Search handleSearchSelect={toggleMenu} />
+        <BlankSearchState>
+          <Emoji text=":sailboat:" size={3} />
+          <Translation id="search-box-blank-state-text" />
+        </BlankSearchState>
+      </SearchContainer>
+    </Container>
   )
 }
 

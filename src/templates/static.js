@@ -4,13 +4,10 @@ import { useIntl } from "gatsby-plugin-intl"
 import { MDXProvider } from "@mdx-js/react"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import styled from "styled-components"
-
 import ButtonLink from "../components/ButtonLink"
 import Breadcrumbs from "../components/Breadcrumbs"
 import Card from "../components/Card"
 import Contributors from "../components/Contributors"
-import Eth2Articles from "../components/Eth2Articles"
-import Eth2Clients from "../components/Eth2Clients"
 import InfoBanner from "../components/InfoBanner"
 import Link from "../components/Link"
 import MarkdownTable from "../components/MarkdownTable"
@@ -24,9 +21,9 @@ import Roadmap from "../components/Roadmap"
 import TableOfContents from "../components/TableOfContents"
 import Translation from "../components/Translation"
 import TranslationsInProgress from "../components/TranslationsInProgress"
-import Warning from "../components/Warning"
 import SectionNav from "../components/SectionNav"
 import DocLink from "../components/DocLink"
+import GhostCard from "../components/GhostCard"
 import { getLocaleTimestamp } from "../utils/time"
 import { isLangRightToLeft } from "../utils/translations"
 import {
@@ -36,11 +33,11 @@ import {
   Header2,
   Header3,
   Header4,
-  H5,
   ListItem,
   CardContainer,
 } from "../components/SharedStyledComponents"
 import Emoji from "../components/Emoji"
+import UpcomingEventsList from "../components/UpcomingEventsList"
 
 const Page = styled.div`
   display: flex;
@@ -90,7 +87,16 @@ const MobileTableOfContents = styled(TableOfContents)`
   z-index: 2;
 `
 
-// Passing components to MDXProvider allows use across all .md/.mdx files
+const HR = styled.hr`
+  width: 100%;
+  margin: 2rem 0rem;
+  margin-bottom: 1rem;
+  display: inline-block;
+  position: inherit;
+  background: ${(props) => props.theme.colors.border};
+`
+
+// Note: you must pass components to MDXProvider in order to render them in markdown files
 // https://www.gatsbyjs.com/plugins/gatsby-plugin-mdx/#mdxprovider
 const components = {
   a: Link,
@@ -98,10 +104,10 @@ const components = {
   h2: Header2,
   h3: Header3,
   h4: Header4,
-  h5: H5,
   p: Paragraph,
   li: ListItem,
   pre: Pre,
+  hr: HR,
   table: MarkdownTable,
   MeetupList,
   RandomAppList,
@@ -110,9 +116,6 @@ const components = {
   ButtonLink,
   Contributors,
   InfoBanner,
-  Warning,
-  Eth2Articles,
-  Eth2Clients,
   Card,
   Divider,
   SectionNav,
@@ -122,17 +125,22 @@ const components = {
   DocLink,
   ExpandableCard,
   CardContainer,
+  GhostCard,
+  UpcomingEventsList,
 }
 
-const StaticPage = ({ data: { mdx } }) => {
+const StaticPage = ({ data: { siteData, mdx }, pageContext }) => {
   const intl = useIntl()
   const isRightToLeft = isLangRightToLeft(intl.locale)
-  const tocItems = mdx.tableOfContents.items
 
-  // TODO some `gitLogLatestDate` are `null` - why?
   const lastUpdatedDate = mdx.parent.fields
     ? mdx.parent.fields.gitLogLatestDate
     : mdx.parent.mtime
+
+  const tocItems = mdx.tableOfContents.items
+  const { editContentUrl } = siteData.siteMetadata
+  const { relativePath } = pageContext
+  const absoluteEditPath = `${editContentUrl}${relativePath}`
 
   return (
     <Page dir={isRightToLeft ? "rtl" : "ltr"}>
@@ -147,9 +155,10 @@ const StaticPage = ({ data: { mdx } }) => {
           {getLocaleTimestamp(intl.locale, lastUpdatedDate)}
         </LastUpdated>
         <MobileTableOfContents
+          editPath={absoluteEditPath}
           items={tocItems}
-          maxDepth={mdx.frontmatter.sidebarDepth}
           isMobile={true}
+          maxDepth={mdx.frontmatter.sidebarDepth}
         />
         <MDXProvider components={components}>
           <MDXRenderer>{mdx.body}</MDXRenderer>
@@ -157,6 +166,7 @@ const StaticPage = ({ data: { mdx } }) => {
       </ContentContainer>
       {mdx.frontmatter.sidebar && tocItems && (
         <TableOfContents
+          editPath={absoluteEditPath}
           items={tocItems}
           maxDepth={mdx.frontmatter.sidebarDepth}
         />
@@ -166,8 +176,13 @@ const StaticPage = ({ data: { mdx } }) => {
 }
 
 export const staticPageQuery = graphql`
-  query StaticPageQuery($slug: String) {
-    mdx(fields: { slug: { eq: $slug } }) {
+  query StaticPageQuery($relativePath: String) {
+    siteData: site {
+      siteMetadata {
+        editContentUrl
+      }
+    }
+    mdx: mdx(fields: { relativePath: { eq: $relativePath } }) {
       fields {
         slug
       }

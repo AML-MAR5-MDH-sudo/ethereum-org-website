@@ -1,17 +1,17 @@
 import React from "react"
+import { useStaticQuery, graphql } from "gatsby"
 import styled from "styled-components"
+import { useIntl } from "gatsby-plugin-intl"
+
+import { translateMessageId } from "../utils/translations"
+
 import CardList from "./CardList"
-import { CardContainer } from "./SharedStyledComponents"
 import Card from "./Card"
 import ButtonLink from "./ButtonLink"
+import Translation from "../components/Translation"
 
 const Container = styled.div`
   margin-bottom: 4rem;
-`
-
-const Row = styled.div`
-  display: flex;
-  align-items: flex-start;
 `
 
 const StyledCardContainer = styled.div`
@@ -26,12 +26,19 @@ const StyledCardLeft = styled(Card)`
   margin-left: 0rem;
   margin-right: 1rem;
   width: 100%;
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
+    margin-right: 0rem;
+    margin-bottom: 2rem;
+  }
 `
 
 const StyledCardRight = styled(Card)`
   margin-left: 0rem;
   margin-left: 1rem;
   width: 100%;
+  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
+    margin-left: 0rem;
+  }
 `
 
 const H3 = styled.h3`
@@ -47,19 +54,41 @@ const StyledButtonLink = styled(ButtonLink)`
   margin-bottom: 0.75rem;
 `
 
-const Eth2BeaconChainActions = ({ data }) => {
+export const DataLogo = graphql`
+  fragment DataLogo on File {
+    childImageSharp {
+      fixed(width: 24) {
+        ...GatsbyImageSharpFixed
+      }
+    }
+  }
+`
+
+const Eth2BeaconChainActions = () => {
+  const intl = useIntl()
+  const data = useStaticQuery(graphql`
+    query {
+      beaconscan: file(relativePath: { eq: "eth2/etherscan.png" }) {
+        ...DataLogo
+      }
+      beaconchain: file(relativePath: { eq: "eth2/beaconchainemoji.png" }) {
+        ...DataLogo
+      }
+    }
+  `)
+
   const datapoints = [
     {
       title: "beaconscan",
-      /* image: data.beaconscan.childImageSharp.fixed, */
+      image: data.beaconscan.childImageSharp.fixed,
       link: "https://beaconscan.com",
-      description: "Eth2 Beacon Chain explorer – Etherscan for Eth2",
+      description: translateMessageId("eth2-beaconscan-desc", intl),
     },
     {
       title: "beaconcha.in",
-      /* image: data.beaconchain.childImageSharp.fixed, */
+      image: data.beaconchain.childImageSharp.fixed,
       link: "https://beaconcha.in",
-      description: "Open source Eth2 Beacon Chain explorer",
+      description: translateMessageId("eth2-beaconcha-in-desc", intl),
     },
   ]
 
@@ -86,54 +115,37 @@ const Eth2BeaconChainActions = ({ data }) => {
       <StyledCardContainer>
         <StyledCardLeft
           emoji=":money_with_wings:"
-          title="Become a staker"
-          description="Staking is live! If you want to stake your ETH to help secure the network, make sure you’re aware of the risks."
+          title={translateMessageId("eth2-become-staker", intl)}
+          description={translateMessageId("eth2-become-staker-desc", intl)}
         >
           <StyledButtonLink to="https://launchpad.ethereum.org">
-            Get started
+            <Translation id="get-started" />
           </StyledButtonLink>
           <ButtonLink isSecondary to="/eth2/staking/">
-            Learn about staking
+            <Translation id="page-eth2-index-staking-learn" />
           </ButtonLink>
         </StyledCardLeft>
         <StyledCardRight
           emoji=":computer:"
-          title="Run a beacon client"
-          description="Ethereum needs as many clients running as possible. Help with this Ethereum public good!"
+          title={translateMessageId("eth2-run-beacon-chain", intl)}
+          description={translateMessageId("eth2-run-beacon-chain-desc", intl)}
         >
           <ButtonLink isSecondary to="/eth2/get-involved/">
-            Run a beacon client
+            <Translation id="eth2-run-beacon-chain" />
           </ButtonLink>
         </StyledCardRight>
       </StyledCardContainer>
-      <H3>Explore the data</H3>
+      <H3>
+        <Translation id="eth2-explore" />
+      </H3>
+
       <CardList content={datapoints} />
-      <H3>Read more</H3>
+      <H3>
+        <Translation id="read-more" />
+      </H3>
       <CardList content={reads} />
     </Container>
   )
 }
 
 export default Eth2BeaconChainActions
-
-// TODO update these to component static queries
-export const DataLogo = graphql`
-  fragment DataLogo on File {
-    childImageSharp {
-      fixed(width: 24) {
-        ...GatsbyImageSharpFixed
-      }
-    }
-  }
-`
-
-export const query = graphql`
-  query {
-    beaconscan: file(relativePath: { eq: "eth2/etherscan.png" }) {
-      ...DataLogo
-    }
-    beaconchain: file(relativePath: { eq: "eth2/beaconchainemoji.png" }) {
-      ...DataLogo
-    }
-  }
-`

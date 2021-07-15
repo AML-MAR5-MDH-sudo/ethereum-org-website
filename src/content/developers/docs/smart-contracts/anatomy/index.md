@@ -1,6 +1,6 @@
 ---
 title: Anatomy of smart contracts
-description: A in-depth look into the anatomy of a smart contact – the functions, data, and variables.
+description: An in-depth look into the anatomy of a smart contact – the functions, data, and variables.
 lang: en
 sidebar: true
 ---
@@ -25,13 +25,11 @@ contract SimpleStorage {
     uint storedData; // State variable
     // ...
 }
-
 ```
 
 ```python
 # Vyper example
 storedData: int128
-
 ```
 
 If you've already programmed object-oriented languages, you'll likely be familiar with most types. However `address` should be new to you if you're new to Ethereum development.
@@ -61,7 +59,7 @@ Values that are only stored for the lifetime of a contract function's execution 
 
 Learn more about how the EVM stores data (Storage, Memory, and the Stack) in the [Solidity docs](https://solidity.readthedocs.io/en/latest/introduction-to-smart-contracts.html?highlight=memory#storage-memory-and-the-stack).
 
-<!-- TODO provide exmaples of when to use storage vs. memory -->
+<!-- TODO provide examples of when to use storage vs. memory -->
 
 <!--- ### Try it
 
@@ -74,29 +72,10 @@ In addition to the variables you define on your contract, there are some special
 
 Examples:
 
-**Prop**
-
-`block.timestamp`
-
-**State variable**
-
-uint256
-
-**Description**
-
-Current block epoch timestamp
-
-**Prop**
-
-`msg.sender`
-
-**State variable**
-
-address
-
-**Description**
-
-Sender of the message (current call)
+| **Prop**          | **State variable** | **Description**                      |
+| ----------------- | ------------------ | ------------------------------------ |
+| `block.timestamp` | uint256            | Current block epoch timestamp        |
+| `msg.sender`      | address            | Sender of the message (current call) |
 
 ## Functions {#functions}
 
@@ -105,7 +84,7 @@ In the most simplistic terms, functions can get information or set information i
 There are two types of function calls:
 
 - `internal` – these don't create an EVM call
-  - Intenal functions and state variables can only be accessed internally (i.e. from within the current contract or contracts deriving from it)
+  - Internal functions and state variables can only be accessed internally (i.e. from within the current contract or contracts deriving from it)
 - `external` – these do create an EVM call
   - External functions are part of the contract interface, which means they can be called from other contracts and via transactions. An external function `f` cannot be called internally (i.e. `f()` does not work, but `this.f()` works).
 
@@ -131,7 +110,7 @@ function update_name(string value) public {
 
 ### View functions {#view-functions}
 
-These functions promise not to modify the state of the contract's data. Command examples are "getter" functions – you might use this to receive a user's balance for example.
+These functions promise not to modify the state of the contract's data. Common examples are "getter" functions – you might use this to receive a user's balance for example.
 
 ```solidity
 // Solidity example
@@ -234,22 +213,22 @@ Your function needs:
 pragma solidity >=0.4.0 <=0.6.0;
 
 contract ExampleDapp {
-   string dapp_name; //state variable
+    string dapp_name; // state variable
 
-   /*Called when the contract is deployed and initializes the value*/
-   constructor() public{
+    // Called when the contract is deployed and initializes the value
+    constructor() public {
         dapp_name = "My Example dapp";
     }
 
     // Get Function
-    function read_name() public view returns(string){
-	   return dapp_name;
-		}
+    function read_name() public view returns(string) {
+        return dapp_name;
+    }
 
     // Set Function
     function update_name(string value) public {
         dapp_name = value;
-		}
+    }
 }
 ```
 
@@ -315,7 +294,7 @@ _Examples provided by Joseph Chow and ConsenSys_ -->
 
 ## Annotated examples {#annotated-examples}
 
-These are some examples written in Solidity. If you'd like to play with the code, you can interact with them in [Ethereum studio](http://studio.ethereum.org)
+These are some examples written in Solidity. If you'd like to play with the code, you can interact with them in [Remix](http://remix.ethereum.org).
 
 ### Hello world {#hello-world}
 
@@ -395,8 +374,8 @@ contract Token {
         // Only the contract owner can call this function
         require(msg.sender == owner, "You are not the owner.");
 
-        // Ensures a maximum amount of tokens
-        require(amount < 1e60, "Maximum issuance succeeded");
+        // Enforces a maximum amount of tokens
+        require(amount < 1e60, "Maximum issuance exceeded");
 
         // Increases the balance of `receiver` by `amount`
         balances[receiver] += amount;
@@ -456,7 +435,7 @@ contract CryptoPizza is IERC721, ERC165 {
     // Creates an empty array of Pizza structs
     Pizza[] public pizzas;
 
-    // Mapping from owner's address to id of Pizza
+    // Mapping from pizza ID to its owner's address
     mapping(uint256 => address) public pizzaToOwner;
 
     // Mapping from owner's address to number of owned token

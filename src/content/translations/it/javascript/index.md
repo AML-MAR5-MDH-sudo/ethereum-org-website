@@ -45,17 +45,12 @@ Ti servono prima le nozioni di base? Dai un'occhiata a [ethereum.org/learn](/it/
 
 **Ethers.js -** **_Implementazione completa del portafoglio di Ethereum e utilità in JavaScript e TypeScript_**
 
-- [Documentazione](https://docs.ethers.io/ethers.js/html/)
+- [Documentazione](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_La VM di Ethereum implementata in JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **Applicazione desktop per gli strumenti di Ethereum, estensibile con JavaScript**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Cerchi altre risorse? Dai un'occhiata a [ethereum.org/developers.](/it/developers/)
 

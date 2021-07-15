@@ -2,105 +2,29 @@ import React from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
 import { graphql } from "gatsby"
+import { useIntl } from "gatsby-plugin-intl"
 
+import ButtonLink from "../../components/ButtonLink"
 import Card from "../../components/Card"
+import ActionCard from "../../components/ActionCard"
 import CalloutBanner from "../../components/CalloutBanner"
-import ExpandableCard from "../../components/ExpandableCard"
-import GhostCard from "../../components/GhostCard"
-import Link from "../../components/Link"
-import Warning from "../../components/Warning"
 import Emoji from "../../components/Emoji"
 import Eth2Articles from "../../components/Eth2Articles"
-import Eth2Diagram from "../../components/Eth2Diagram"
-import ButtonLink from "../../components/ButtonLink"
+import ExpandableCard from "../../components/ExpandableCard"
+import GhostCard from "../../components/GhostCard"
+import InfoBanner from "../../components/InfoBanner"
+import Link from "../../components/Link"
 import PageMetadata from "../../components/PageMetadata"
+import BannerNotification from "../../components/BannerNotification"
+import Translation from "../../components/Translation"
+import PageHero from "../../components/PageHero"
 import {
   CardContainer,
   Content,
   Page,
   Divider,
-  Eth2Header,
-  Eth2HeaderGradient,
 } from "../../components/SharedStyledComponents"
-
-const HeroContainer = styled.div`
-  padding-left: 4rem;
-  padding-right: 2rem;
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    padding-top: 6rem;
-    padding-left: 2rem;
-    padding-bottom: 4rem;
-  }
-`
-
-const HeroCard = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 2rem;
-  margin-bottom: 4rem;
-  border-radius: 2px;
-  /* background: linear-gradient(
-    285.24deg,
-    #f7cbc0 0%,
-    #fbeae3 17.81%,
-    #f4b1ab 29.8%,
-    #8476d9 49.78%,
-    #85acf9 54.14%,
-    #1c1ce1 61.77%,
-    #000000 69.77%
-  ); */
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    flex-direction: column;
-    margin-right: -2rem;
-    margin-left: -2rem;
-    margin-top: -2rem;
-    /* background: linear-gradient(
-      360deg,
-      #f7cbc0 0%,
-      #fbeae3 -0.19%,
-      #f4b1ab 5.8%,
-      #8476d9 16.78%,
-      #85acf9 26%,
-      #1c1ce1 36.77%,
-      #000000 57.77%
-    ); */
-  }
-`
-
-const Hero = styled(Img)`
-  flex: 1 1 50%;
-  max-width: 500px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  margin-top: 3rem;
-  margin-right: 3rem;
-  @media (min-width: ${(props) => props.theme.breakpoints.m}) {
-    align-self: center;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    margin-top: 0;
-    margin-left: 0;
-  }
-`
-
-const Title = styled.h1`
-  text-transform: uppercase;
-  font-size: 14px;
-  color: ${(props) => props.theme.colors.text300};
-`
-
-const Subtitle = styled.div`
-  font-size: 24px;
-  line-height: 140%;
-  color: ${(props) => props.theme.colors.text200};
-  max-width: 480px;
-  margin-top: 1rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    font-size: 20px;
-  }
-`
+import { translateMessageId } from "../../utils/translations"
 
 const Row = styled.div`
   display: flex;
@@ -110,50 +34,10 @@ const Row = styled.div`
   }
 `
 
-const ButtonRow = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 1rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.s}) {
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
-  }
-`
-
-const TwoColumnContent = styled.div`
-  display: flex;
-  align-items: flex-start;
-  width: 100%;
-  margin-left: 2rem;
-  margin-right: 2rem;
-  justify-content: space-between;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    flex-direction: column;
-    align-items: flex-start;
-    margin-left: 0rem;
-    margin-right: 0rem;
-  }
-`
-
 const H2 = styled.h2`
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: 22px;
-  letter-spacing: 0px;
   text-align: left;
-`
-
-const Column = styled.div`
-  flex: 1 1 33%;
-  margin-bottom: 1.5rem;
-  margin-right: 2rem;
-  width: 100%;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    margin-right: 0rem;
-    margin-left: 0rem;
-  }
+  margin-top: 0;
+  margin-bottom: 1rem;
 `
 
 const CentreCard = styled(Card)`
@@ -164,14 +48,6 @@ const CentreCard = styled(Card)`
   text-align: center;
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     flex: 1 1 30%;
-  }
-`
-
-const StyledButton = styled(ButtonLink)`
-  margin-right: 1rem;
-  margin-bottom: 2rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    margin-bottom: 1rem;
   }
 `
 
@@ -209,11 +85,10 @@ const Disclaimer = styled.div`
   }
 `
 
-const StyledWarning = styled(Warning)`
+const StyledInfoBanner = styled(InfoBanner)`
   margin-left: 2rem;
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     margin: 2rem 0;
-    max-width: 100%;
   }
 `
 
@@ -327,214 +202,230 @@ const ResearchContainer = styled.div`
   margin-top: 2rem;
 `
 
+const StyledBannerNotification = styled(BannerNotification)`
+  display: flex;
+  justify-content: center;
+`
+
+const StyledEmoji = styled(Emoji)`
+  margin-right: 1rem;
+  flex-shrink: 0;
+`
+
 const paths = [
   {
     emoji: ":rocket:",
-    title: "More scalable",
-    description:
-      "Ethereum needs to support 1000s of transactions per second, to make applications faster and cheaper to use.",
+    title: <Translation id="page-eth2-scalable" />,
+    description: <Translation id="page-eth2-scalable-desc" />,
   },
   {
     emoji: ":shield:",
-    title: "More secure",
-    description:
-      "Ethereum needs to be more secure. As the adoption of Ethereum grows, the protocol needs to become more secure against all forms of attack.",
+    title: <Translation id="page-eth2-secure" />,
+    description: <Translation id="page-eth2-secure-desc" />,
   },
   {
     emoji: ":evergreen_tree:",
-    title: "More sustainable",
-    description:
-      "Ethereum needs to be better for the environment. The technology today requires too much computing power and energy.",
-  },
-]
-
-const upgrades = [
-  {
-    emoji: ":police_car_light:",
-    title: "The Beacon Chain",
-    description:
-      "The first Eth2 addition to the ecosystem. The Beacon Chain will coordinate the new system, bring staking to Ethereum and lay the groundwork for future upgrades.",
-    url: "/en/eth2/beacon-chain/",
-    button: "More on the Beacon Chain",
-    date: "December 1, 2020",
-  },
-  {
-    emoji: ":chains:",
-    title: "Shard chains",
-    description:
-      "Shard chains will expand Ethereum's capacity to process transactions and store data. The shards themselves will gain more features over time, rolled out in multiple phases.",
-    url: "/en/eth2/shard-chains/",
-    button: "More on the shard chains",
-    date: "Estimate: 2021",
-  },
-  {
-    emoji: ":ship:",
-    title: "The docking",
-    description:
-      "Mainnet Ethereum will need to “dock” or “merge” with the beacon chain at some point. This will enable staking for the entire network and signal the end of energy-intensive mining.",
-    url: "/en/eth2/docking/",
-    button: "More on the docking",
-    date: "Estimate: 2022",
+    title: <Translation id="page-eth2-index-staking-sustainability" />,
+    description: <Translation id="page-eth2-sustainable-desc" />,
   },
 ]
 
 const Eth2IndexPage = ({ data }) => {
+  const intl = useIntl()
+
+  const heroContent = {
+    title: translateMessageId("page-eth2-upgrades", intl),
+    header: translateMessageId("page-eth2-upgrading", intl),
+    subtitle: translateMessageId("page-eth2-upgrade-desc", intl),
+    image: data.merge.childImageSharp.fluid,
+    alt: translateMessageId("page-dapps-doge-img-alt", intl),
+    buttons: [
+      {
+        content: translateMessageId("page-eth2-explore-btn", intl),
+        path: "/eth2/beacon-chain/",
+      },
+      {
+        content: translateMessageId("page-eth2-whats-ethereum", intl),
+        path: "/what-is-ethereum/",
+        isSecondary: "isSecondary",
+      },
+    ],
+  }
+
+  const upgrades = [
+    {
+      image: data.beaconchain.childImageSharp.fixed,
+      title: <Translation id="page-eth2-beacon-chain-title" />,
+      description: <Translation id="page-eth2-beacon-chain-desc" />,
+      to: "/eth2/beacon-chain/",
+      date: <Translation id="page-eth2-beacon-chain-estimate" />,
+    },
+    {
+      image: data.themerge.childImageSharp.fixed,
+      title: <Translation id="page-eth2-docking" />,
+      description: <Translation id="page-eth2-docking-desc" />,
+      to: "/eth2/merge/",
+      date: <Translation id="page-eth2-docking-estimate" />,
+    },
+    {
+      image: data.shards.childImageSharp.fixed,
+      title: <Translation id="page-eth2-shard-title" />,
+      description: <Translation id="page-eth2-shard-desc" />,
+      to: "/eth2/shard-chains/",
+      date: <Translation id="page-eth2-shard-estimate" />,
+    },
+  ]
+
   return (
     <Page>
       <PageMetadata
-        title="The Eth2 upgrades"
-        description="An overview of the Ethereum 2.0 upgrades and the vision they hope to make a reality."
+        title={translateMessageId("page-eth2-meta-title", intl)}
+        description={translateMessageId("page-eth2-meta-desc", intl)}
       />
+      <StyledBannerNotification shouldShow>
+        <StyledEmoji text=":megaphone:" />
+        <div>
+          <b>Latest:</b> Eth2 researchers are working on ways to accelerate the
+          merge. It will probably happen earlier than expected. More soon.{" "}
+          <Link to="https://blog.ethereum.org/category/research-and-development/">
+            Follow updates
+          </Link>
+        </div>
+      </StyledBannerNotification>
+      <PageHero content={heroContent} />
+      <Divider />
       <Content>
-        <HeroCard>
-          <HeroContainer>
-            <Title>The ETH2 Upgrades</Title>
-            <Eth2Header>
-              Upgrading Ethereum to{" "}
-              <Eth2HeaderGradient>radical</Eth2HeaderGradient> new heights
-            </Eth2Header>
-            <Subtitle>
-              The Ethereum we know and love, just more scalable, more secure,
-              and more sustainable...
-            </Subtitle>
-            <ButtonRow>
-              <StyledButton to="/eth2/beacon-chain/">
-                Explore upgrades
-              </StyledButton>
-              <StyledButton isSecondary to="/what-is-ethereum/">
-                Wait, what's Ethereum?
-              </StyledButton>
-            </ButtonRow>
-          </HeroContainer>
-          <Hero fluid={data.doge.childImageSharp.fluid} />
-        </HeroCard>
-
         <Row>
           <GhostCard>
-            <H2>What is Eth2?</H2>
-            Eth2 refers to a set of interconnected upgrades that will make
-            Ethereum more scalable, more secure, and more sustainable. These
-            upgrades are being built by multiple teams from across the Ethereum
-            ecosystem.
+            <H2>
+              <Translation id="page-eth2-whats-eth2" />
+            </H2>
+            <Translation id="page-eth2-whats-eth2-desc" />
           </GhostCard>
-          <StyledWarning>
-            <H2>What do you need to do?</H2>
-            If you're a dapp user or ETH holder, you don't need to do anything.
-            If you're a developer or want to start staking, there are ways you
-            can get involved today. <br />
-            <Link to="/eth2/get-involved/">Get involved in Eth2</Link>
-          </StyledWarning>
+          <StyledInfoBanner isWarning={true}>
+            <H2>
+              <Translation id="page-eth2-what-to-do" />
+            </H2>
+            <Translation id="page-eth2-what-to-do-desc" /> <br />
+            <Link to="/eth2/get-involved/">
+              <Translation id="page-eth2-get-involved" />
+            </Link>
+          </StyledInfoBanner>
         </Row>
         <Vision>
           <H2>
-            The vision
+            <Translation id="page-eth2-vision" />
             <Emoji ml={`0.5rem`} text=":sparkles:" />
           </H2>
           <p>
-            To bring Ethereum into the mainstream and serve all of humanity, we
-            have to make Ethereum more scalable, secure, and sustainable.
+            <Translation id="page-eth2-vision-desc" />
           </p>
           <CardContainer>
-            {paths.map((path, idx) => {
-              return (
-                <CentreCard
-                  key={idx}
-                  emoji={path.emoji}
-                  title={path.title}
-                  description={path.description}
-                />
-              )
-            })}
+            {paths.map((path, idx) => (
+              <CentreCard
+                key={idx}
+                emoji={path.emoji}
+                title={path.title}
+                description={path.description}
+              />
+            ))}
           </CardContainer>
         </Vision>
       </Content>
       <StyledCallout
-        image={data.eth.childImageSharp.fluid}
-        title="Dive into the vision"
-        description="How are we going to make Ethereum more scalable, secure, and sustainable? All while keeping Ethereum's core ethos of decentralization."
+        image={data.oldship.childImageSharp.fluid}
+        alt={translateMessageId("page-eth-whats-eth-hero-alt", intl)}
+        title={translateMessageId("page-eth2-dive", intl)}
+        description={translateMessageId("page-eth2-dive-desc", intl)}
       >
         <div>
-          <ButtonLink to="/en/eth2/vision/">The Eth2 vision</ButtonLink>
+          <ButtonLink to="/eth2/vision/">
+            <Translation id="page-eth2-vision-btn" />
+          </ButtonLink>
         </div>
       </StyledCallout>
       <Content>
-        <H2>The Eth2 upgrades</H2>
+        <H2>
+          <Translation id="page-eth2-the-upgrades" />
+        </H2>
         <p>
-          Eth2 is a set of upgrades that improve the scalability, security, and
-          sustainability of Ethereum. Although each is being worked on in
-          parallel, they have certain dependencies that determine when they will
-          be deployed.
+          <Translation id="page-eth2-the-upgrades-desc" />
         </p>
         <StyledCardContainer>
-          {upgrades.map((upgrade, idx) => {
-            return (
-              <StyledCard
-                key={idx}
-                emoji={upgrade.emoji}
-                title={upgrade.title}
-                description={upgrade.description}
-              >
-                <h6>{upgrade.date}</h6>
-                <ButtonLink to={upgrade.url}>{upgrade.button}</ButtonLink>
-              </StyledCard>
-            )
-          })}
+          {upgrades.map((upgrade, idx) => (
+            <ActionCard
+              isRight
+              key={idx}
+              image={upgrade.image}
+              title={upgrade.title}
+              description={upgrade.description}
+              to={upgrade.to}
+            >
+              <h6>{upgrade.date}</h6>
+            </ActionCard>
+          ))}
         </StyledCardContainer>
-        {/* <Eth2Diagram /> */}
+      </Content>
+      {/* TODO: Upgrade existing Eth2Diagram with new plan, then reinstate here */}
+      <Content>
         <ContributeCard>
           <div>
-            <H2>Want to help with Eth2?</H2>
-            There’s plenty of opportunities to weigh in on the Eth2 upgrades,
-            help with testing, and even earn rewards in the process.
+            <H2>
+              <Translation id="page-eth2-help" />
+            </H2>
+            <Translation id="page-eth2-help-desc" />
           </div>
           <ContributeButton isSecondary to="/eth2/get-involved/">
-            Get involved
+            <Translation id="page-eth2-get-involved-2" />
           </ContributeButton>
         </ContributeCard>
         <Disclaimer>
           <em>
-            This is not the official roadmap. This is how we view what’s
-            happening based on the information out there. But this is
-            technology, things can change in an instant. So please don’t read
-            this as a commitment.
+            <Translation id="page-eth2-unofficial-roadmap" />
           </em>
         </Disclaimer>
       </Content>
 
       <Staking>
-        <H2>Staking is here</H2>
+        <H2>
+          <Translation id="page-eth2-index-staking" />
+        </H2>
         <StakingColumns>
           <StakingLeftColumn>
             <p>
-              Key to the Eth2 upgrades is the introduction of staking. If you
-              want to use your ETH to help secure the Ethereum network, make
-              sure you follow these steps.
+              <Translation id="page-eth2-index-staking-desc" />
             </p>
-            <h3>1. Set up with the launchpad</h3>
+            <h3>
+              <Translation id="page-eth2-index-staking-step-1" />
+            </h3>
             <p>
-              To stake in Eth2 you’ll need to use the launchpad – this will walk
-              you through the process.
+              <Translation id="page-eth2-index-staking-step-1-desc" />
             </p>
             <ButtonLink to="https://launchpad.ethereum.org">
-              Visit staking launchpad
+              <Translation id="page-eth2-index-staking-step-1-btn" />
             </ButtonLink>
-            <h3>2. Confirm staking address</h3>
+            <h3>
+              <Translation id="page-eth2-index-staking-step-2" />
+            </h3>
             <p>
-              Before you stake your ETH, be sure to check you’ve got the right
-              address. You must have gone through the launchpad before doing
-              this.
+              <Translation id="page-eth2-index-staking-step-2-desc" />
             </p>
             <ButtonLink to="/eth2/deposit-contract/">
-              Confirm deposit contract address
+              <Translation id="page-eth2-index-staking-step-2-btn" />
             </ButtonLink>
           </StakingLeftColumn>
           <StakingRightColumn>
             <StakingCard
               emoji=":money_with_wings:"
-              title="Learn about staking"
-              description="The beacon chain will bring staking to Ethereum. This means if you have ETH, you can do a public good by securing the network and earn more ETH in the process."
+              title={translateMessageId("page-eth2-index-staking-learn", intl)}
+              description={translateMessageId(
+                "page-eth2-index-staking-learn-desc",
+                intl
+              )}
             >
-              <ButtonLink to="/eth2/staking/">More on staking</ButtonLink>
+              <ButtonLink to="/eth2/staking/">
+                <Translation id="page-eth2-deposit-contract-staking-more-link" />
+              </ButtonLink>
             </StakingCard>
             <StakingImage fluid={data.rhino.childImageSharp.fluid} />
           </StakingRightColumn>
@@ -542,290 +433,340 @@ const Eth2IndexPage = ({ data }) => {
       </Staking>
       <Divider />
       <Content>
-        <CenterH2>Frequently asked questions</CenterH2>
+        <CenterH2>
+          <Translation id="page-eth2-question-title" />
+        </CenterH2>
         <Faq>
           <LeftColumn>
             <ExpandableCard
-              contentPreview="Eth2 is a set of distinct upgrades with different ship dates."
-              title="When will Eth2 ship?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-1-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-1-title", intl)}
             >
+              <Link to="/eth2/beacon-chain/">
+                <Translation id="page-eth2-beacon-chain-title" />
+              </Link>
               <p>
-                <Link to="/eth2/beacon-chain/">The Beacon Chain</Link> should go
-                live on December 1, 2020.
+                <Translation id="page-eth2-beacon-chain-date" />
               </p>
+              <Link to="/eth2/merge/">
+                <Translation id="page-eth2-docking" />
+              </Link>
               <p>
-                <Link to="/eth2/shard-chains/">Shard chains</Link> will be the
-                second upgrade, expected in 2021.
-              </p>
-              <p>
-                <Link to="/eth2/docking/">The docking</Link>, or the merging of{" "}
-                <Link to="/glossary/#mainnet">mainnet</Link> into a shard, will
-                come later after a successful implementation of shard chains.
-              </p>
-            </ExpandableCard>
-            <ExpandableCard
-              contentPreview="It’s not accurate to think of Eth2 as a separate blockchain."
-              title="Is Eth2 a separate blockchain?"
-            >
-              <p>
-                Think of Eth2 as a set of upgrades being added to improve the
-                Ethereum we use today. These upgrades include the creation of a
-                new chain called the beacon chain and up to 64 chains known as
-                shards.{" "}
-              </p>
-              <p>
-                These are separate to the{" "}
-                <Link to="/glossary/#mainnet">Ethereum mainnet</Link> we use
-                today but won’t replace it. Instead mainnet will dock or "merge"
-                with this parallel system that’s being added over time.
-              </p>
-              <p>
-                In other words the Ethereum we use today will eventually embody
-                all the features that we’re aiming towards in{" "}
-                <Link to="/eth2/vision/">the Eth2 vision</Link>.
-              </p>
-              <p>
-                To learn more, check out{" "}
-                <Link to="/eth2/beacon-chain/">the Eth2 upgrades</Link>.
-              </p>
-            </ExpandableCard>
-            <ExpandableCard
-              contentPreview="You don't have to do anything right now to prepare for Eth2."
-              title="How do I prepare for Eth2?"
-            >
-              <p>
-                Eth holders certainly don't need to do anything. Your ETH will
-                not need changing or upgrading. There's almost certain to be
-                scams telling you otherwise, so be careful.
-              </p>
-              <p>
-                The <Link to="/eth2/shard-chains/">shard chain</Link> and{" "}
-                <Link to="/eth2/docking/">docking</Link> upgrades may impact
-                dapp developers. But the specifications have not been finalised
-                yet, so there's no immediate action required.
-              </p>
-              <p>
-                You can discuss with the Eth2 research and development team over
-                at <Link to="https://ethresear.ch">etheresear.ch</Link>.
-              </p>
-            </ExpandableCard>
-            <ExpandableCard
-              contentPreview="Eth1 refers to the Ethereum mainnet you transact on today."
-              title="What is Eth1?"
-            >
-              <p>
-                Whenever you send a transaction or use a dapp today, you're
-                using Eth1. This is the Ethereum that is secured by{" "}
-                <Link to="/developers/docs/mining/">miners</Link>.
-              </p>
-              <p>
-                "Eth1", or <Link to="/glossary/#mainnet"> mainnet</Link>, will
-                continue to run as normal until{" "}
-                <Link to="/eth2/docking/">the docking</Link>. After that,
-                validators will secure the network via{" "}
-                <Link to="/developers/docs/consensus-mechanisms/pos/">
-                  proof-of-stake
-                </Link>{" "}
-                instead of{" "}
-                <Link to="/developers/docs/consensus-mechanisms/pow/mining/">
-                  miners
+                <Translation id="page-eth2-docking-answer-1" />{" "}
+                <Link to="/glossary/#mainnet">
+                  <Translation id="page-eth2-docking-mainnet" />
                 </Link>
-                . Anyone can become a validator by{" "}
-                <Link to="/eth2/staking/">staking their ETH</Link>.
               </p>
+              <Link to="/eth2/shard-chains/">
+                <Translation id="page-eth2-shard-title" />
+              </Link>
               <p>
-                The beacon chain and shard chain upgrades will not disrupt Eth1
-                as they are being built out separately.
+                <Translation id="page-eth2-shard-date" />
               </p>
             </ExpandableCard>
             <ExpandableCard
-              contentPreview="You’ll need to use the staking launchpad or join a staking pool."
-              title="How do I stake?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-2-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-2-title", intl)}
             >
               <p>
-                To become a full validator on the network, you'll need to stake
-                32 ETH. If you don't have that much, or aren't willing to stake
-                that much, you can join staking pools. These pools will let you
-                stake less and earn fractions of the total rewards.
+                <Translation id="page-eth2-answer-1" />{" "}
+                <Link to="/eth2/beacon-chain/">
+                  <Translation id="page-eth2-more-on-upgrades" />
+                </Link>
               </p>
               <p>
-                <Link to="/eth2/staking/">More on staking</Link>
+                <Translation id="page-eth2-answer-2" />{" "}
+                <Link to="/glossary/#mainnet">
+                  <Translation id="page-eth2-docking-mainnet" />
+                </Link>{" "}
+              </p>
+              <p>
+                <Translation id="page-eth2-answer-4" />{" "}
+                <Link to="/eth2/vision/">
+                  <Translation id="page-eth2-vision-btn" />
+                </Link>
+              </p>
+            </ExpandableCard>
+            <ExpandableCard
+              contentPreview={translateMessageId(
+                "page-eth2-question-3-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-3-title", intl)}
+            >
+              <p>
+                <Translation id="page-eth2-question3-answer-1" />
+              </p>
+              <p>
+                <Translation id="page-eth2-question-3-answer-2" />
+              </p>
+              <ul>
+                <li>
+                  <Link to="/eth2/merge/">
+                    <Translation id="page-eth2-just-docking" />
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/eth2/shard-chains/">
+                    <Translation id="page-eth2-shard-lower" />
+                  </Link>
+                </li>
+              </ul>
+              <p>
+                <Translation id="page-eth2-question-3-answer-3" />
+              </p>
+              <Link to="https://ethresear.ch">
+                <Translation id="page-eth2-question-3-answer-3-link" />
+              </Link>
+            </ExpandableCard>
+            <ExpandableCard
+              contentPreview={translateMessageId(
+                "page-eth2-question-4-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-4-title", intl)}
+            >
+              <p>
+                <Translation id="page-eth2-question-4-answer-1" />{" "}
+                <Link to="/developers/docs/mining/">
+                  <Translation id="page-eth2-miners" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-4-answer-2" />{" "}
+                <Link to="/eth2/merge/">
+                  <Translation id="page-eth2-just-docking" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-4-answer-3" />{" "}
+                <Link to="/developers/docs/consensus-mechanisms/pos/">
+                  <Translation id="page-eth2-proof-stake-link" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-4-answer-6" />{" "}
+                <Link to="/eth2/staking/">
+                  <Translation id="page-eth2-question-4-answer-7" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-4-answer-8" />
+              </p>
+            </ExpandableCard>
+            <ExpandableCard
+              contentPreview={translateMessageId(
+                "page-eth2-question-5-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-5-title", intl)}
+            >
+              <p>
+                <Translation id="page-eth2-question-5-answer-1" />
+              </p>
+              <p>
+                <Link to="/eth2/staking/">
+                  <Translation id="page-eth2-deposit-contract-staking-more-link" />
+                </Link>
               </p>
             </ExpandableCard>
           </LeftColumn>
           <RightColumn>
             <ExpandableCard
-              contentPreview="Your dapp won’t be affected by any imminent upgrades. However future upgrades may require some changes."
-              title="What do I need to do with my dapp?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-6-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-6-title", intl)}
             >
               <p>
-                For now, there's no actions to take. But we recommend you stay
-                up to date with developments on the{" "}
-                <Link to="/eth2/shard-chains/">shard chain</Link> and{" "}
-                <Link to="/eth2/docking/">docking</Link> upgrades.
+                <Translation id="page-eth2-question-6-answer-1" />
               </p>
               <ul>
                 <li>
-                  Danny Ryan of the Ethereum foundation regularly updates the
-                  community via the{" "}
-                  <Link to="https://blog.ethereum.org">ethereum.org blog</Link>.
+                  <Link to="/eth2/merge/">
+                    <Translation id="page-eth2-just-docking" />
+                  </Link>
                 </li>
                 <li>
-                  Ben Edginton of ConsenSys has a weekly Eth2 newsletter:{" "}
-                  <Link to="https://eth2.news">What's new in Eth2?</Link>.
+                  <Link to="/eth2/shard-chains/">
+                    <Translation id="page-eth2-shard-lower" />
+                  </Link>
                 </li>
               </ul>
               <p>
-                You can also join the discussion on Eth2 research and
-                development at{" "}
-                <Link to="https://ethresear.ch">etheresear.ch</Link>.
+                <Translation id="page-eth2-question-6-answer-3" />{" "}
+                <Link to="https://blog.ethereum.org">
+                  <Translation id="page-eth2-eth-blog" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-6-answer-4" />{" "}
+                <Link to="https://eth2.news">
+                  <Translation id="page-eth2-whats-new" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-6-answer-5" />{" "}
+                <Link to="https://ethresear.ch">
+                  <Translation id="page-eth2-question-3-answer-3-link" />
+                </Link>
               </p>
             </ExpandableCard>
             <ExpandableCard
-              contentPreview="Many different teams from all over the community are working on the various Eth2 upgrades."
-              title="Who's building Eth2?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-7-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-7-title", intl)}
             >
-              <p>The Eth2 client teams:</p>
               <p>
-                <ul>
-                  <li>
-                    <Link to="https://trinity.ethereum.org/">Trinity</Link>{" "}
-                    (Python implementation)
-                  </li>
-                  <li>
-                    <Link to="https://sigmaprime.io/">Lighthouse</Link> (Rust
-                    implementation)
-                  </li>
-                  <li>
-                    <Link to="https://nimbus.team/">Nimbus</Link> (Nim
-                    implementation)
-                  </li>
-                  <li>
-                    <Link to="https://prysmaticlabs.com/">Prysm</Link> (Go
-                    implementation)
-                  </li>
-                  <li>
-                    <Link to="https://nethermind.io/">Cortex</Link> (.NET
-                    implementation)
-                  </li>
-                  <li>
-                    <Link to="https://pegasys.tech/teku-ethereum-2-for-enterprise/">
-                      Teku
-                    </Link>{" "}
-                    (Java implementation)
-                  </li>
-                  <li>
-                    <Link to="https://github.com/chainsafe/lodestar#getting-started">
-                      Lodestar
-                    </Link>{" "}
-                    (JavaScript implementation)
-                  </li>
-                </ul>
+                <Translation id="page-eth2-question-7-teams" />
+              </p>
+              <ul>
+                <li>
+                  <Link to="https://trinity.ethereum.org/">
+                    <Translation id="page-eth2-question-7-trinity" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-trinity-lang" />
+                </li>
+                <li>
+                  <Link to="https://sigmaprime.io/">
+                    <Translation id="page-eth2-question-7-lighthouse" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-lighthouse-lang" />
+                </li>
+                <li>
+                  <Link to="https://nimbus.team/">
+                    <Translation id="page-eth2-question-7-nimbus" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-nimbus-lang" />
+                </li>
+                <li>
+                  <Link to="https://prysmaticlabs.com/">
+                    <Translation id="page-eth2-question-7-prysm" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-prysm-lang" />
+                </li>
+                <li>
+                  <Link to="https://nethermind.io/">
+                    <Translation id="page-eth2-question-7-cortex" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-cortex-lang" />
+                </li>
+                <li>
+                  <Link to="https://pegasys.tech/teku-ethereum-2-for-enterprise/">
+                    <Translation id="page-eth2-question-7-teku" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-teku-lang" />
+                </li>
+                <li>
+                  <Link to="https://github.com/chainsafe/lodestar#getting-started">
+                    <Translation id="page-eth2-question-7-lodestar" />
+                  </Link>{" "}
+                  <Translation id="page-eth2-question-7-lodestar-lang" />
+                </li>
+              </ul>
+            </ExpandableCard>
+            <ExpandableCard
+              contentPreview={translateMessageId(
+                "page-eth2-question-8-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-8-title", intl)}
+            >
+              <p>
+                <Translation id="page-eth2-question-8-answer-1" />
+              </p>
+              <p>
+                <Translation id="page-eth2-question-8-answer-2" />{" "}
+                <Link to="/eth2/beacon-chain">
+                  <Translation id="page-eth2-upgrades-guide" />
+                </Link>
+              </p>
+              <p>
+                <Translation id="page-eth2-question-8-answer-3" />
+              </p>
+              <p>
+                <Translation id="page-eth2-question-8-answer-4" />
+              </p>
+              <p>
+                <ButtonLink to="/eth2/vision/">
+                  <Translation id="page-eth2-question-8-answer-6" />
+                </ButtonLink>
               </p>
             </ExpandableCard>
             <ExpandableCard
-              contentPreview="The Ethereum we use today needs to offer a better experience to end users and network participants."
-              title="Why is Eth2 needed?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-9-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-9-title", intl)}
             >
               <p>
-                The Eth2 upgrades will help Ethereum scale in a decentralized
-                way, while maintaining security, and increasing sustainability.
+                <Translation id="page-eth2-question-9-answer-1" />{" "}
+                <Link to="/eth2/staking/">
+                  <Translation id="page-eth2-question-9-stake-eth" />
+                </Link>
               </p>
               <p>
-                Perhaps the most obvious problem is that Ethereum needs to be
-                able to handle more than 15-45 transactions per second. But the
-                Eth2 upgrades also address some other problems with Ethereum
-                today.
+                <Translation id="page-eth2-question-9-answer-2" />{" "}
+                <Link to="/eth2/get-involved/">
+                  <Translation id="page-eth2-clients" />
+                </Link>
               </p>
               <p>
-                The network is in such high demand that it's making Ethereum
-                expensive to use. Nodes in the network are struggling under the
-                size of Ethereum and the amount of data their computers are
-                having to process. And the underlying algorithm that keeps
-                Ethereum secure and decentralized is energy intensive andd needs
-                to be greener.
-              </p>
-              <p>
-                A lot of what's changing with{" "}
-                <Link to="/eth2/beacon-chain/">the Eth2 upgrades</Link> has
-                always been on the Ethereum roadmap, even since 2015. But
-                current conditions are making the need for the upgrades even
-                greater.
-              </p>
-              <p>
-                For more on why Eth2's needed, check out the{" "}
-                <Link to="/eth2/vision/">Eth2 vision</Link>.
-              </p>
-            </ExpandableCard>
-            <ExpandableCard
-              contentPreview="You don't have to be technical to contribute. The community is looking for contributions from all kinds of skillsets."
-              title="How can I contribute to Eth2?"
-            >
-              <p>
-                The most active role you can play is to{" "}
-                <Link to="/eth2/staking/">stake your ETH</Link>.
-              </p>
-              <p>
-                You may also want to run a second client to help improve client
-                diversity.{" "}
-                <Link to="/eth2/get-involved/">Check out the Eth2 clients</Link>
-                .
-              </p>
-              <p>
-                If you're more technical, you can help catch bugs in the new
-                clients via the{" "}
+                <Translation id="page-eth2-question-9-answer-3" />{" "}
                 <Link to="/eth2/get-involved/bug-bounty/">
-                  Bug bounty program
+                  <Translation id="page-eth2-bug-bounty" />
                 </Link>
-                .
               </p>
               <p>
-                You can also weigh in on the technical discussions with Ethereum
-                researchers at{" "}
-                <Link to="https://ethresear.ch">ethresear.ch</Link>.
+                <Translation id="page-eth2-question-9-answer-4" />{" "}
+                <Link to="https://ethresear.ch">
+                  <Translation id="page-eth2-question-3-answer-3-link" />
+                </Link>
               </p>
             </ExpandableCard>
             <ExpandableCard
-              contentPreview="Phases relate to phases of work and focus in the Eth2 technical roadmap."
-              title="What are the Eth2 phases?"
+              contentPreview={translateMessageId(
+                "page-eth2-question-10-desc",
+                intl
+              )}
+              title={translateMessageId("page-eth2-question-10-title", intl)}
             >
               <p>
-                We're reluctant to talk too much in terms of a technical roadmap
-                because this is software: things can change. We think it's
-                easier to understand what's happening when you read about the
-                outcomes:{" "}
-                <Link to="/eth2/beacon-chain/">the Eth2 upgrades</Link>. But if
-                you've followed the discussions, here's how the upgrades fit
-                into technical roadmaps.
+                <Translation id="page-eth2-question-10-answer-1" />{" "}
+                <Link to="/eth2/beacon-chain/">
+                  <Translation id="page-eth2-question-10-answer-1-link" />
+                </Link>
               </p>
               <p>
-                Phase 0 describes the work to get{" "}
-                <Link to="/eth2/beacon-chain/">The Beacon Chain</Link> live.
+                <Translation id="page-eth2-question-10-answer-2" />
               </p>
               <p>
-                Phase 1 of technical roadmaps focus on implementing{" "}
-                <Link to="/eth2/shard-chains/">the shard chains</Link>.
+                <Translation id="page-eth2-question-10-answer-3" />
               </p>
               <p>
-                <Link to="/eth2/docking/">Docking mainnet into Eth2</Link> is an
-                extension of the work done to implement shard chains and has
-                been referred to as Phase 1.5. But it's a significant moment as
-                the Ethereum we know today merges with the other Eth2 upgrades.
-                Plus it's when Ethereum fully transitions to{" "}
+                <Translation id="page-eth2-question-10-answer-5" />
+              </p>
+              <p>
+                <Translation id="page-eth2-question-10-answer-6" />{" "}
                 <Link to="/developers/docs/consensus-mechanisms/pos/">
-                  proof of stake
+                  <Translation id="page-eth2-proof-stake-link" />
                 </Link>
-                .
               </p>
               <p>
-                It's currently unclear what will happen around Phase 2. It's
-                still a point of intense research and discussion. The initial
-                plan was to add extra functionality to{" "}
-                <Link to="/eth2/shard-chains/">the shard chains</Link> but{" "}
+                <Translation id="page-eth2-question-10-answer-7" />{" "}
                 <Link to="/eth2/shard-chains/#code-execution">
-                  it might not be necessary
+                  <Translation id="page-eth2-question-10-answer-8" />
                 </Link>
-                .
               </p>
             </ExpandableCard>
           </RightColumn>
@@ -833,31 +774,24 @@ const Eth2IndexPage = ({ data }) => {
       </Content>
       <Divider />
       <Content>
-        <H2>Stay up to date</H2>
+        <H2>
+          <Translation id="page-eth2-stay-up-to-date" />
+        </H2>
         <p>
-          Get the latest from the researchers and developers working on the Eth2
-          upgrades.
+          <Translation id="page-eth2-stay-up-to-date-desc" />
         </p>
         <Eth2Articles />
         <ResearchContainer>
-          <H2>Take part in the research</H2>
+          <H2>
+            <Translation id="page-eth2-take-part" />
+          </H2>
           <p>
-            Ethereum researchers and enthusiasts alike meet here to discuss
-            research efforts, including everything Eth2.
+            <Translation id="page-eth2-take-part-desc" />
           </p>
           <ButtonLink to="https://ethresear.ch/">
-            Head to ethresear.ch
+            <Translation id="page-eth2-head-to" /> ethresear.ch
           </ButtonLink>
         </ResearchContainer>
-        {/* <Divider />
-            <H2>Not sure what to do about Eth2?</H2>
-            <p>
-              Check to see if you need to do anything to get ready for Eth2.{" "}
-            </p>
-            <p>
-              <em>HINT: you probably don’t need to do anything.</em>
-            </p>
-        <ButtonLink to="#">Check</ButtonLink> */}
       </Content>
     </Page>
   )
@@ -867,7 +801,7 @@ export default Eth2IndexPage
 
 export const query = graphql`
   query {
-    eth: file(relativePath: { eq: "eth2/eth2_eth.png" }) {
+    oldship: file(relativePath: { eq: "eth2/oldship.png" }) {
       childImageSharp {
         fluid(maxWidth: 800) {
           ...GatsbyImageSharpFluid
@@ -881,16 +815,30 @@ export const query = graphql`
         }
       }
     }
-    doge: file(relativePath: { eq: "eth2/eth2_doge.png" }) {
+    merge: file(relativePath: { eq: "eth2/merge.png" }) {
       childImageSharp {
-        fluid(maxWidth: 500) {
+        fluid(maxWidth: 1000) {
           ...GatsbyImageSharpFluid
         }
       }
     }
-    ethresearch: file(relativePath: { eq: "eth2/ethresearch.png" }) {
+    beaconchain: file(relativePath: { eq: "eth2/core.png" }) {
       childImageSharp {
-        fixed(width: 300) {
+        fixed(width: 420) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    shards: file(relativePath: { eq: "eth2/newrings.png" }) {
+      childImageSharp {
+        fixed(width: 420) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    themerge: file(relativePath: { eq: "eth2/merge.png" }) {
+      childImageSharp {
+        fixed(width: 420) {
           ...GatsbyImageSharpFixed
         }
       }

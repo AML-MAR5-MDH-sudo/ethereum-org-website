@@ -3,9 +3,10 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 import { useIntl } from "gatsby-plugin-intl"
 import { graphql } from "gatsby"
+import { shuffle } from "lodash"
 
+import PageHero from "../../components/PageHero"
 import Translation from "../../components/Translation"
-import { getDefaultMessage } from "../../utils/translations"
 import Callout from "../../components/Callout"
 import Card from "../../components/Card"
 import Link from "../../components/Link"
@@ -22,6 +23,8 @@ import {
   StyledCard,
   TwoColumnContent,
 } from "../../components/SharedStyledComponents"
+
+import { translateMessageId } from "../../utils/translations"
 
 const StyledTwoColumnContent = styled(TwoColumnContent)`
   margin-bottom: -2rem;
@@ -48,101 +51,16 @@ const RightColumn = styled.div`
   }
 `
 
-const HeroContent = styled(Content)`
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0;
-
-  @media (max-width: ${(props) => props.theme.breakpoints.xl}) {
-    padding: 1rem 2rem 0;
-  }
-
+const StyledRightColumn = styled(RightColumn)`
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    flex-direction: column;
-  }
-`
-
-const HeroCopy = styled.div`
-  flex: 1 1 50%;
-  min-width: 300px;
-  margin-top: 8rem;
-  @media (max-width: 1280px) {
-    margin-top: 6rem;
-  }
-  @media (max-width: 1200px) {
-    margin-top: 4rem;
-  }
-  @media (max-width: 1150px) {
-    margin-top: 3rem;
-  }
-  @media (max-width: 1120px) {
-    margin-top: 1.5rem;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    height: 100%;
-  }
-`
-
-const HeroImage = styled(Img)`
-  flex: 0 1 50%;
-  max-width: 624px;
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  margin-top: 4rem;
-  @media (max-width: 1200px) {
-    margin-top: 5rem;
-  }
-  @media (max-width: 1150px) {
-    margin-top: 6rem;
-  }
-  @media (max-width: 1120px) {
-    margin-top: 7rem;
-  }
-  @media (max-width: 1080px) {
-    margin-top: 9rem;
-  }
-  @media (max-width: 1045px) {
-    margin-top: 11rem;
-  }
-  @media (max-width: ${(props) => props.theme.breakpoints.l}) {
-    align-self: center;
-    height: 100%;
-    width: 100%;
-    max-width: 400px;
-    margin-top: 0;
-    order: -1;
+    margin-top: 0rem;
   }
 `
 
 const StyledGrayContainer = styled(GrayContainer)`
-  margin-top: -4rem;
   @media (max-width: ${(props) => props.theme.breakpoints.l}) {
     margin-top: 1rem;
   }
-`
-
-const Slogan = styled.p`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 32px;
-  line-height: 140%;
-`
-
-const Title = styled.h1`
-  font-size: 14px;
-  line-height: 140%;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: ${(props) => props.theme.colors.textTableOfContents};
-`
-
-const Subtitle = styled.div`
-  font-size: 20px;
-  line-height: 140%;
-  color: ${(props) => props.theme.colors.text200};
 `
 
 const SubtitleTwo = styled.div`
@@ -160,11 +78,6 @@ const SubtitleThree = styled.div`
   text-align: center;
 `
 
-const StyledDivider = styled(Divider)`
-  margin-top: 3rem;
-  margin-bottom: 3rem;
-`
-
 const FindWallet = styled(Img)`
   margin-top: 2rem;
   max-width: 800px;
@@ -173,13 +86,16 @@ const FindWallet = styled(Img)`
   width: 100%;
 `
 
-const Intro = styled.div`
-  max-width: 608px;
-  margin-bottom: 4rem;
-  @media (max-width: ${(props) => props.theme.breakpoints.m}) {
-    margin-bottom: 3rem;
-    margin-top: -2rem;
+const Intro = styled(Content)`
+  padding-bottom: 0;
+  h2 {
+    margin-bottom: 0;
   }
+`
+
+const IntroTwoColumnContent = styled(TwoColumnContent)`
+  margin-bottom: 0;
+  padding-bottom: 0;
 `
 
 const GradientContainer = styled(GrayContainer)`
@@ -241,58 +157,62 @@ const CalloutCardContainer = styled(CardContainer)`
   margin-top: 4rem;
 `
 
+const H2 = styled.h2`
+  /* margin: 0; */
+`
+
 const cards = [
   {
     emoji: ":dollar:",
-    title: <Translation id="page-wallet-manage-funds" />,
-    description: <Translation id="page-wallet-manage-funds-desc" />,
+    title: <Translation id="page-wallets-manage-funds" />,
+    description: <Translation id="page-wallets-manage-funds-desc" />,
   },
   {
     emoji: ":frame_with_picture:",
-    title: <Translation id="page-wallet-your-ethereum-account" />,
-    description: <Translation id="page-wallet-your-ethereum-account-desc" />,
+    title: <Translation id="page-wallets-your-ethereum-account" />,
+    description: <Translation id="page-wallets-your-ethereum-account-desc" />,
   },
   {
     emoji: ":bust_in_silhouette:",
-    title: <Translation id="page-wallet-your-login" />,
-    description: <Translation id="page-wallet-your-login-desc" />,
+    title: <Translation id="page-wallets-your-login" />,
+    description: <Translation id="page-wallets-your-login-desc" />,
   },
 ]
 
 const types = [
   {
     emoji: ":cd:",
-    description: <Translation id="page-wallet-cd" />,
+    description: <Translation id="page-wallets-cd" />,
   },
   {
     emoji: ":mobile_phone:",
-    description: <Translation id="page-wallet-mobile" />,
+    description: <Translation id="page-wallets-mobile" />,
   },
   {
     emoji: ":globe_with_meridians:",
-    description: <Translation id="page-wallet-web-browser" />,
+    description: <Translation id="page-wallets-web-browser" />,
   },
   {
     emoji: ":desktop_computer:",
-    description: <Translation id="page-wallet-desktop" />,
+    description: <Translation id="page-wallets-desktop" />,
   },
 ]
 
 const articles = [
   {
-    title: <Translation id="page-wallet-protecting-yourself" />,
+    title: <Translation id="page-wallets-protecting-yourself" />,
     description: "MyCrypto",
     link:
       "https://support.mycrypto.com/staying-safe/protecting-yourself-and-your-funds",
   },
   {
-    title: <Translation id="page-wallet-keys-to-safety" />,
-    description: <Translation id="page-wallet-blog" />,
+    title: <Translation id="page-wallets-keys-to-safety" />,
+    description: <Translation id="page-wallets-blog" />,
     link:
       "https://blog.coinbase.com/the-keys-to-keeping-your-crypto-safe-96d497cce6cf",
   },
   {
-    title: <Translation id="page-wallet-how-to-store" />,
+    title: <Translation id="page-wallets-how-to-store" />,
     description: "ConsenSys",
     link:
       "https://media.consensys.net/how-to-store-digital-assets-on-ethereum-a2bfdcf66bd0",
@@ -306,190 +226,159 @@ const WalletsPage = ({ data }) => {
   useEffect(() => {
     const nodes = data.allWallets.nodes
     // Add fields for CardList
-    const randomWallets = nodes
-      .map((node) => {
+    const randomWallets = shuffle(
+      nodes.map((node) => {
         node.image = data[node.id].childImageSharp.fixed
         node.title = node.name
+        node.description = translateMessageId(
+          `page-find-wallet-description-${node.id}`,
+          intl
+        )
         node.link = node.url
-        node.randomNumber = Math.floor(Math.random() * nodes.length)
         return node
       })
-      .sort((a, b) => a.randomNumber - b.randomNumber)
+    )
 
     setWallets(randomWallets)
-  }, [data])
+  }, [data, intl])
 
   const cryptoCurious = wallets
-    .filter((wallet) => {
-      return (
+    .filter(
+      (wallet) =>
         (wallet.has_card_deposits === "TRUE" ||
           wallet.has_explore_dapps === "TRUE") &&
         wallet.has_hardware !== "TRUE"
-      )
-    })
+    )
     .slice(0, 4)
 
-  const hardwareWallets = wallets.filter(
-    (wallet) => wallet.has_hardware === "TRUE"
-  )
-  const whaleWallets = wallets
-    .filter((wallet) => {
-      return (
+  const cryptoConverted = wallets
+    .filter(
+      (wallet) =>
+        wallet.has_hardware === "TRUE" ||
         wallet.has_high_volume_purchases === "TRUE" ||
-        wallet.has_limits_protection === "TRUE" ||
-        wallet.has_multisig === "TRUE"
-      )
-    })
-    .slice(0, 4 - hardwareWallets.length)
-  const cryptoConverted = Array.prototype.concat(hardwareWallets, whaleWallets)
+        wallet.has_limits_protection === "TRUE"
+    )
+    .slice(0, 4)
+
+  const heroContent = {
+    title: translateMessageId("page-wallets-title", intl),
+    header: translateMessageId("page-wallets-slogan", intl),
+    subtitle: translateMessageId("page-wallets-subtitle", intl),
+    image: data.hero.childImageSharp.fluid,
+    alt: translateMessageId("page-wallets-alt", intl),
+    buttons: [
+      {
+        path: "/wallets/find-wallet/",
+        content: translateMessageId("page-wallets-find-wallet-link", intl),
+      },
+    ],
+  }
 
   return (
     <Page>
       <PageMetadata
-        title={intl.formatMessage({
-          id: "page-wallets-meta-title",
-          defaultMessage: getDefaultMessage("page-wallets-meta-title"),
-        })}
-        description={intl.formatMessage({
-          id: "page-wallets-meta-description",
-          defaultMessage: getDefaultMessage("page-wallets-meta-description"),
-        })}
+        title={translateMessageId("page-wallets-meta-title", intl)}
+        description={translateMessageId("page-wallets-meta-description", intl)}
         image={data.ogImage.childImageSharp.fixed.src}
       />
-      <HeroContent>
-        <HeroCopy>
-          <Title>
-            <Translation id="page-wallets-title" />
-          </Title>
-          <Slogan>
-            <Translation id="page-wallets-slogan" />
-          </Slogan>
-          <Subtitle>
-            <Translation id="page-wallets-subtitle" />
-          </Subtitle>
-          <SubtitleTwo>
-            <Translation id="page-wallets-subtitle-2" />
-          </SubtitleTwo>
-
-          <ButtonLink to="/wallets/find-wallet/">
-            <Translation id="page-wallets-find-wallet-link" />
-          </ButtonLink>
-
-          <StyledDivider />
-          <p>
-            <Translation id="page-wallets-description" />
-          </p>
-          <p>
-            <Translation id="page-wallets-desc-2" /> <Link to="/eth/">ETH</Link>
-            .
-          </p>
-          <p>
-            <Translation id="page-wallets-desc-3" />
-          </p>
-          <p>
-            <Translation id="page-wallets-desc-4" />
-          </p>
-        </HeroCopy>
-        <HeroImage
-          fluid={data.hero.childImageSharp.fluid}
-          alt={intl.formatMessage({
-            id: "page-wallets-alt",
-            defaultMessage: getDefaultMessage("page-wallets-alt"),
-          })}
-          loading="eager"
-        />
-      </HeroContent>
+      <PageHero content={heroContent} />
       <StyledGrayContainer>
+        <Intro>
+          <H2>
+            <Translation id="page-wallets-whats-a-wallet" />
+          </H2>
+        </Intro>
+        <IntroTwoColumnContent>
+          <LeftColumn>
+            <p>
+              <Translation id="page-wallets-description" />
+            </p>
+            <p>
+              <Translation id="page-wallets-desc-2" />{" "}
+              <Link to="/eth/">
+                <Translation id="page-wallets-desc-2-link" />{" "}
+              </Link>
+            </p>
+          </LeftColumn>
+          <StyledRightColumn>
+            <p>
+              <Translation id="page-wallets-desc-3" />
+            </p>
+            <p>
+              <Translation id="page-wallets-desc-4" />
+            </p>
+          </StyledRightColumn>
+        </IntroTwoColumnContent>
         <Content>
-          <Intro>
-            <h2>
-              <Translation id="page-wallet-whats-a-wallet" />
-            </h2>
-          </Intro>
           <CardContainer>
-            {cards.map((card, idx) => {
-              return (
-                <StyledCard
-                  key={idx}
-                  emoji={card.emoji}
-                  title={card.title}
-                  description={card.description}
-                />
-              )
-            })}
+            {cards.map((card, idx) => (
+              <StyledCard
+                key={idx}
+                emoji={card.emoji}
+                title={card.title}
+                description={card.description}
+              />
+            ))}
           </CardContainer>
         </Content>
       </StyledGrayContainer>
       <StyledTwoColumnContent>
         <LeftColumn>
-          <h2>
-            <Translation id="page-wallet-accounts-addresses" />
-          </h2>
+          <H2>
+            <Translation id="page-wallets-accounts-addresses" />
+          </H2>
           <p>
-            <Translation id="page-wallet-accounts-addresses-desc" />
+            <Translation id="page-wallets-accounts-addresses-desc" />
           </p>
           <ul>
             <li>
               <p>
-                <Translation id="page-wallet-an" />{" "}
-                <b>
-                  <Translation id="page-wallet-ethereum-account" />
-                </b>{" "}
-                <Translation id="page-wallet-accounts-addresses-desc-2" />
+                <Translation id="page-wallets-ethereum-account" />
               </p>
             </li>
             <li>
               <p>
-                <Translation id="page-wallet-accounts-has" />{" "}
-                <b>
-                  <Translation id="page-wallet-ethereum-addresses" />
-                </b>
-                <Translation id="page-wallet-ethereum-addresses-2" />
+                <Translation id="page-wallets-accounts-ethereum-addresses" />
               </p>
             </li>
             <li>
               <p>
-                <b>
-                  <Translation id="page-wallet-ethereum-wallet" />
-                </b>{" "}
-                <Translation id="page-wallet-ethereum-wallet-2" />
+                <Translation id="page-wallets-ethereum-wallet" />
               </p>
             </li>
           </ul>
           <p>
-            <Translation id="page-wallet-most-wallets" />
+            <Translation id="page-wallets-most-wallets" />
           </p>
         </LeftColumn>
         <RightColumn>
-          <h2>
-            <Translation id="page-wallet-types" />
-          </h2>
+          <H2>
+            <Translation id="page-wallets-types" />
+          </H2>
           <div>
-            {types.map((type, idx) => {
-              return (
-                <WalletType
-                  key={idx}
-                  emoji={type.emoji}
-                  title={type.title}
-                  description={type.description}
-                  size={2.5}
-                />
-              )
-            })}
+            {types.map((type, idx) => (
+              <WalletType
+                key={idx}
+                emoji={type.emoji}
+                title={type.title}
+                description={type.description}
+                size={2.5}
+              />
+            ))}
           </div>
         </RightColumn>
       </StyledTwoColumnContent>
       <GradientContainer>
         <Content>
-          <h2>
-            <Translation id="page-wallet-get-wallet" />
-          </h2>
+          <H2>
+            <Translation id="page-wallets-get-wallet" />
+          </H2>
           <p>
-            <Translation id="page-wallet-get-wallet-desc" />
+            <Translation id="page-wallets-get-wallet-desc" />
           </p>
           <p>
             <em>
-              <Translation id="page-wallet-get-wallet-desc-2" />
+              <Translation id="page-wallets-get-wallet-desc-2" />
             </em>
           </p>
         </Content>
@@ -497,30 +386,23 @@ const WalletsPage = ({ data }) => {
           <LeftColumn>
             <ContainerCard
               emoji=":thinking_face:"
-              title={intl.formatMessage({
-                id: "page-wallet-curious",
-                defaultMessage: getDefaultMessage("page-wallet-curious"),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-curious-desc",
-                defaultMessage: getDefaultMessage("page-wallet-curious-desc"),
-              })}
+              title={translateMessageId("page-wallets-curious", intl)}
+              description={translateMessageId(
+                "page-wallets-curious-desc",
+                intl
+              )}
             >
               <CardList content={cryptoCurious} />
             </ContainerCard>
           </LeftColumn>
           <RightColumn>
-            {/* TODO tooltip */}
             <ContainerCard
               emoji=":whale:"
-              title={intl.formatMessage({
-                id: "page-wallet-converted",
-                defaultMessage: getDefaultMessage("page-wallet-converted"),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-converted-desc",
-                defaultMessage: getDefaultMessage("page-wallet-converted-desc"),
-              })}
+              title={translateMessageId("page-wallets-converted", intl)}
+              description={translateMessageId(
+                "page-wallets-converted-desc",
+                intl
+              )}
             >
               <CardList content={cryptoConverted} />
             </ContainerCard>
@@ -529,14 +411,14 @@ const WalletsPage = ({ data }) => {
         <Content>
           <CentralColumn>
             <Divider />
-            <h2>
-              <Translation id="page-wallet-features-title" />
-            </h2>
+            <H2>
+              <Translation id="page-wallets-features-title" />
+            </H2>
             <SubtitleThree>
-              <Translation id="page-wallet-features-desc" />
+              <Translation id="page-wallets-features-desc" />
             </SubtitleThree>
             <ButtonLink to="/wallets/find-wallet/">
-              <Translation id="page-wallet-find-wallet-btn" />
+              <Translation id="page-wallets-find-wallet-btn" />
             </ButtonLink>
             <FindWallet fluid={data.findWallet.childImageSharp.fluid} alt="" />
           </CentralColumn>
@@ -544,140 +426,106 @@ const WalletsPage = ({ data }) => {
       </GradientContainer>
       <TwoColumnContent>
         <LeftColumn>
-          <h2>
-            <Translation id="page-wallet-stay-safe" />
-          </h2>
+          <H2>
+            <Translation id="page-wallets-stay-safe" />
+          </H2>
           <SubtitleTwo>
-            <Translation id="page-wallet-stay-safe-desc" />
+            <Translation id="page-wallets-stay-safe-desc" />
           </SubtitleTwo>
           <div>
             <ChecklistItem
               key="0"
               emoji=":white_check_mark:"
-              title={intl.formatMessage({
-                id: "page-wallet-take-responsibility",
-                defaultMessage: getDefaultMessage(
-                  "page-wallet-take-responsibility"
-                ),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-take-responsibility-desc",
-                defaultMessage: getDefaultMessage(
-                  "page-wallet-take-responsibility-desc"
-                ),
-              })}
+              title={translateMessageId(
+                "page-wallets-take-responsibility",
+                intl
+              )}
+              description={translateMessageId(
+                "page-wallets-take-responsibility-desc",
+                intl
+              )}
             />
             <ChecklistItem
               key="1"
               emoji=":white_check_mark:"
-              title={intl.formatMessage({
-                id: "page-wallet-seed-phrase",
-                defaultMessage: getDefaultMessage("page-wallet-seed-phrase"),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-seed-phrase-desc",
-                defaultMessage: getDefaultMessage(
-                  "page-wallet-seed-phrase-desc"
-                ),
-              })}
+              title={translateMessageId("page-wallets-seed-phrase", intl)}
+              description={translateMessageId(
+                "page-wallets-seed-phrase-desc",
+                intl
+              )}
             >
               <p>
-                <Translation id="page-wallet-seed-phrase-example" />
+                <Translation id="page-wallets-seed-phrase-example" />
               </p>
               <CodeBox>
                 <Code>
-                  <Translation id="page-walet-seed-phrase-snippet" />
+                  <Translation id="page-wallets-seed-phrase-snippet" />
                 </Code>
               </CodeBox>
               <p>
-                <Translation id="page-wallet-seed-phrase-write-down" />
+                <Translation id="page-wallets-seed-phrase-write-down" />
               </p>
             </ChecklistItem>
             <ChecklistItem
               key="2"
               emoji=":white_check_mark:"
-              title={intl.formatMessage({
-                id: "page-wallet-bookmarking",
-                defaultMessage: getDefaultMessage("page-wallet-bookmarking"),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-bookmarking-desc",
-                defaultMessage: getDefaultMessage(
-                  "page-wallet-bookmarking-desc"
-                ),
-              })}
+              title={translateMessageId("page-wallets-bookmarking", intl)}
+              description={translateMessageId(
+                "page-wallets-bookmarking-desc",
+                intl
+              )}
             />
             <ChecklistItem
               key="3"
               emoji=":white_check_mark:"
-              title={intl.formatMessage({
-                id: "page-wallet-triple-check",
-                defaultMessage: getDefaultMessage("page-wallet-triple-check"),
-              })}
-              description={intl.formatMessage({
-                id: "page-wallet-triple-check-desc",
-                defaultMessage: getDefaultMessage(
-                  "page-wallet-triple-check-desc"
-                ),
-              })}
+              title={translateMessageId("page-wallets-triple-check", intl)}
+              description={translateMessageId(
+                "page-wallets-triple-check-desc",
+                intl
+              )}
             />
           </div>
         </LeftColumn>
         <RightColumn>
-          <h2>
-            <Translation id="page-wallet-tips" />
-          </h2>
+          <H2>
+            <Translation id="page-wallets-tips" />
+          </H2>
           <SubtitleTwo>
-            <Translation id="page-wallet-tips-community" />
+            <Translation id="page-wallets-tips-community" />
           </SubtitleTwo>
           <CardList content={articles} />
         </RightColumn>
       </TwoColumnContent>
       <Content>
         <Divider />
-        <h2>
-          <Translation id="page-wallet-explore" />
-        </h2>
+        <H2>
+          <Translation id="page-wallets-explore" />
+        </H2>
         <CalloutCardContainer>
           <StyledCallout
             image={data.eth.childImageSharp.fixed}
-            title={intl.formatMessage({
-              id: "page-wallet-get-some",
-              defaultMessage: getDefaultMessage("page-wallet-get-some"),
-            })}
-            alt={intl.formatMessage({
-              id: "page-wallet-get-some-alt",
-              defaultMessage: getDefaultMessage("page-wallet-get-some-alt"),
-            })}
-            description={intl.formatMessage({
-              id: "page-wallet-get-some-desc",
-              defaultMessage: getDefaultMessage("page-wallet-get-some-desc"),
-            })}
+            title={translateMessageId("page-wallets-get-some", intl)}
+            alt={translateMessageId("page-wallets-get-some-alt", intl)}
+            description={translateMessageId("page-wallets-get-some-desc", intl)}
           >
             <div>
               <ButtonLink to="/get-eth/">
-                <Translation id="page-wallet-get-some-btn" />
+                <Translation id="page-wallets-get-some-btn" />
               </ButtonLink>
             </div>
           </StyledCallout>
           <StyledCallout
             image={data.dapps.childImageSharp.fixed}
-            title={intl.formatMessage({
-              id: "page-wallet-try-dapps",
-              defaultMessage: getDefaultMessage("page-wallet-try-dapps"),
-            })}
-            alt={intl.formatMessage({
-              id: "page-wallet-try-dapps-alt",
-              defaultMessage: getDefaultMessage("page-wallet-try-dapps-alt"),
-            })}
-            description={intl.formatMessage({
-              id: "page-wallet-try-dapps-desc",
-              defaultMessage: getDefaultMessage("page-wallet-try-dapps-desc"),
-            })}
+            title={translateMessageId("page-wallets-try-dapps", intl)}
+            alt={translateMessageId("page-wallets-try-dapps-alt", intl)}
+            description={translateMessageId(
+              "page-wallets-try-dapps-desc",
+              intl
+            )}
           >
             <div>
               <ButtonLink to="/dapps/">
-                <Translation id="page-wallet-more-on-dapps-btn" />
+                <Translation id="page-wallets-more-on-dapps-btn" />
               </ButtonLink>
             </div>
           </StyledCallout>
@@ -713,7 +561,7 @@ export const query = graphql`
   query {
     hero: file(relativePath: { eq: "wallet.png" }) {
       childImageSharp {
-        fluid(maxHeight: 800) {
+        fluid(maxHeight: 600) {
           ...GatsbyImageSharpFluid
         }
       }
@@ -743,7 +591,6 @@ export const query = graphql`
         id
         name
         url
-        description
         brand_color
         has_mobile
         has_desktop
@@ -773,17 +620,14 @@ export const query = graphql`
     alpha: file(relativePath: { eq: "wallets/alpha.png" }) {
       ...listImage
     }
-    ambo: file(relativePath: { eq: "wallets/ambo.png" }) {
-      ...listImage
-    }
     argent: file(relativePath: { eq: "wallets/argent.png" }) {
       ...listImage
     }
     atomic: file(relativePath: { eq: "wallets/atomic.png" }) {
       ...listImage
     }
-    authereum: file(relativePath: { eq: "wallets/authereum.png" }) {
-      ...listImage
+    bitcoindotcom: file(relativePath: { eq: "wallets/bitcoindotcom.png" }) {
+      ...walletCardImage
     }
     bitski: file(relativePath: { eq: "wallets/bitski.png" }) {
       ...listImage
@@ -792,6 +636,12 @@ export const query = graphql`
       ...listImage
     }
     coinbase: file(relativePath: { eq: "wallets/coinbase.png" }) {
+      ...listImage
+    }
+    coinomi: file(relativePath: { eq: "wallets/coinomi.png" }) {
+      ...listImage
+    }
+    dcent: file(relativePath: { eq: "wallets/dcent.png" }) {
       ...listImage
     }
     dharma: file(relativePath: { eq: "wallets/dharma.png" }) {
@@ -806,7 +656,16 @@ export const query = graphql`
     eql: file(relativePath: { eq: "wallets/eql.png" }) {
       ...listImage
     }
+    fortmatic: file(relativePath: { eq: "wallets/fortmatic.png" }) {
+      ...listImage
+    }
     gnosis: file(relativePath: { eq: "wallets/gnosis.png" }) {
+      ...listImage
+    }
+    guarda: file(relativePath: { eq: "wallets/guarda.png" }) {
+      ...listImage
+    }
+    hyperpay: file(relativePath: { eq: "wallets/hyperpay.png" }) {
       ...listImage
     }
     imtoken: file(relativePath: { eq: "wallets/imtoken.png" }) {
@@ -815,13 +674,22 @@ export const query = graphql`
     ledger: file(relativePath: { eq: "wallets/ledger.png" }) {
       ...listImage
     }
+    linen: file(relativePath: { eq: "wallets/linen.png" }) {
+      ...listImage
+    }
     lumi: file(relativePath: { eq: "wallets/lumi.png" }) {
+      ...listImage
+    }
+    mathwallet: file(relativePath: { eq: "wallets/mathwallet.png" }) {
       ...listImage
     }
     metamask: file(relativePath: { eq: "wallets/metamask.png" }) {
       ...listImage
     }
     monolith: file(relativePath: { eq: "wallets/monolith.png" }) {
+      ...listImage
+    }
+    multis: file(relativePath: { eq: "wallets/multis.png" }) {
       ...listImage
     }
     mycrypto: file(relativePath: { eq: "wallets/mycrypto.png" }) {
@@ -839,6 +707,9 @@ export const query = graphql`
     rainbow: file(relativePath: { eq: "wallets/rainbow.png" }) {
       ...listImage
     }
+    samsung: file(relativePath: { eq: "wallets/samsung.png" }) {
+      ...listImage
+    }
     squarelink: file(relativePath: { eq: "wallets/squarelink.png" }) {
       ...listImage
     }
@@ -854,7 +725,16 @@ export const query = graphql`
     trust: file(relativePath: { eq: "wallets/trust.png" }) {
       ...listImage
     }
+    unstoppable: file(relativePath: { eq: "wallets/unstoppable.png" }) {
+      ...listImage
+    }
     zengo: file(relativePath: { eq: "wallets/zengo.png" }) {
+      ...listImage
+    }
+    tokenpocket: file(relativePath: { eq: "wallets/tokenpocket.png" }) {
+      ...listImage
+    }
+    walleth: file(relativePath: { eq: "wallets/walleth.png" }) {
       ...listImage
     }
   }

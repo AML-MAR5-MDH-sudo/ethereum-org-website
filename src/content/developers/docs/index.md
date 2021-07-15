@@ -1,6 +1,6 @@
 ---
 title: Ethereum development documentation
-description: Introducing the Ethereum developer network documentation.
+description: Introducing the ethereum.org developer documentation.
 lang: en
 sidebar: true
 ---
@@ -43,4 +43,4 @@ If this is your first attempt at Ethereum development, we recommend starting at 
 
 - [Token standards](/developers/docs/standards/tokens/)
 - [Oracles](/developers/docs/oracles/)
-- [Scaling](/developers/docs/layer-2-scaling/)
+- [Scaling](/developers/docs/scaling/)

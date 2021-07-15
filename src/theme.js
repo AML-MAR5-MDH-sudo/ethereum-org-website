@@ -8,15 +8,22 @@ const primaryDark = "rgb(255, 115, 36)"
 const success = "rgb(16,158,98)"
 const fail = "rgb(184,0,0)"
 const turquoise = "#CCFCFF"
+const turquoiseDark = "rgb(41,50,51,1)"
 const yellow = "#FFF8DF"
 const mint = "#E1FEFA"
-const pink = "#FFE5F9"
+const mintDark = "rgb(45,51,50,1)"
+const codeBoxDark = "#2a2734"
+const codeBoxLight = "#fafafa"
 
+// purple and orangeDark introduced for dark mode alts for homepage boxes
+const purpleDark = "rgb(33,33,49,1)"
+const orangeDark = "rgb(51,40,33,1)"
+const pink = "#FFE5F9"
+const pinkDark = "rgb(51,32,39,1)"
 const gridYellow = "#FFE78E"
 const gridRed = "#EF7D7D"
 const gridBlue = "#A7D0F4"
 const gridPink = "#FFA1C3"
-const gridOrange = "#FFAB7C"
 
 const white500 = white
 const white600 = mix(0.03, black, white)
@@ -31,6 +38,7 @@ const black300 = mix(0.2, white, black)
 const black400 = mix(0.1, white, black)
 const black500 = black
 
+const primaryLight950 = mix(0.85, black, primaryLight)
 const primaryLight900 = mix(0.8, black, primaryLight)
 const primaryLight800 = mix(0.6, black, primaryLight)
 const primaryLight700 = mix(0.4, black, primaryLight)
@@ -40,7 +48,9 @@ const primaryLight400 = mix(0.2, white, primaryLight)
 const primaryLight300 = mix(0.4, white, primaryLight)
 const primaryLight200 = mix(0.6, white, primaryLight)
 const primaryLight100 = mix(0.8, white, primaryLight)
+const primaryLight50 = mix(0.9, white, primaryLight)
 
+const primaryDark950 = mix(0.9, black, primaryDark)
 const primaryDark900 = mix(0.8, black, primaryDark)
 const primaryDark800 = mix(0.6, black, primaryDark)
 const primaryDark700 = mix(0.4, black, primaryDark)
@@ -131,8 +141,8 @@ const baseColors = {
   gridGreen: success300,
   gridOrange: primaryDark300,
   gridPink,
-  gridOrange,
   gridPurple: primaryLight200,
+  infoBanner: primaryLight50,
 }
 
 // TODO replace random variables w/ baseColor variables
@@ -144,6 +154,7 @@ const lightColors = {
   ghostCardGhost: white600,
   secondaryButtonBackgroundActive: white700,
   primary: primaryLight,
+  primary950: primaryLight950,
   primary900: primaryLight900,
   primary800: primaryLight800,
   primary700: primaryLight700,
@@ -204,6 +215,23 @@ const lightColors = {
   warningLink: primaryDark700,
   warningLinkHover: primaryDark900,
   tagMint: mint,
+  mainnet: success200,
+  mainnetBorder: black50,
+  beaconchain: turquoise,
+  beaconchainBorder: black50,
+  shard: primaryDark100,
+  shardBorder: black50,
+  infoLink: primaryLight800,
+  infoLinkHover: primaryLight900,
+  cardBoxShadow: "4px 4px 0px 0px #D2D2F9",
+  homeBoxMint: mint,
+  homeBoxTurquoise: turquoise,
+  homeBoxOrange: primaryDark100,
+  homeBoxPurple: primaryLight50,
+  homeBoxPink: pink,
+  codeBackground: codeBoxLight,
+  beta:
+    "radial-gradient(25.56% 133.51% at 28.36% 45.54%, rgba(28, 28, 225, 0) 0%, rgba(28, 28, 225, 0.06) 100%)",
 }
 
 // TODO replace random variables w/ baseColor variables
@@ -217,6 +245,7 @@ const darkColors = {
   ghostCardGhost: black50,
   secondaryButtonBackgroundActive: black300,
   primary: primaryDark,
+  primary950: primaryDark950,
   primary900: primaryDark900,
   primary800: primaryDark800,
   primary700: primaryDark700,
@@ -268,6 +297,23 @@ const darkColors = {
   warningLink: primaryDark700,
   warningLinkHover: primaryDark900,
   tagMint: mint,
+  mainnet: "#222222",
+  mainnetBorder: success300,
+  beaconchain: "#222222",
+  beaconchainBorder: pink,
+  shard: "#222222",
+  shardBorder: primaryDark500,
+  infoLink: primaryLight800,
+  infoLinkHover: primaryLight900,
+  cardBoxShadow: "4px 4px 0px 0px #FFAB7C",
+  homeBoxMint: mintDark,
+  homeBoxTurquoise: turquoiseDark,
+  homeBoxOrange: orangeDark,
+  homeBoxPurple: purpleDark,
+  homeBoxPink: pinkDark,
+  codeBackground: codeBoxDark,
+  beta:
+    "background: radial-gradient(25.56% 133.51% at 28.36% 45.54%, rgba(255, 143, 80, 0.72) 0%, rgba(255, 143, 80, 0.22) 100%)",
   cardGradient:
     "linear-gradient(49.21deg, rgba(127, 127, 213, 0.2) 19.87%, rgba(134, 168, 231, 0.2) 58.46%, rgba(145, 234, 228, 0.2) 97.05% )",
 }
@@ -284,8 +330,8 @@ const theme = {
     s: "0.875rem", // 14px
     m: "1rem", // 16px
     r: "1.125rem", // 18px
-    l: "1.5rem", // 20px
-    xl: "2rem", // 24px
+    l: "1.5rem", // 24px
+    xl: "2rem", // 32px
   },
   breakpoints: {
     xs: "320px",
@@ -355,6 +401,7 @@ export const GlobalStyle = createGlobalStyle`
     list-style-type: none;
     list-style-image: none;
   }
+
   li {
     padding-left: .5em;
     margin-bottom: .5em;
@@ -373,59 +420,124 @@ export const GlobalStyle = createGlobalStyle`
       position: absolute;
     }
   }
-  `
 
-// Mixins
-// TODO must be a better way...
-export const Mixins = {
-  textLevel1: `
+  /* YouTube embeds */
+  iframe {
+    display: block;
+    max-width: 560px;
+    margin: 32px 0;
+  }
+  
+  h1 {
     font-size: 3rem;
     line-height: 1.4;
     margin: 2rem 0;
-    font-weight: 400;
-  `,
-  textLevel2: `
+    font-weight: 700;
+    @media (max-width: ${theme.breakpoints.m}) {
+      font-size: 2.5rem;
+    }
+  }
+  
+  h2 {
     font-size: 2rem;
     line-height: 1.4;
-    margin: 4.5rem 0 1.5rem;
-    font-weight: 400;
-  `,
-  textLevel3: `
+    margin: 2rem 0;
+    margin-top: 3rem;
+    font-weight: 600;
+    @media (max-width: ${theme.breakpoints.m}) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  h3 {
     font-size: 1.5rem;
     line-height: 1.4;
-    margin: 1.5rem 0 2rem;
-    font-weight: 400;
-  `,
-  textLevel4: `
+    margin: 2rem 0;
+    margin-top: 2.5rem;
+    font-weight: 600;
+    @media (max-width: ${theme.breakpoints.m}) {
+      font-size: 1.25rem;
+    }
+  }
+  
+  h4 {
     font-size: 1.25rem;
     line-height: 1.4;
-    font-weight: 400;
-    margin-top: 2rem;
-  `,
-  textLevel5: `
+    font-weight: 500;
+    margin: 2rem 0;
+    @media (max-width: ${theme.breakpoints.m}) {
+      font-size: 1rem;
+    }
+  }
+  
+  h5 {
     font-size: 1rem;
-    line-height: 1.6;
+    line-height: 1.4;
+    font-weight: 450;
+    margin: 2rem 0;
+  }
+
+  h6 {
+    font-size: 0.9rem;
+    line-height: 1.4;
     font-weight: 400;
-    margin-top: 2rem;
-  `,
-  textLevel6: `
-    font-size: .875rem;
-    line-height: 1.6;
-    font-weight: 400;
-    letter-spacing: 0.04em;
-    margin: 1.14em 0;
-    text-transform uppercase
-  `,
-  textLevel7: `
-    font-size: 1rem;
-    line-height: 1.6;
-    font-weight: 400;
-    margin: 2rem 0 1rem;
-  `,
-  textLevel8: `
-    font-size: .875rem;
-    line-height:1.6;
-    margin: 1.14em 0;
-    font-weight: 400;
-  `,
-}
+    text-transform: uppercase;
+    margin: 2rem 0;
+  }
+  
+`
+// H6 basically only uses as labels as per design system
+
+// Old Mixins for referecne
+// export const Mixins = {
+//   textLevel1: `
+//     font-size: 3rem;
+//     line-height: 1.4;
+//     margin: 2rem 0;
+//     font-weight: 400;
+//   `,
+//   textLevel2: `
+//     font-size: 2rem;
+//     line-height: 1.4;
+//     margin: 2rem 0;
+//     font-weight: 600;
+//   `,
+//   textLevel3: `
+//     font-size: 1.5rem;
+//     line-height: 1.4;
+//     margin: 1.5rem 0 2rem;
+//     font-weight: 600;
+//   `,
+//   textLevel4: `
+//     font-size: 1.25rem;
+//     line-height: 1.4;
+//     font-weight: 400;
+//     margin-top: 2rem;
+//   `,
+//   textLevel5: `
+//     font-size: 1rem;
+//     line-height: 1.6;
+//     font-weight: 400;
+//     margin-top: 2rem;
+//   `,
+//   textLevel6: `
+//     font-size: .875rem;
+//     line-height: 1.6;
+//     font-weight: 400;
+//     letter-spacing: 0.04em;
+//     margin: 1.14em 0;
+//     text-transform uppercase
+//   `,
+//   textLevel7: `
+//     font-size: 1rem;
+//     line-height: 1.6;
+//     font-weight: 400;
+//     margin: 2rem 0 1rem;
+//   `,
+//   textLevel8: `
+//     font-size: .875rem;
+//     line-height:1.6;
+//     margin: 1.14em 0;
+//     font-weight: 400;
+//   `,
+// }

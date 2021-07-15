@@ -21,11 +21,11 @@ Oltre alle informazioni su questa pagina, le seguenti risorse realizzate da memb
 
 - [EthHub](https://docs.ethhub.io) _Guida informativa completa sull'ecosistema Ethereum_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _Risorsa formativa su Ethereum dedicata ai principianti_
-- [Ethereum.wiki](https://ethereum.wiki) _Wiki realizzata dalla community riguardo la tecnologia di Ethereum_
+- [Ethereum.wiki](https://eth.wiki) _Wiki realizzata dalla community riguardo la tecnologia di Ethereum_
 - [Kauri](https://kauri.io) _Articoli tecnici e tutorial per Ethereum e progetti correlati_
 - [Canale Youtube della Fondazione Ethereum](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _Raccolta di video e interviste su Ethereum_
 - [Week in Ethereum News](https://weekinethereumnews.com/) _Newsletter settimanale che copre le principali novità dell'ecosistema_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _Newsletter a frequenza regolare sui nuovi sviluppi di ETH 2.0_
+- [What’s new in ETH 2.0](https://eth2.news) _Newsletter a frequenza regolare sui nuovi sviluppi di ETH 2.0_
 - [ethresear.ch forum](https://ethresear.ch/) _Discussioni tecniche approfondite su Ethereum per ETH 2.0 e non solo_
 - [ETHGlobal](https://ethglobal.co) _Serie di hackathon. Partecipa a uno nella tua zona!_
 

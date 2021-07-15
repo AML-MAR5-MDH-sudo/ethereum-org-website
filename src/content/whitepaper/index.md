@@ -97,9 +97,9 @@ Bitcoin can be thought of as a state transition system, where there is a
 a "state transition function" that takes a state and a transaction and
 outputs a new state which is the result. In a standard banking system,
 for example, the state is a balance sheet, a transaction is a request to
-move \$X from A to B, and the state transition function reduces the
-value in A's account by \$X and increases the value in B's account by
-\$X. If A's account has less than \$X in the first place, the state
+move $X from A to B, and the state transition function reduces the
+value in A's account by $X and increases the value in B's account by
+$X. If A's account has less than $X in the first place, the state
 transition function returns an error. Hence, one can formally define:
 
     APPLY(S,TX) -> S' or ERROR
@@ -430,8 +430,8 @@ important limitations:
 - **Value-blindness** - there is no way for a UTXO script to provide
   fine-grained control over the amount that can be withdrawn. For
   example, one powerful use case of an oracle contract would be a
-  hedging contract, where A and B put in \$1000 worth of BTC and after
-  30 days the script sends \$1000 worth of BTC to A and the rest to B.
+  hedging contract, where A and B put in $1000 worth of BTC and after
+  30 days the script sends $1000 worth of BTC to A and the rest to B.
   This would require an oracle to determine the value of 1 BTC in USD,
   but even then it is a massive improvement in terms of trust and
   infrastructure requirement over the fully centralized solutions that
@@ -892,9 +892,9 @@ follows:
 1.  Wait for party A to input 1000 ether.
 2.  Wait for party B to input 1000 ether.
 3.  Record the USD value of 1000 ether, calculated by querying the data
-    feed contract, in storage, say this is \$x.
+    feed contract, in storage, say this is $x.
 4.  After 30 days, allow A or B to "reactivate" the contract in order to
-    send \$x worth of ether (calculated by querying the data feed
+    send $x worth of ether (calculated by querying the data feed
     contract again to get the new price) to A and the rest to B.
 
 Such a contract would have significant potential in crypto-commerce. One
@@ -1414,15 +1414,13 @@ The issuance model will be as follows:
 - 0.26x the total amount sold will be allocated to miners per year
   forever after that point.
 
-Group At launch After 1 year After 5 years
-
----
-
-Currency units 1.198X 1.458X 2.498X
-Purchasers 83.5% 68.6% 40.0%
-Reserve spent pre-sale 8.26% 6.79% 3.96%
-Reserve used post-sale 8.26% 6.79% 3.96%
-Miners 0% 17.8% 52.0%
+| Group                  | At launch | After 1 year | After 5 years |
+| ---------------------- | --------- | ------------ | ------------- |
+| Currency units         | 1.198X    | 1.458X       | 2.498X        |
+| Purchasers             | 83.5%     | 68.6%        | 40.0%         |
+| Reserve spent pre-sale | 8.26%     | 6.79%        | 3.96%         |
+| Reserve used post-sale | 8.26%     | 6.79%        | 3.96%         |
+| Miners                 | 0%        | 17.8%        | 52.0%         |
 
 **Long-Term Supply Growth Rate (percent)**
 
@@ -1654,8 +1652,8 @@ of both financial and non-financial protocols in the years to come.
 2.  [Smart property](https://en.bitcoin.it/wiki/Smart_Property)
 3.  [Smart contracts](https://en.bitcoin.it/wiki/Contracts)
 4.  [B-money](http://www.weidai.com/bmoney.txt)
-5.  [Reusable proofs of work](http://www.finney.org/~hal/rpow/)
-6.  [Secure property titles with owner authority](http://szabo.best.vwh.net/securetitle.html)
+5.  [Reusable proofs of work](https://nakamotoinstitute.org/finney/rpow/)
+6.  [Secure property titles with owner authority](https://nakamotoinstitute.org/secure-property-titles/)
 7.  [Bitcoin whitepaper](http://bitcoin.org/bitcoin.pdf)
 8.  [Namecoin](https://namecoin.org/)
 9.  [Zooko's triangle](https://en.wikipedia.org/wiki/Zooko's_triangle)

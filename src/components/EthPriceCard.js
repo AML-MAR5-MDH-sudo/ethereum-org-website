@@ -6,7 +6,6 @@ import Translation from "../components/Translation"
 import Icon from "./Icon"
 import Link from "./Link"
 import Tooltip from "./Tooltip"
-import { Mixins } from "../theme"
 
 const InfoIcon = styled(Icon)`
   margin-left: 0.5rem;
@@ -16,10 +15,10 @@ const InfoIcon = styled(Icon)`
 const Card = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: ${(props) => (props.isLeftAlign ? `flex-start` : `center`)};
   justify-content: space-between;
   width: 100%;
-  max-width: 416px;
+  max-width: 420px;
   max-height: 192px;
   background: ${(props) =>
     props.isNegativeChange
@@ -32,7 +31,6 @@ const Card = styled.div`
         ? props.theme.colors.priceCardBorderNegative
         : props.theme.colors.priceCardBorder};
   padding: 1.5rem;
-  margin-bottom: 2rem;
 `
 
 const Title = styled.h4`
@@ -45,7 +43,8 @@ const Title = styled.h4`
 `
 
 const Price = styled.div`
-  ${Mixins.textLevel1}
+  line-height: 1.4;
+  font-weight: 400;
   margin: ${(props) => (props.hasError ? `1rem 0` : 0)};
   font-size: ${(props) => (props.hasError ? props.theme.fontSizes.m : `3rem`)};
   color: ${(props) =>
@@ -56,7 +55,7 @@ const ChangeContainer = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: ${(props) => (props.isLeftAlign ? `flex-start` : `center`)};
   min-height: 33px; /* prevents jump when price loads*/
 `
 
@@ -79,7 +78,7 @@ const ChangeTime = styled.div`
 `
 
 // TODO add prop to left vs. center align
-const EthPriceCard = () => {
+const EthPriceCard = ({ className, isLeftAlign }) => {
   const [state, setState] = useState({
     currentPriceUSD: "",
     percentChangeUSD: "",
@@ -115,13 +114,13 @@ const EthPriceCard = () => {
   const isLoading = !state.currentPriceUSD
 
   let price = isLoading ? (
-    <Translation id="page-get-eth-loading" />
+    <Translation id="loading" />
   ) : (
     `$${state.currentPriceUSD}`
   )
 
   if (state.hasError) {
-    price = <Translation id="page-get-eth-error" />
+    price = <Translation id="loading-error-refresh" />
   }
 
   const isNegativeChange = state.percentChangeUSD && state.percentChangeUSD < 0
@@ -134,24 +133,28 @@ const EthPriceCard = () => {
 
   const tooltipContent = (
     <div>
-      <Translation id="page-get-eth-data" />{" "}
+      <Translation id="data-provided-by" />{" "}
       <Link to="https://www.coingecko.com/en/api">coingecko.com</Link>
     </div>
   )
 
   return (
-    <Card isNegativeChange={isNegativeChange}>
+    <Card
+      className={className}
+      isLeftAlign={isLeftAlign}
+      isNegativeChange={isNegativeChange}
+    >
       <Title>
-        <Translation id="page-get-eth-current-price" />
+        <Translation id="eth-current-price" />
         <Tooltip content={tooltipContent}>
           <InfoIcon name="info" size="14" />
         </Tooltip>
       </Title>
       <Price hasError={state.hasError}>{price}</Price>
-      <ChangeContainer>
+      <ChangeContainer isLeftAlign={isLeftAlign}>
         <Change isNegativeChange={isNegativeChange}>{change}</Change>
         <ChangeTime>
-          <Translation id="page-get-eth-24-hrs" />
+          (<Translation id="last-24-hrs" />)
         </ChangeTime>
       </ChangeContainer>
     </Card>

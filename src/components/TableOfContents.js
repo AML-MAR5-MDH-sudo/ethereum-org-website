@@ -31,7 +31,7 @@ const OuterList = styled(motion.ul)`
   list-style-type: none;
   list-style-image: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 3rem;
   border-left: 1px solid ${(props) => props.theme.colors.dropdownBorder};
   font-size: ${(props) => props.theme.fontSizes.s};
   line-height: 1.6;
@@ -231,31 +231,22 @@ const ItemsList = ({ items, depth, maxDepth }) => {
   if (depth > maxDepth || !items) {
     return null
   }
-  return items.map((item, index) => {
-    if (item.items) {
-      return (
-        <ListItem key={index}>
-          <div>
-            <TableOfContentsLink depth={depth} item={item} />
-            <InnerList key={item.title}>
-              <ItemsList
-                items={item.items}
-                depth={depth + 1}
-                maxDepth={maxDepth}
-              />
-            </InnerList>
-          </div>
-        </ListItem>
-      )
-    }
-    return (
-      <ListItem key={index}>
-        <div>
-          <TableOfContentsLink depth={depth} item={item} />
-        </div>
-      </ListItem>
-    )
-  })
+  return items.map((item, index) => (
+    <ListItem key={index}>
+      <div>
+        <TableOfContentsLink depth={depth} item={item} />
+        {item.items && (
+          <InnerList key={item.title}>
+            <ItemsList
+              items={item.items}
+              depth={depth + 1}
+              maxDepth={maxDepth}
+            />
+          </InnerList>
+        )}
+      </div>
+    </ListItem>
+  ))
 }
 
 const TableOfContentsMobile = ({ items, maxDepth, className }) => {
@@ -335,7 +326,10 @@ const TableOfContents = ({
           <ButtonContainer>
             <ButtonLink to={editPath} isSecondary={true} mt={0}>
               <ButtonContent>
-                <GithubIcon name="github" /> <span>Edit page</span>
+                <GithubIcon name="github" />{" "}
+                <span>
+                  <Translation id="edit-page" />
+                </span>
               </ButtonContent>
             </ButtonLink>
           </ButtonContainer>

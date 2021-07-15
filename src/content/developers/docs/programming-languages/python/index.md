@@ -14,7 +14,7 @@ Use Ethereum to create decentralized applications (or "dapps") that utilize the 
 
 **Take your first steps to integrating Python with Ethereum**
 
-Need a more basic primer first? Check out [ethereum.org/learn](/en/learn/) or [ethereum.org/developers](/en/developers/).
+Need a more basic primer first? Check out [ethereum.org/learn](/learn/) or [ethereum.org/developers](/developers/).
 
 - [Blockchain Explained](https://kauri.io/article/d55684513211466da7f8cc03987607d5/blockchain-explained)
 - [Understanding Smart Contracts](https://kauri.io/article/e4f66c6079e74a4a9b532148d3158188/ethereum-101-part-5-the-smart-contract)
@@ -23,7 +23,8 @@ Need a more basic primer first? Check out [ethereum.org/learn](/en/learn/) or [e
 
 ## Beginner articles {#beginner-articles}
 
-- [An Introduction to Smart Contracts with Vyper](https://kauri.io/article/af913a853eaf4db88627b3ff9572b770/v1/an-introduction-to-smart-contracts-with-vyper)
+- [An Introduction to Smart Contracts with Vyper](https://kauri.io/#collections/Getting%20Started/an-introduction-to-smart-contracts-with-vyper/)
+- [Deploy your own ERC20 Token with Python and Brownie](https://betterprogramming.pub/python-blockchain-token-deployment-tutorial-create-an-erc20-77a5fd2e1a58)
 - [How to develop Ethereum contract using Python Flask?](https://medium.com/coinmonks/how-to-develop-ethereum-contract-using-python-flask-9758fe65976e)
 - [Intro to Web3.py · Ethereum For Python Developers](https://www.dappuniversity.com/articles/web3-py-intro)
 - [How to call a Smart Contract function using Python and web3.py](https://stackoverflow.com/questions/57580702/how-to-call-a-smart-contract-function-using-python-and-web3-py)
@@ -34,11 +35,14 @@ Need a more basic primer first? Check out [ethereum.org/learn](/en/learn/) or [e
 - [Creating a Python Ethereum Interface: Part 1](https://hackernoon.com/creating-a-python-ethereum-interface-part-1-4d2e47ea0f4d)
 - [Ethereum Smart Contracts in Python: a comprehensive(ish) guide](https://hackernoon.com/ethereum-smart-contracts-in-python-a-comprehensive-ish-guide-771b03990988)
 - [Everything you need to know about the Trinity Ethereum client](https://medium.com/@pipermerriam/everything-you-need-to-know-about-the-trinity-ethereum-client-b093c756d1de)
+- [Using Brownie and Python to deploy Smart Contracts](https://dev.to/patrickalphac/using-brownie-for-to-deploy-smart-contracts-1kkp)
+- [Creating NFTs on OpenSea with Brownie](https://www.freecodecamp.org/news/how-to-make-an-nft-and-render-on-opensea-marketplace/)
 
 ## Advanced Use Patterns {#advanced-use-patterns}
 
-- [Compiling, deploying and calling Ethereum smartcontract using Python](https://yohanes.gultom.me/2018/11/28/compiling-deploying-and-calling-ethereum-smartcontract-using-python/)
-- [Analyze Solidity Smart Contracts with Slither](https://kauri.io/article/4f4dcf7d105d4714b212a86da742baf6/v1/analyze-solidity-smart-contracts-with-slither)
+- [Compiling, deploying and calling Ethereum smartcontract using Python](https://yohanes.gultom.id/2018/11/28/compiling-deploying-and-calling-ethereum-smartcontract-using-python/)
+- [Analyze Solidity Smart Contracts with Slither](https://kauri.io/#collections/DevOps/analyze-solidity-smart-contracts-with-slither/#analyze-solidity-smart-contracts-with-slither)
+- [Blockchain Fintech Tutorial: Lending and Borrowing With Python](https://blog.chain.link/blockchain-fintech-defi-tutorial-lending-borrowing-python/)
 
 ## Python Projects and Tools {#python-projects-and-tools}
 
@@ -54,7 +58,7 @@ Need a more basic primer first? Check out [ethereum.org/learn](/en/learn/) or [e
 - [Vyper](https://github.com/ethereum/vyper/) - _Pythonic Smart Contract Language for the EVM_
 - [Web3.py](https://github.com/ethereum/web3.py) - _Python library for interacting with Ethereum_
 
-Looking for more resources? Check out [ethereum.org/developers.](/en/developers/)
+Looking for more resources? Check out [ethereum.org/developers.](/developers/)
 
 ## Python Community Contributors {#python-community-contributors}
 
@@ -62,8 +66,9 @@ Looking for more resources? Check out [ethereum.org/developers.](/en/developers/
 - [Trinity Gitter](https://gitter.im/ethereum/trinity)
 - [Vyper Gitter](https://gitter.im/ethereum/vyper)
 - [Webpy Gitter](https://gitter.im/ethereum/web3.py)
+- [Ethereum Python Community Discord](https://discord.gg/9zk7snTfWe)
 
 ## Other Aggregated Lists {#other-aggregated-lists}
 
-The Vyper wiki has an [inceredible list of resources for Vyper](https://github.com/ethereum/vyper/wiki/Vyper-tools-and-resources)  
+The Vyper wiki has an [incredible list of resources for Vyper](https://github.com/ethereum/vyper/wiki/Vyper-tools-and-resources)  
 For a compiled source of Python related tools, check out [py-eth.com](http://py-eth.com/).

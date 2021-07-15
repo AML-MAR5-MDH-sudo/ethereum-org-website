@@ -45,17 +45,12 @@ sidebarDepth: 1
 
 **Ethers.js -** **_JavaScript と TypeScript による完全なイーサリアムウォレットの実装とユーティリティ。_**
 
-- [ドキュメント](https://docs.ethers.io/ethers.js/html/)
+- [ドキュメント](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_JavaScript で実装されたイーサリアム VM_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **JavaScript で拡張可能なイーサリアムツールのデスクトップアプリケーション。**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 もっとリソースをお探しですか？ [ethereum.org/developers](/ja/developers/) をチェックしてください
 

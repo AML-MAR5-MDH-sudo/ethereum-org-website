@@ -3,6 +3,7 @@ import styled from "styled-components"
 import Img from "gatsby-image"
 
 import ButtonLink from "./ButtonLink"
+import Translation from "./Translation"
 
 const Product = styled.div`
   width: 100%;
@@ -73,33 +74,28 @@ const StyledButton = styled(ButtonLink)`
   }
 `
 
-const ProductList = ({ content, category }) => {
-  return (
-    <Product>
-      <CategoryTitle>{category}</CategoryTitle>
-      {content.map((listItem, idx) => {
-        const { title, description, link, image, id } = listItem
-        return (
-          <Item key={id || idx}>
-            <ImageContainer>
-              {image && <Image fluid={image} alt={`The ${title} logo`} />}
-            </ImageContainer>
-            <TextContent>
-              <LeftContainer>
-                <ItemTitle>{title}</ItemTitle>
-                <ItemDesc>{description}</ItemDesc>
-              </LeftContainer>
-              {link && (
-                <StyledButton isSecondary to={link}>
-                  Go
-                </StyledButton>
-              )}
-            </TextContent>
-          </Item>
-        )
-      })}
-    </Product>
-  )
-}
+const ProductList = ({ content, category }) => (
+  <Product>
+    <CategoryTitle>{category}</CategoryTitle>
+    {content.map(({ title, description, link, image, alt, id }, idx) => (
+      <Item key={id || idx}>
+        <ImageContainer>
+          {image && <Image fluid={image} alt={alt} />}
+        </ImageContainer>
+        <TextContent>
+          <LeftContainer>
+            <ItemTitle>{title}</ItemTitle>
+            <ItemDesc>{description}</ItemDesc>
+          </LeftContainer>
+          {link && (
+            <StyledButton isSecondary to={link}>
+              <Translation id="page-dapps-ready-button" />
+            </StyledButton>
+          )}
+        </TextContent>
+      </Item>
+    ))}
+  </Product>
+)
 
 export default ProductList

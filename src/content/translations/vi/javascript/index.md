@@ -45,17 +45,12 @@ Cần một hướng dẫn cơ bản hơn? Tham khảo [ethereum.org/learn](/vi/
 
 **Ethers.js -** **_Công cụ thiết lập và các tiện ích ví Ethereum toàn diện bằng ngôn ngữ JavaScript và TypeScript._**
 
-- [Tài liệu tham khảo](https://docs.ethers.io/ethers.js/html/)
+- [Tài liệu tham khảo](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_Máy ảo Ethereum được triển khai bằng JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_Một ứng dụng máy tính để bàn dành cho các công cụ Ethereum, có thể mở rộng bằng JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Tìm kiếm thêm tài nguyên? Truy cập vào [ethereum.org/developers.](/vi/developers/)
 

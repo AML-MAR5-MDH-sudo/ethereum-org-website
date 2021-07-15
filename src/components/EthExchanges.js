@@ -9,6 +9,8 @@ import Link from "./Link"
 import { getLocaleTimestamp } from "../utils/time"
 import { trackCustomEvent } from "../utils/matomo"
 import Emoji from "./Emoji"
+import Translation from "./Translation"
+import { translateMessageId } from "../utils/translations"
 
 const Container = styled.div`
   width: 100%;
@@ -142,14 +144,6 @@ const Intro = styled.p`
   text-align: center;
 `
 
-const Header = styled.h2`
-  font-weight: normal;
-  font-size: 2rem;
-  line-height: 140%;
-  text-align: center;
-  margin-bottom: 1rem;
-`
-
 const Disclaimer = styled.p`
   width: 100%;
   max-width: 876px;
@@ -157,20 +151,20 @@ const Disclaimer = styled.p`
   margin-bottom: 0;
 `
 
-const NoResults = ({ text }) => (
+const NoResults = ({ children }) => (
   <EmptyStateContainer>
     <Emoji text=":crying_face:" size={5} />
     <EmptyStateText>
-      {text}. If you do, tell us at{" "}
+      {children}{" "}
       <Link to="mailto:website@ethereum.org">website@ethereum.org</Link>.
     </EmptyStateText>
   </EmptyStateContainer>
 )
 
-const NoResultsSingle = ({ text }) => (
+const NoResultsSingle = ({ children }) => (
   <EmptyStateContainerSingle>
     <EmptyStateTextSingle>
-      {text}. If you do, tell us at{" "}
+      {children}{" "}
       <Link to="mailto:website@ethereum.org">website@ethereum.org</Link>.
     </EmptyStateTextSingle>
     <Emoji text=":crying_face:" size={5} />
@@ -187,6 +181,7 @@ export const cardListImage = graphql`
   }
 `
 
+// TODO move component into get-eth.js page?
 const EthExchanges = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -197,8 +192,11 @@ const EthExchanges = () => {
           bittrex
           coinbase
           coinmama
+          coinspot
           country
+          cryptocom
           gemini
+          itezcom
           kraken
           moonpay
           rain
@@ -216,9 +214,6 @@ const EthExchanges = () => {
             }
           }
         }
-      }
-      ambo: file(relativePath: { eq: "wallets/ambo.png" }) {
-        ...cardListImage
       }
       argent: file(relativePath: { eq: "wallets/argent.png" }) {
         ...cardListImage
@@ -238,6 +233,12 @@ const EthExchanges = () => {
       coinmama: file(relativePath: { eq: "exchanges/coinmama.png" }) {
         ...cardListImage
       }
+      coinspot: file(relativePath: { eq: "exchanges/coinspot.png" }) {
+        ...cardListImage
+      }
+      cryptocom: file(relativePath: { eq: "exchanges/crypto.com.png" }) {
+        ...cardListImage
+      }
       dharma: file(relativePath: { eq: "wallets/dharma.png" }) {
         ...cardListImage
       }
@@ -247,10 +248,16 @@ const EthExchanges = () => {
       imtoken: file(relativePath: { eq: "wallets/imtoken.png" }) {
         ...cardListImage
       }
+      itezcom: file(relativePath: { eq: "exchanges/itezcom.png" }) {
+        ...cardListImage
+      }
       kraken: file(relativePath: { eq: "exchanges/kraken.png" }) {
         ...cardListImage
       }
       myetherwallet: file(relativePath: { eq: "wallets/myetherwallet.png" }) {
+        ...cardListImage
+      }
+      mycrypto: file(relativePath: { eq: "wallets/mycrypto.png" }) {
         ...cardListImage
       }
       rain: file(relativePath: { eq: "exchanges/rain.png" }) {
@@ -310,6 +317,24 @@ const EthExchanges = () => {
       image: data.coinmama,
       usaExceptions: ["CT", "FL", "IA", "NY"],
     },
+    coinspot: {
+      name: "CoinSpot",
+      url: "https://www.coinspot.com.au/",
+      image: data.coinspot,
+      usaExceptions: [],
+    },
+    cryptocom: {
+      name: "Crypto.com",
+      url: "https://crypto.com/exchange/",
+      image: data.cryptocom,
+      usaExceptions: ["NY"],
+    },
+    itezcom: {
+      name: "Itez",
+      url: "https://itez.com/",
+      image: data.itezcom,
+      usaExceptions: [],
+    },
     kraken: {
       name: "Kraken",
       url: "https://www.kraken.com/",
@@ -334,11 +359,6 @@ const EthExchanges = () => {
     wyre: {
       usaExceptions: ["CT", "HI", "NY", "NH", "TX", "VT", "VA"],
       wallets: {
-        Ambo: {
-          url: "https://www.ambo.io/	",
-          platform: "iOS",
-          image: data.ambo,
-        },
         Squarelink: {
           url: "https://squarelink.com/	",
           platform: "Web",
@@ -381,6 +401,11 @@ const EthExchanges = () => {
           url: "https://trustwallet.com/	",
           platform: "Mobile",
           image: data.trust,
+        },
+        MyCrypto: {
+          url: "https://app.mycrypto.com",
+          platform: "Web",
+          image: data.mycrypto,
         },
       },
     },
@@ -439,11 +464,15 @@ const EthExchanges = () => {
         // Add state exceptions if Country is USA
         let description = null
         if (
-          state.selectedCountry.country === "United States of America (USA)"
+          state.selectedCountry.country ===
+          translateMessageId("page-get-eth-exchanges-usa", intl)
         ) {
           const exceptions = exchanges[exchange].usaExceptions
           if (exceptions.length > 0) {
-            description = `Except ${exceptions.join(", ")}`
+            description = `${translateMessageId(
+              "page-get-eth-exchanges-except",
+              intl
+            )} ${exceptions.join(", ")}`
           }
         }
         return {
@@ -473,11 +502,15 @@ const EthExchanges = () => {
             // Add state exceptions if Country is USA
             let description = null
             if (
-              state.selectedCountry.country === "United States of America (USA)"
+              state.selectedCountry.country ===
+              translateMessageId("page-get-eth-exchanges-usa", intl)
             ) {
               const exceptions = walletProviders[currentProvider].usaExceptions
               if (exceptions.length > 0) {
-                description = `Except ${exceptions.join(", ")}`
+                description = `${translateMessageId(
+                  "page-get-eth-exchanges-except",
+                  intl
+                )} ${exceptions.join(", ")}`
               }
               // Filter out wallets that only service USA
             } else if (walletObject.isUsaOnly) {
@@ -500,9 +533,11 @@ const EthExchanges = () => {
 
   return (
     <Container>
-      <Header>What country do you live in?</Header>
+      <h2>
+        <Translation id="page-get-eth-exchanges-header" />
+      </h2>
       <Intro>
-        Exchanges and wallets have restrictions on where they can sell crypto.
+        <Translation id="page-get-eth-exchanges-intro" />
       </Intro>
       <StyledSelect
         className="react-select-container"
@@ -515,15 +550,16 @@ const EthExchanges = () => {
         <EmptyStateContainer>
           <Emoji text=":world_map:" size={5} />
           <EmptyStateText>
-            Enter your country of residence to see a list of wallets and
-            exchanges you can use to buy ETH
+            <Translation id="page-get-eth-exchanges-empty-state-text" />
           </EmptyStateText>
         </EmptyStateContainer>
       )}
       {/* No results */}
       {hasSelectedCountry && !hasExchangeResults && !hasWalletResults && (
         <ResultsContainer>
-          <NoResults text="Sorry, we don’t know any exchanges or wallets that let you buy ETH from this country" />
+          <NoResults>
+            <Translation id="page-get-eth-exchanges-no-exchanges-or-wallets" />
+          </NoResults>
         </ResultsContainer>
       )}
       {/* Has results */}
@@ -531,42 +567,52 @@ const EthExchanges = () => {
         <>
           <ResultsContainer>
             <ListContainer>
-              <h3>Exchanges</h3>
+              <h3>
+                <Translation id="page-get-eth-exchanges-header-exchanges" />
+              </h3>
               {hasExchangeResults && (
                 <SuccessContainer>
                   <p>
-                    It can take a number of days to register with an exchange
-                    because of their legal checks.
+                    <Translation id="page-get-eth-exchanges-success-exchange" />
                   </p>
                   <CardList content={filteredExchanges} />
                 </SuccessContainer>
               )}
               {!hasExchangeResults && (
-                <NoResultsSingle text="Sorry, we don’t know any exchanges that let you buy ETH from this country" />
+                <NoResultsSingle>
+                  <Translation id="page-get-eth-exchanges-no-exchanges" />
+                </NoResultsSingle>
               )}
             </ListContainer>
             <ListContainer>
-              <h3>Wallets</h3>
+              <h3>
+                <Translation id="page-get-eth-exchanges-header-wallets" />
+              </h3>
 
               {hasWalletResults && (
                 <SuccessContainer>
                   <p>
-                    Where you live, you can buy ETH directly from these wallets.
-                    Learn more about <Link to="/wallets/">wallets</Link>.
+                    <Translation id="page-get-eth-exchanges-success-wallet-paragraph" />{" "}
+                    <Link to="/wallets/">
+                      <Translation id="page-get-eth-exchanges-success-wallet-link" />
+                    </Link>
+                    .
                   </p>
                   <CardList content={filteredWallets} />
                 </SuccessContainer>
               )}
               {!hasWalletResults && (
-                <NoResultsSingle text="Sorry, we don’t know any wallets that let you buy ETH from this country" />
+                <NoResultsSingle>
+                  <Translation id="page-get-eth-exchanges-no-wallets" />
+                </NoResultsSingle>
               )}
             </ListContainer>
           </ResultsContainer>
           <Disclaimer>
-            We collected this information manually. If you spot something wrong,
-            let us know at{" "}
+            <Translation id="page-get-eth-exchanges-disclaimer" />{" "}
             <Link to="mailto:website@ethereum.org">website@ethereum.org</Link>.
-            Last updated <strong>{lastUpdated}</strong>
+            <Translation id="page-find-wallet-last-updated" />{" "}
+            <strong>{lastUpdated}</strong>
           </Disclaimer>
         </>
       )}

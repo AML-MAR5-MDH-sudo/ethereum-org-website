@@ -8,6 +8,10 @@ sidebarDepth: 2
 
 # Eth2 Staking Community Grants {#Eth2-staking-community-grants}
 
+<InfoBanner emoji=":warning:" isWarning={true}>
+  This challenge is over. Results coming soon!
+</InfoBanner>
+
 _The Ethereum Foundation is sponsoring a wave of Eth2 staking community grants. Proposals are due December 22, 2020. Here are all the details you need._
 
 <Divider />
@@ -20,7 +24,7 @@ The Ethereum Foundation is funding the creation of tools, documentation, and res
 
 <br />
 <InfoBanner emoji=":thinking_face:">
-  Wait, how do I get started with staking? Learn <a href="/eth2/staking/">what staking means</a>, or try it first on the <a href="https://medalla.launchpad.ethereum.org/">Medalla testnet</a>
+  Wait, how do I get started with staking? Learn <a href="/en/eth2/staking/">what staking means</a>, or try it first on the <a href="https://medalla.launchpad.ethereum.org/" target="_blank">Medalla testnet</a>
 </InfoBanner>
 
 ## Submit proposal {#submit-proposal}
@@ -36,8 +40,6 @@ Ideas and projects at any stage of development are welcome:
 - Work in progress.
 - Fleshed out project.
 
-<ButtonLink to="https://ethereumfoundation.typeform.com/to/SqN5shuA">Submit proposal</ButtonLink>
-
 Grants are decided on a case-by-case basis and you may enter more than one proposal! So long as each proposal is unique and meets <a href="#requirements">the requirements</a>.
 
 ### Deadline {#deadline}
@@ -47,7 +49,7 @@ The deadline for proposals is any time the day of <b>Tuesday, December 22, 2020<
 ### Requirements {#requirements}
 
 - Proposals must be in English.
-- Work must open source with a free and permissive license.
+- Work must be open source with a free and permissive license.
 - If published work, it must be accessible by a url.
 
 ### Selection criteria {#selection-criteria}
@@ -240,7 +242,7 @@ title="How can I learn more about Eth2?">
 - The Genesis of a Beacon Chain — Ben Edgington [https://hackmd.io/@benjaminion/genesis](https://hackmd.io/@benjaminion/genesis)
 - The Beacon Chain Ethereum 2.0 explainer — [https://ethos.dev/beacon-chain/](https://ethos.dev/beacon-chain/)
 - [The State of Eth2](https://blog.ethereum.org/2020/06/02/the-state-of-eth2-june-2020/) _– Danny Ryan_
-- ['Intro to Eth2 & Staking for Beginners'](<[https://www.youtube.com/watch?v=tpkpW031RCI](https://www.youtube.com/watch?v=tpkpW031RCI)>) - Superphiz
+- ['Intro to Eth2 & Staking for Beginners'](https://www.youtube.com/watch?v=tpkpW031RCI) - Superphiz
 - [https://old.reddit.com/r/ethstaker/wiki/studymaster](https://old.reddit.com/r/ethstaker/wiki/studymaster)
 - [https://blog.ethereum.org/2020/11/04/eth2-quick-update-no-19/](https://blog.ethereum.org/2020/11/04/eth2-quick-update-no-19/)
 

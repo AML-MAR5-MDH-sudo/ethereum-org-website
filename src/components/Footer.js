@@ -3,12 +3,10 @@ import styled from "styled-components"
 import { useIntl } from "gatsby-plugin-intl"
 import { StaticQuery, graphql } from "gatsby"
 
-import { getLangContentVersion } from "../utils/translations"
 import { getLocaleTimestamp } from "../utils/time"
 import Translation from "./Translation"
 import Link from "./Link"
 import Icon from "./Icon"
-import { Mixins } from "../theme"
 
 const StyledFooter = styled.footer`
   padding-top: 3rem;
@@ -47,12 +45,16 @@ const LinkGrid = styled.div`
 const LinkSection = styled.div``
 
 const SectionHeader = styled.h3`
-  ${Mixins.textLevel8}
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 1.14em 0;
   font-weight: bold;
 `
 
 const List = styled.ul`
-  ${Mixins.textLevel8}
+  font-size: 0.875rem;
+  line-height: 1.6;
+  font-weight: 400;
   margin: 0;
   list-style-type: none;
   list-style-image: none;
@@ -99,242 +101,205 @@ const socialLinks = [
   {
     icon: "github",
     to: "https://github.com/ethereum/ethereum-org-website",
+    ariaLabel: "GitHub",
   },
   {
     icon: "twitter",
     to: "https://twitter.com/ethdotorg",
+    ariaLabel: "Twitter",
   },
   {
     icon: "youtube",
     to: "https://youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g",
+    ariaLabel: "Youtube",
   },
   {
     icon: "discord",
     to: "https://discord.gg/CetY6Y4",
+    ariaLabel: "Discord",
   },
 ]
 
 const Footer = () => {
   const intl = useIntl()
 
-  const contentVersion = getLangContentVersion(intl.locale)
-
   const linkSections = [
     {
-      title: "page-home-section-individuals-item-two",
-      shouldDisplay: true,
+      title: "use-ethereum",
       links: [
         {
-          to: `/what-is-ethereum/`,
-          text:
-            contentVersion > 1
-              ? "page-home-section-individuals-item-one"
-              : "page-home-section-beginners-item-two",
-          shouldDisplay: true,
-        },
-        {
-          to: `/use/`,
-          text: "page-use",
-          shouldDisplay: contentVersion < 1.1,
-        },
-        {
-          to: `/eth/`,
-          text: "page-home-section-individuals-item-four",
-          shouldDisplay: contentVersion >= 1.1,
+          to: `/wallets/`,
+          text: "ethereum-wallets",
         },
         {
           to: `/get-eth/`,
-          text: "page-home-section-individuals-item-six",
-          shouldDisplay: contentVersion > 1.1,
+          text: "get-eth",
         },
         {
           to: `/dapps/`,
-          text: "page-find-wallet-explore-dapps",
-          shouldDisplay: contentVersion >= 1.1,
+          text: "decentralized-applications-dapps",
         },
         {
-          to: `/wallets/`,
-          text: "page-home-section-individuals-item-five",
-          shouldDisplay: contentVersion >= 1.1,
+          to: `/stablecoins/`,
+          text: "page-stablecoins-title",
+        },
+        {
+          to: `/eth2/staking/`,
+          text: "page-eth2-get-involved-stake-eth",
         },
       ],
     },
     {
-      title: "page-home-section-learn-title",
-      shouldDisplay: true,
+      title: "learn",
       links: [
         {
+          to: `/what-is-ethereum/`,
+          text: "what-is-ethereum",
+        },
+        {
+          to: `/eth/`,
+          text: "what-is-ether",
+        },
+        {
           to: `/learn/`,
-          text:
-            contentVersion > 1
-              ? "page-home-section-individuals-item-three"
-              : "page-learn",
-          shouldDisplay: true,
+          text: "guides-and-resources",
+        },
+        {
+          to: "/history/",
+          text: "history-of-ethereum",
         },
         {
           to: "/whitepaper/",
-          text: "footer-ethereum-whitepaper",
-          shouldDisplay: contentVersion > 1.1,
+          text: "ethereum-whitepaper",
         },
         {
-          to: "/eips/",
-          text: "footer-eips",
-          shouldDisplay: contentVersion > 1.1,
-        },
-        {
-          text: "page-eth2",
+          text: "ethereum-2-0",
           to: "/eth2/",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
           to: `/glossary/`,
-          text: "page-glossary",
-          shouldDisplay: contentVersion > 1.1,
+          text: "ethereum-glossary",
+        },
+        {
+          to: "/eips/",
+          text: "eips",
         },
       ],
     },
     {
-      title: "page-developers",
-      shouldDisplay: true,
+      title: "developers",
       links: [
         {
           to: `/developers/`,
-          text: "edn-home-title",
-          shouldDisplay: contentVersion >= 1.2,
+          text: "get-started",
           isPartiallyActive: false,
         },
         {
           to: `/developers/docs/`,
-          text: "edn-docs-title",
-          shouldDisplay: contentVersion >= 1.2,
+          text: "documentation",
         },
         {
           to: `/developers/tutorials/`,
-          text: "edn-tutorials",
-          shouldDisplay: contentVersion >= 1.2,
+          text: "tutorials",
         },
         {
           to: `/developers/learning-tools/`,
-          text: "edn-learning-tools",
-          shouldDisplay: contentVersion >= 1.2,
+          text: "learn-by-coding",
         },
         {
           to: `/developers/local-environment/`,
-          text: "edn-local-env",
-          shouldDisplay: contentVersion >= 1.2,
-        },
-        {
-          to: `/build/`,
-          text: "get-started",
-          shouldDisplay: contentVersion < 1.2 && contentVersion >= 1.1,
-        },
-        {
-          to: "https://studio.ethereum.org/",
-          text: "ethereum-studio",
-          shouldDisplay: contentVersion < 1.2,
+          text: "set-up-local-env",
         },
         {
           to: `/developers/`,
-          text: contentVersion > 1 ? "developer-resources" : "page-developers",
-          shouldDisplay: contentVersion > 1.2,
+          text: "developer-resources",
         },
       ],
     },
     {
-      title: "footer-ecosystem",
-      shouldDisplay: true,
+      title: "ecosystem",
       links: [
         {
           to: `/community/`,
-          text: "footer-community",
-          shouldDisplay: contentVersion > 1.1,
+          text: "ethereum-community",
         },
         {
           to: "/foundation/",
           text: "ethereum-foundation",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
           to: "https://blog.ethereum.org/",
-          text: "footer-blog",
-          shouldDisplay: true,
+          text: "ef-blog",
         },
         {
           to: "https://esp.ethereum.foundation",
-          text: "footer-esp",
-          shouldDisplay: true,
+          text: "esp",
+        },
+        {
+          to: "/community/grants",
+          text: "grant-programs",
         },
         {
           to: "/assets/",
           text: "ethereum-brand-assets",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
           to: "https://devcon.org/",
           text: "devcon",
-          shouldDisplay: true,
         },
       ],
     },
     {
-      title: "page-enterprise",
-      shouldDisplay: contentVersion >= 1.1,
+      title: "enterprise",
       links: [
         {
           to: "/enterprise/",
-          text: "page-enterprise-public",
-          shouldDisplay: contentVersion > 1.1,
+          text: "mainnet-ethereum",
         },
         {
           to: "/enterprise/private-ethereum/",
-          text: "page-enterprise-private",
-          shouldDisplay: contentVersion > 1.1,
+          text: "private-ethereum",
         },
         {
           to: "/enterprise/",
-          text: "page-enterprise",
-          shouldDisplay: contentVersion === 1.1,
+          text: "enterprise",
         },
       ],
     },
     {
-      title: "footer-about",
-      shouldDisplay: true,
+      title: "about-ethereum-org",
       links: [
         {
-          to: "/en/about/",
-          text: "footer-about-us",
-          shouldDisplay: true,
+          to: "/about/",
+          text: "about-us",
+        },
+        {
+          to: "/about/#open-jobs",
+          text: "jobs",
         },
         {
           to: "/en/contributing/",
           text: "contributing",
-          shouldDisplay: contentVersion > 1.1,
         },
         {
-          to: "/en/languages/",
+          to: "/languages/",
           text: "language-support",
-          shouldDisplay: true,
         },
         {
           to: "/en/privacy-policy/",
           text: "privacy-policy",
-          shouldDisplay: true,
         },
         {
           to: "/en/terms-of-use/",
           text: "terms-of-use",
-          shouldDisplay: true,
         },
         {
           to: "/en/cookie-policy/",
           text: "cookie-policy",
-          shouldDisplay: true,
         },
         {
           to: "mailto:press@ethereum.org",
           text: "contact",
-          shouldDisplay: true,
         },
       ],
     },
@@ -366,7 +331,12 @@ const Footer = () => {
             <SocialIcons>
               {socialLinks.map((link, idx) => {
                 return (
-                  <Link to={link.to} hideArrow={true} key={idx}>
+                  <Link
+                    to={link.to}
+                    hideArrow={true}
+                    key={idx}
+                    ariaLabel={link.ariaLabel}
+                  >
                     <SocialIcon name={link.icon} size="36" />
                   </Link>
                 )
@@ -374,33 +344,22 @@ const Footer = () => {
             </SocialIcons>
           </FooterTop>
           <LinkGrid>
-            {linkSections.map((section, idx) => {
-              return (
-                section.shouldDisplay && (
-                  <LinkSection key={idx}>
-                    <SectionHeader>
-                      <Translation id={section.title} />
-                    </SectionHeader>
-                    <List>
-                      {section.links
-                        .filter((link) => link.shouldDisplay)
-                        .map((link, linkIdx) => {
-                          return (
-                            <ListItem key={linkIdx}>
-                              <FooterLink
-                                to={link.to}
-                                isPartiallyActive={link.isPartiallyActive}
-                              >
-                                <Translation id={link.text} />
-                              </FooterLink>
-                            </ListItem>
-                          )
-                        })}
-                    </List>
-                  </LinkSection>
-                )
-              )
-            })}
+            {linkSections.map((section, idx) => (
+              <LinkSection key={idx}>
+                <SectionHeader>
+                  <Translation id={section.title} />
+                </SectionHeader>
+                <List>
+                  {section.links.map((link, linkIdx) => (
+                    <ListItem key={linkIdx}>
+                      <FooterLink to={link.to} isPartiallyActive={false}>
+                        <Translation id={link.text} />
+                      </FooterLink>
+                    </ListItem>
+                  ))}
+                </List>
+              </LinkSection>
+            ))}
           </LinkGrid>
         </StyledFooter>
       )}

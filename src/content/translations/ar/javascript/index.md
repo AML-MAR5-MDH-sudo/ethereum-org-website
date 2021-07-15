@@ -44,17 +44,12 @@ sidebar: true
 
 **Ethers.js -** **_تطبيق محفظة إيثريوم مكتملة مع الأدوات المساعدة باستخدام JavaScript و TypeScript._**
 
-- [التوثيق](https://docs.ethers.io/ethers.js/html/)
+- [التوثيق](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_VM الخاص بإيثريوم المنفذ في JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**شبكة إيثريوم -** **\_A تطبيق سطح مكتب لأدوات إيثريوم، قابل للتوسع باستخدام JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 تبحث عن المزيد من الموارد؟ راجع [ethereum.org/developers.](/ar/developers/)
 

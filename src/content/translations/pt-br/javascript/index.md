@@ -45,17 +45,12 @@ Precisa de uma introdução geral? Confira [ethereum.org/learn](/learn/) ou [eth
 
 **Ethers.js -** **_Implementação completa de uma carteira Ethereum e utilidades em JavaScript e TypeScript._**
 
-- [Documentação](https://docs.ethers.io/ethers.js/html/)
+- [Documentação](https://docs.ethers.io/)
 - [GitHub](https://github.com/ethers-io/ethers.js/)
 
 **ethereumjs-vm -** **_A Máquina Virtual de Ethereum implementada em JavaScript_**
 
 - [GitHub](https://github.com/ethereumjs/ethereumjs-vm)
-
-**Ethereum Grid -** **\_Uma aplicação desktop de ferramentas de Ethereum, extensível com JavaScript.**
-
-- [grid.ethereum.org](https://grid.ethereum.org)
-- [GitHub](https://github.com/ethereum/grid)
 
 Procurando por mais recursos? Leia [ethereum.org/developers.](/developers/)
 

@@ -17,7 +17,10 @@ Some basic familiarity with common terminology in computer science such as [byte
 
 The analogy of a 'distributed ledger' is often used to describe blockchains like Bitcoin, which enable a decentralized currency using fundamental tools of cryptography. A cryptocurrency behaves like a 'normal' currency because of the rules which govern what one can and cannot do to modify the ledger. For example, a Bitcoin address cannot spend more Bitcoin than it has previously received. These rules underpin all transactions on Bitcoin and many other blockchains.
 
-While Ethereum has its own native cryptocurrency (Ether) that follows almost exactly the same intuitive rules, it also enables a much more powerful function: [smart contracts](/en/developers/docs/smart-contracts/). For this more complex feature, a more sophisticated analogy is required. Instead of a distributed ledger, Ethereum is a distributed [state machine](https://en.wikipedia.org/wiki/Finite-state_machine). Ethereum's state is a large data structure which holds not only all accounts and balances, but a _machine state_, which can change from block to block according to a pre-defined set of rules, and which can execute arbitrary machine code. The specific rules of changing state from block to block are defined by the EVM.
+While Ethereum has its own native cryptocurrency (Ether) that follows almost exactly the same intuitive rules, it also enables a much more powerful function: [smart contracts](/developers/docs/smart-contracts/). For this more complex feature, a more sophisticated analogy is required. Instead of a distributed ledger, Ethereum is a distributed [state machine](https://en.wikipedia.org/wiki/Finite-state_machine). Ethereum's state is a large data structure which holds not only all accounts and balances, but a _machine state_, which can change from block to block according to a pre-defined set of rules, and which can execute arbitrary machine code. The specific rules of changing state from block to block are defined by the EVM.
+
+![A diagram showing the make up of the EVM](./evm.png)
+_Diagram adapted from [Ethereum EVM illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)_
 
 ## The Ethereum State Transition Function {#the-ethereum-state-transition-function}
 
@@ -41,13 +44,16 @@ Contract creation results in the creation of a new contract account containing c
 
 ## EVM Instructions {#evm-instructions}
 
-The EVM executes as a [stack machine](https://en.wikipedia.org/wiki/Stack_machine) with a depth of 1024 items. Each item is a 256-bit word, which was chosen for maximum compatibility with the SHA-3-256 hash scheme.
+The EVM executes as a [stack machine](https://en.wikipedia.org/wiki/Stack_machine) with a depth of 1024 items. Each item is a 256-bit word, which was chosen for the ease of use with 256-bit cryptography (such as Keccak-256 hashes or secp256k1 signatures).
 
 During execution, the EVM maintains a transient _memory_ (as a word-addressed byte array), which does not persist between transactions.
 
 Contracts, however, do contain a Merkle Patricia _storage_ trie (as a word-addressable word array), associated with the account in question and part of the global state.
 
-Compiled smart contract bytecode executes as a number of EVM [opcodes](https://www.ethervm.io/), which perform standard stack operations like `XOR`, `AND`, `ADD`, `SUB`, etc. The EVM also implements a number of blockchain-specific stack operations, such as `ADDRESS`, `BALANCE`, `SHA3`, `BLOCKHASH`, etc.
+Compiled smart contract bytecode executes as a number of EVM [opcodes](https://www.ethervm.io/), which perform standard stack operations like `XOR`, `AND`, `ADD`, `SUB`, etc. The EVM also implements a number of blockchain-specific stack operations, such as `ADDRESS`, `BALANCE`, `KECCAK256`, `BLOCKHASH`, etc.
+
+![A diagram showing where gas is needed for EVM operations](../gas/gas.png)
+_Diagrams adapted from [Ethereum EVM illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)_
 
 <!-- TODO add full list from  https://eth.wiki/concepts/evm/implementations -->
 
@@ -64,13 +70,16 @@ All [Ethereum clients](/developers/docs/nodes-and-clients/#clients) include an E
 - [ethereumjs-vm](https://github.com/ethereumjs/ethereumjs-vm) - _JavaScript_
 - [eEVM](https://github.com/microsoft/eevm) - _C++_
 - [Hyperledger Burrow](https://github.com/hyperledger/burrow) - _Go_
+- [hevm](https://github.com/dapphub/dapptools/tree/master/src/hevm) - _Haskell_
 
 ## Further Reading {#further-reading}
 
-- [Ethereum Yellowpaper](https://ethereum.github.io/yellowpaper/paper.pdf).
+- [Ethereum Yellowpaper](https://ethereum.github.io/yellowpaper/paper.pdf)
+- [Jellopaper aka KEVM: Semantics of EVM in K](https://jellopaper.org/)
 - [The Beigepaper](https://github.com/chronaeon/beigepaper)
 - [Ethereum Virtual Machine Opcodes](https://www.ethervm.io/)
+- [A short introduction in Solidity's documentation](https://docs.soliditylang.org/en/latest/introduction-to-smart-contracts.html#index-6)
 
 ## Related Topics {#related-topics}
 
-- [Gas](/en/developers/docs/gas/)
+- [Gas](/developers/docs/gas/)

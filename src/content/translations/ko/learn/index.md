@@ -21,11 +21,11 @@ sidebarDepth: 1
 
 - [EthHub](https://docs.ethhub.io) _이더리움에 대한 종합적인 기본 지식을 습득할 수 있는 사이트_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/) _이더리움 입문자 교육용 참조 자료 제공_
-- [Ethereum.wiki](https://ethereum.wiki) _이더리움 기술에 대한 커뮤니티 기반 위키_
+- [Ethereum.wiki](https://eth.wiki) _이더리움 기술에 대한 커뮤니티 기반 위키_
 - [Kauri](https://kauri.io) _이더리움과 관련 프로젝트에 대한 기술적 자료와 튜토리얼 제공_
 - [Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g) _이더리움에 대한 영상 자료 제공_
 - [Week in Ethereum News](https://weekinethereumnews.com/) _이더리움 생태계의 주요 발전 사항을 전해주는 주간 뉴스레터 서비스 제공_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ) _ETH 2.0의 개발 사항에 대해 주기적인 뉴스레터 제공_
+- [What’s new in ETH 2.0](https://eth2.news) _ETH 2.0의 개발 사항에 대해 주기적인 뉴스레터 제공_
 - [ethresear.ch forum](https://ethresear.ch/) _ETH 2.0 이상에 대한 상세한 기술적 논의_
 - [ETHGlobal](https://ethglobal.co) _이더리움 해커톤 시리즈 - 가까운 곳에서 진행되는 해커톤에 참여해보세요!_
 

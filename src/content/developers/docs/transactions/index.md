@@ -13,11 +13,14 @@ Transactions are cryptographically signed instructions from accounts. An account
 
 ## Prerequisites {#prerequisites}
 
-To help you better understand this page, we recommend you first read [Accounts](/en/developers/docs/accounts/) and our [introduction to Ethereum](/en/developers/docs/intro-to-ethereum/).
+To help you better understand this page, we recommend you first read [Accounts](/developers/docs/accounts/) and our [introduction to Ethereum](/developers/docs/intro-to-ethereum/).
 
 ## What's a transaction? {#whats-a-transaction}
 
 An Ethereum transaction refers to an action initiated by an externally-owned account, in other words an account managed by a human, not a contract. For example, if Bob sends Alice 1 ETH, Bob's account must be debited and Alice's must be credited. This state-changing action takes place within a transaction.
+
+![Diagram showing a transaction cause state change](./tx.png)
+_Diagram adapted from [Ethereum EVM illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)_
 
 Transactions, which change the state of the EVM, need to be broadcast to the whole network. Any node can broadcast a request for a transaction to be executed on the EVM; after this happens, a miner will execute the transaction and propagate the resulting state change to the rest of the network.
 
@@ -32,7 +35,7 @@ A submitted transaction includes the following information:
 - `gasLimit` – the maximum amount of gas units that can be consumed by the transaction. Units of gas represent computational steps
 - `gasPrice` – the fee the sender pays per unit of gas
 
-Gas is a reference to the computation required to process the transaction by a miner. Users have to pay a fee for this computation. The `gasLimit` and `gasPrice` determine the maximum transaction fee paid to the miner. [More on Gas](/en/developers/docs/gas/).
+Gas is a reference to the computation required to process the transaction by a miner. Users have to pay a fee for this computation. The `gasLimit` and `gasPrice` determine the maximum transaction fee paid to the miner. [More on Gas](/developers/docs/gas/).
 
 The transaction object will look a little like this:
 
@@ -105,10 +108,10 @@ With the signature hash, the transaction can be cryptographically proven that it
 
 As mentioned, transactions cost [gas](/developers/docs/gas/) to execute. Simple transfer transactions require 21000 units of Gas.
 
-So for Bob to send Alice 1ETH at a `gasPrice` of 200 Gwei, he'll need to pay the following fee:
+So for Bob to send Alice 1 ETH at a `gasPrice` of 200 gwei, Bob will need to pay the following fee:
 
 ```
-200*21000 = 4,200,000 GWEI
+200 * 21000 = 4,200,000 gwei
 --or--
 0.0042 ETH
 ```
@@ -118,6 +121,13 @@ Bob's account will be debited **-1.0042 ETH**
 Alice's account will be credited **+1.0 ETH**
 
 The miner processing the transaction will get **+0.0042 ETH**
+
+Gas is required for any smart contract interaction too.
+
+![Diagram showing how unused gas is refunded](./gas-tx.png)
+_Diagram adapted from [Ethereum EVM illustrated](https://takenobu-hs.github.io/downloads/ethereum_evm_illustrated.pdf)_
+
+Any gas not used in a transaction is refunded to the user account.
 
 ## Transaction lifecycle {#transaction-lifecycle}
 
@@ -276,13 +286,19 @@ Ethers
 
 <!-- ## How are transactions protected/safe? -->
 
-## Further reading
+## A visual demo {#a-visual-demo}
+
+Watch Austin walk you through transactions, gas, and mining.
+
+<iframe width="100%" height="315" src="https://www.youtube.com/embed/er-0ihqFQB0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+## Further reading {#further-reading}
 
 _Know of a community resource that helped you? Edit this page and add it!_
 
-## Related topics
+## Related topics {#related-topics}
 
-- [Accounts](/en/developers/docs/accounts/)
-- [Ethereum virtual machine (EVM)](/en/developers/docs/evm/)
-- [Gas](/en/developers/docs/gas/)
-- [Mining](/en/developers/docs/consensus-mechanisms/pow/mining/)
+- [Accounts](/developers/docs/accounts/)
+- [Ethereum virtual machine (EVM)](/developers/docs/evm/)
+- [Gas](/developers/docs/gas/)
+- [Mining](/developers/docs/consensus-mechanisms/pow/mining/)

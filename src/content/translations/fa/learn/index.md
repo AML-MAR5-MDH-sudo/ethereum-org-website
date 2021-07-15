@@ -22,13 +22,13 @@ sidebar: true
 - [EthHub](https://docs.ethhub.io) _دانستنی‌های جامع پایه درباره اتریوم_
 - [District0x](https://education.district0x.io/general-topics/understanding-ethereum/)
   _یک منبع آموزشی اتریوم برای مبتدیان_
-- [Ethereum.wiki](https://ethereum.wiki) _یک ویکی فناوری اتریوم ساخته شده توسط جامعه اتریوم_
+- [Ethereum.wiki](https://eth.wiki) _یک ویکی فناوری اتریوم ساخته شده توسط جامعه اتریوم_
 - [Kauri](https://kauri.io) _مقاله‌های آموزشی و فنی اتریوم و پروژه‌های مربوطه_
 - [Ethereum Foundation YouTube](https://www.youtube.com/channel/UCNOfzGXD_C9YMYmnefmPH0g)
   _گفتگو‌ها و ویدیو‌ها درباره اتریوم_
 - [Week in Ethereum News](https://weekinethereumnews.com/)
   _یک خبرنامه هفتگی درباره توسعه‌های اکوسیستم_
-- [What’s new in ETH 2.0](https://notes.ethereum.org/c/Sk8Zs--CQ)
+- [What’s new in ETH 2.0](https://eth2.news)
   _یک خبرنامه درباره توسعه ETH 2.0_
 - [ethresear.ch forum](https://ethresear.ch/)
   _مباحث فنی عمیق‌تر در اتریوم برای ETH 2.0 و ماورای آن_

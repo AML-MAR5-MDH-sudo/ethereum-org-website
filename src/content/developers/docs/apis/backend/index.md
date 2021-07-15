@@ -7,13 +7,13 @@ sidebar: true
 
 In order for a software application to interact with the Ethereum blockchain (i.e. read blockchain data and/or send transactions to the network), it must connect to an Ethereum node.
 
-For this purpose, every Ethereum client implements the JSON-RPC specification, so there are a uniform set of endpoints that applications can rely on.
+For this purpose, every Ethereum client implements the [JSON-RPC](/developers/docs/apis/json-rpc/) specification, so there are a uniform set of [endpoints](/developers/docs/apis/json-rpc/endpoints/) that applications can rely on.
 
-If you want to use a specific programming language to connect with an Ethereum node, roll your own solution but several convenience libraries exist within the ecosystem that make this much easier. With these libraries, developers can write intuitive, one-line methods to initialize JSON RPC requests (under the hood) that interact with Ethereum.
+If you want to use a specific programming language to connect with an Ethereum node, there are many convenience libraries within the ecosystem that make this much easier. With these libraries, developers can write intuitive, one-line methods to initialize JSON-RPC requests (under the hood) that interact with Ethereum.
 
 ## Prerequisites {#prerequisites}
 
-It might be helpful to understand the [Ethereum stack](/developers/docs/ethereum-stack/) and [Ethereum clients](/docs/nodes-and-clients/).
+It might be helpful to understand the [Ethereum stack](/developers/docs/ethereum-stack/) and [Ethereum clients](/developers/docs/nodes-and-clients/).
 
 ## Why use a library? {#why-use-a-library}
 
@@ -21,7 +21,7 @@ These libraries abstract away much of the complexity of interacting directly wit
 
 ## Available libraries {#available-libraries}
 
-<!-- TODO seperate APIs-as-a-service vs. connect your own -->
+<!-- TODO separate APIs-as-a-service vs. connect your own -->
 
 **Alchemy -** **_Ethereum Development Platform._**
 
@@ -29,6 +29,11 @@ These libraries abstract away much of the complexity of interacting directly wit
 - [Documentation](https://docs.alchemyapi.io/)
 - [GitHub](https://github.com/alchemyplatform)
 - [Discord](https://discord.gg/kwqVnrA)
+
+**BlockCypher -** **_Ethereum Web APIs_**
+
+- [blockcypher.com](https://www.blockcypher.com/)
+- [Documentation](https://www.blockcypher.com/dev/ethereum/)
 
 **Infura -** **_The Ethereum API as a service._**
 
@@ -75,6 +80,12 @@ These libraries abstract away much of the complexity of interacting directly wit
 - [rivet.cloud](https://rivet.cloud)
 - [Documentation](https://rivet.cloud/docs/)
 - [GitHub](https://github.com/openrelayxyz/ethercattle-deployment)
+
+**Nethereum -** **_An open source .NET integration library for blockchain._**
+
+- [GitHub](https://github.com/Nethereum/Nethereum)
+- [Documentation](http://docs.nethereum.com/en/latest/)
+- [Discord](https://discord.com/invite/jQPrR58FxX)
 
 ## Further reading {#further-reading}
 

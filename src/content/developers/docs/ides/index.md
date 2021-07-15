@@ -5,7 +5,7 @@ lang: en
 sidebar: true
 ---
 
-When it comes to setting up an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment), building with Ethereum is similar to any other software project. There's many options to choose from, so at the end of the day, pick the one that best suites your preferences.
+When it comes to setting up an [integrated development environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment), building with Ethereum is similar to any other software project. There's many options to choose from, so at the end of the day, pick the one that best suits your preferences.
 
 ## Web-based IDEs {#web-based-ides}
 
@@ -20,15 +20,9 @@ If you're looking to fiddle with code before you [set up a local development env
 - [ethfiddle.com](https://ethfiddle.com/)
 - [Gitter](https://gitter.im/loomnetwork/ethfiddle)
 
-**Ethereum Studio -** **_Web-based IDE ideal for new developers looking to experiment with smart contracts. Ethereum Studio features multiple templates, transaction logger, and a built in-browser Ethereum Virtual Machine (EVM) to help you get started building on Ethereum as fast as possible._**
-
-- [studio.ethereum.org](https://studio.ethereum.org)
-- [superblocks.com/ethereum-studio](https://superblocks.com/ethereum-studio)
-- [GitHub](https://github.com/SuperblocksHQ/ethereum-studio)
-
 ## Desktop IDEs {#desktop-ides}
 
-Most established IDEs have built plugins to enhance the Ethereum development experience. At a minimum, they provide syntax higlighting for [smart contract languages](/developers/docs/smart-contracts/languages/).
+Most established IDEs have built plugins to enhance the Ethereum development experience. At a minimum, they provide syntax highlighting for [smart contract languages](/developers/docs/smart-contracts/languages/).
 
 **Visual Studio Code -** **_Professional cross-platform IDE with official Ethereum support._**
 
@@ -43,6 +37,17 @@ Most established IDEs have built plugins to enhance the Ethereum development exp
 - [Atom](https://atom.io/)
 - [GitHub](https://github.com/atom)
 - [Ethereum packages](https://atom.io/packages/search?utf8=%E2%9C%93&q=keyword%3Aethereum&commit=Search)
+
+**JetBrains IDEs (IntelliJ IDEA, etc.) -** **_Essential tools for software developers and teams_**
+
+- [JetBrains](https://www.jetbrains.com/)
+- [GitHub](https://github.com/JetBrains)
+- [IntelliJ Solidity](https://github.com/intellij-solidity/intellij-solidity/)
+
+## Plugins and Extensions {#plugins-extensions}
+
+- [solidity](https://marketplace.visualstudio.com/items?itemName=JuanBlanco.solidity) - Ethereum Solidity Language for Visual Studio Code
+- [Prettier Solidity](https://github.com/prettier-solidity/prettier-plugin-solidity) - Code formatter using prettier
 
 ## Further reading {#further-reading}
 

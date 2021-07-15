@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 
 import Icon from "./Icon"
 import Link from "./Link"
+import Translation from "./Translation"
 import { dropdownIconContainerVariant } from "./SharedStyledComponents"
 
 import docLinks from "../data/developer-docs-links.yaml"
@@ -95,12 +96,12 @@ const NavLink = ({ item, path }) => {
         <LinkContainer>
           {item.to && (
             <SideNavLink to={item.to} isPartiallyActive={false}>
-              {item.title}
+              <Translation id={item.id} />
             </SideNavLink>
           )}
           {!item.to && (
             <SideNavGroup onClick={() => setIsOpen(!isOpen)}>
-              {item.title}
+              <Translation id={item.id} />
             </SideNavGroup>
           )}
           <IconContainer
@@ -112,7 +113,7 @@ const NavLink = ({ item, path }) => {
           </IconContainer>
         </LinkContainer>
         <InnerLinks
-          key={item.title}
+          key={item.id}
           animate={isOpen ? "open" : "closed"}
           variants={innerLinksVariants}
           initial="closed"
@@ -128,7 +129,7 @@ const NavLink = ({ item, path }) => {
     <NavItem>
       <LinkContainer>
         <SideNavLink to={item.to} isPartiallyActive={false}>
-          {item.title}
+          <Translation id={item.id} />
         </SideNavLink>
       </LinkContainer>
     </NavItem>
@@ -139,14 +140,12 @@ const NavLink = ({ item, path }) => {
 // of the given parent. Currently all `path` items default to open
 // and they only collapse when clicked on.
 // e.g. solution: https://github.com/hasura/gatsby-gitbook-starter/blob/5c165af40e48fc55eb06b45b95c84eb64b17ed32/src/components/sidebar/tree.js
-const SideNav = ({ path }) => {
-  return (
-    <Nav>
-      {docLinks.map((item, idx) => (
-        <NavLink item={item} path={path} key={idx} />
-      ))}
-    </Nav>
-  )
-}
+const SideNav = ({ path }) => (
+  <Nav>
+    {docLinks.map((item, idx) => (
+      <NavLink item={item} path={path} key={idx} />
+    ))}
+  </Nav>
+)
 
 export default SideNav

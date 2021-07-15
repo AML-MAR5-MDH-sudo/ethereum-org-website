@@ -29,69 +29,70 @@ const RightColumn = styled.div`
   }
 `
 
+// TODO move into /data/ directory
 const dannyArticles = [
+  {
+    title: "The State of Eth2, Jan 2021",
+    description: "20 January 2021",
+    link:
+      "https://blog.ethereum.org/2021/01/20/the-state-of-eth2-january-2021/",
+  },
+  {
+    title: "Eth2 quick update no. 21",
+    description: "27 November 2020",
+    link: "https://blog.ethereum.org/2020/11/27/eth2-quick-update-no-21/",
+  },
+  {
+    title: "Eth2 quick update no. 20",
+    description: "13 November 2020",
+    link: "https://blog.ethereum.org/2020/11/13/eth2-quick-update-no-20/",
+  },
   {
     title: "Eth2 quick update no. 19",
     description: "4 November 2020",
     link: "https://blog.ethereum.org/2020/11/04/eth2-quick-update-no-19/",
   },
-  {
-    title: "Eth2 quick update no. 18: Spadina Postmortem",
-    description: "1 October 2020",
-    link: "https://blog.ethereum.org/2020/10/01/eth2-quick-update-no-18/",
-  },
-  {
-    title: "Eth2 quick update no. 17: Announcing Spadina Launchpad",
-    description: "22 September 2020",
-    link: "https://blog.ethereum.org/2020/09/22/eth2-quick-update-no-17/",
-  },
-  {
-    title: "Eth2 quick update no. 16",
-    description: "14 September 2020",
-    link: "https://blog.ethereum.org/2020/09/14/eth2-quick-update-no-16/",
-  },
 ]
 
+// TODO move into /data/ directory
 const benArticles = [
   {
-    title: "What’s New in Eth2 #55",
-    description: "31 October 2020",
+    title: "What’s New in Eth2 – #60",
+    description: "15 January 2021",
     link:
-      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201031",
+      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_210115",
   },
   {
-    title: "What’s New in Eth2 #54",
-    description: "18 October 2020",
+    title: "What's New in Eth2 - #59",
+    description: "30 December 2020",
     link:
-      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201018",
+      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201230",
   },
   {
-    title: "What’s New in Eth2 #53",
-    description: "02 October 2020",
+    title: "What’s New in Eth2 - #58",
+    description: "12 December 2020",
     link:
-      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201002",
+      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201212",
   },
   {
-    title: "What’s New in Eth2 #52",
-    description: "19 September 2020",
+    title: "What's New in Eth2 – #57",
+    description: "30 November 2020",
     link:
-      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_200919",
+      "https://hackmd.io/@benjaminion/eth2_news/https%3A%2F%2Fhackmd.io%2F%40benjaminion%2Fwnie2_201130",
   },
 ]
 
-const Eth2Articles = () => {
-  return (
-    <Container>
-      <LeftColumn>
-        <h4>Danny Ryan (Ethereum Foundation)</h4>
-        <CardList content={dannyArticles} />
-      </LeftColumn>
-      <RightColumn>
-        <h4>Ben Edgington (PegaSys, ConsenSys)</h4>
-        <CardList content={benArticles} />
-      </RightColumn>
-    </Container>
-  )
-}
+const Eth2Articles = () => (
+  <Container>
+    <LeftColumn>
+      <h4>Danny Ryan (Ethereum Foundation)</h4>
+      <CardList content={dannyArticles} />
+    </LeftColumn>
+    <RightColumn>
+      <h4>Ben Edgington (PegaSys, ConsenSys)</h4>
+      <CardList content={benArticles} />
+    </RightColumn>
+  </Container>
+)
 
 export default Eth2Articles
