@@ -1,0 +1,219 @@
+{
+  "version": 2,
+  "sourceFile": "public/content/videos/zero-knowledge-proofs-5-levels/index.md",
+  "generatedAt": "2026-09-30T19:19:10.388Z",
+  "rootHash": "3648378ab210",
+  "tree": {
+    "contentHash": "19c6942e91b3",
+    "anchorHash": "ee15caafa874",
+    "children": {
+      "frontmatter:title": {
+        "contentHash": "9e9d1bd72102",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:description": {
+        "contentHash": "6d39e684e7ae",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:lang": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "dbd3a49d0d90"
+      },
+      "frontmatter:youtubeId": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "9f799c4263e8"
+      },
+      "frontmatter:uploadDate": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "d56760759a70"
+      },
+      "frontmatter:duration": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "d97c4ff6c30d"
+      },
+      "frontmatter:educationLevel": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "d0c2ebfa3490"
+      },
+      "frontmatter:topic": {
+        "contentHash": "f5818652a990",
+        "anchorHash": "78b2868763a9",
+        "children": {
+          "0": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "a4cc6bc01a92"
+          },
+          "1": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "3ddeb596fa81"
+          }
+        },
+        "childrenOrder": [
+          "0",
+          "1"
+        ]
+      },
+      "frontmatter:format": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "0cb1dd1d18fd"
+      },
+      "frontmatter:author": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "db73b12c2249"
+      },
+      "frontmatter:breadcrumb": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "27cba1f8a0c9"
+      },
+      "prose:1": {
+        "contentHash": "c727b509481c",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:0": {
+        "contentHash": "82b9caff648d",
+        "anchorHash": "853d0459c865"
+      },
+      "prose:2": {
+        "contentHash": "5201e277597d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "introduction-000": {
+        "contentHash": "d7ba3c2ad1b2",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "92590c627fa1",
+        "children": {
+          "_label": {
+            "contentHash": "92590c627fa1",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "685f2a5d2fcc",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "level-1-child-041": {
+        "contentHash": "747cdef4b477",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "f661838bfc67",
+        "children": {
+          "_label": {
+            "contentHash": "f661838bfc67",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "20d97c10bc75",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "level-2-teen-331": {
+        "contentHash": "829303d734b6",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "a0fc69c9358c",
+        "children": {
+          "_label": {
+            "contentHash": "a0fc69c9358c",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "40d6ba0dc3f3",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "level-3-college-student-613": {
+        "contentHash": "efc6d38c301c",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "2e56fb71c7dd",
+        "children": {
+          "_label": {
+            "contentHash": "2e56fb71c7dd",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "98897de6b02d",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "level-4-grad-student-1159": {
+        "contentHash": "70a71905b7c3",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "11bee167fb59",
+        "children": {
+          "_label": {
+            "contentHash": "11bee167fb59",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "c7c3df315862",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "level-5-expert-1710": {
+        "contentHash": "232179295764",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "92b5ad77ce3c",
+        "children": {
+          "_label": {
+            "contentHash": "92b5ad77ce3c",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "6003879e3fa1",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      }
+    },
+    "childrenOrder": [
+      "frontmatter:title",
+      "frontmatter:description",
+      "frontmatter:lang",
+      "frontmatter:youtubeId",
+      "frontmatter:uploadDate",
+      "frontmatter:duration",
+      "frontmatter:educationLevel",
+      "frontmatter:topic",
+      "frontmatter:format",
+      "frontmatter:author",
+      "frontmatter:breadcrumb",
+      "prose:1",
+      "link:0",
+      "prose:2",
+      "introduction-000",
+      "level-1-child-041",
+      "level-2-teen-331",
+      "level-3-college-student-613",
+      "level-4-grad-student-1159",
+      "level-5-expert-1710"
+    ]
+  },
+  "sourceCommitSha": "8091512f99874c31008351459e68ffcbfef78b79"
+}

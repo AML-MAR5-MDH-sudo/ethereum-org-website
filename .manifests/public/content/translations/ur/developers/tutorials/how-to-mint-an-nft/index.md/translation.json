@@ -1,0 +1,327 @@
+{
+  "version": 2,
+  "locale": "ur",
+  "translatedAt": "2026-10-26T17:19:15.949Z",
+  "englishManifestHash": "568b240d1510",
+  "placeholderOrder": [
+    "LINK-13a07c",
+    "LINK-2b67ba",
+    "LINK-faa750",
+    "LINK-a21a82",
+    "CODE-8f0a81",
+    "CODE-c52233",
+    "CODE-787fe2",
+    "CODE-787fe2",
+    "CODEBLOCK-f85a58",
+    "CODE-374543",
+    "CODE-757ac4",
+    "CODE-4e2bf9",
+    "LINK-e7d1d5",
+    "CODE-bf5298",
+    "CODEBLOCK-61d02e",
+    "CODE-480e30",
+    "LINK-ff7422",
+    "LINK-861517",
+    "LINK-149702",
+    "CODE-184f37",
+    "LINK-40c923",
+    "CODE-7fc331",
+    "CODEBLOCK-7fc59e",
+    "CODE-1f7adc",
+    "CODE-7fc331",
+    "LINK-f7aa37",
+    "LINK-88ed30",
+    "IMAGE-5d97c0",
+    "CODE-7da047",
+    "CODE-787fe2",
+    "CODEBLOCK-444dad",
+    "CODE-e9cbb0",
+    "CODE-e9cbb0",
+    "CODEBLOCK-4a5198",
+    "CODE-cfc55d",
+    "CODE-c50ecc",
+    "CODE-e9cbb0",
+    "CODE-480e30",
+    "CODE-1db978",
+    "CODE-480e30",
+    "CODE-787fe2",
+    "CODEBLOCK-9bb42c",
+    "CODE-480e30",
+    "CODE-b51117",
+    "CODEBLOCK-911a42",
+    "CODE-480e30",
+    "CODE-787fe2",
+    "CODE-7fc331",
+    "CODE-e2dc06",
+    "CODE-480e30",
+    "CODE-b5df5e",
+    "CODE-ff4c0b",
+    "IMAGE-c8abbd",
+    "CODEBLOCK-641f2b",
+    "CODEBLOCK-d094db",
+    "CODEBLOCK-03b9fd",
+    "LINK-f7aa37",
+    "LINK-88ed30",
+    "IMAGE-4ded4a",
+    "CODE-787fe2",
+    "LINK-c18af1"
+  ],
+  "placeholderMap": {
+    "CODEBLOCK-f85a58": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-61d02e": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-7fc59e": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-444dad": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-4a5198": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-9bb42c": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-911a42": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-641f2b": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-d094db": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-03b9fd": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODE-8f0a81": {
+      "type": "inline-code",
+      "values": {
+        "content": "API_URL"
+      }
+    },
+    "CODE-c52233": {
+      "type": "inline-code",
+      "values": {
+        "content": "PRIVATE_KEY"
+      }
+    },
+    "CODE-787fe2": {
+      "type": "inline-code",
+      "values": {
+        "content": "mint-nft.js"
+      }
+    },
+    "CODE-374543": {
+      "type": "inline-code",
+      "values": {
+        "content": "network.create()"
+      }
+    },
+    "CODE-757ac4": {
+      "type": "inline-code",
+      "values": {
+        "content": "--network"
+      }
+    },
+    "CODE-4e2bf9": {
+      "type": "inline-code",
+      "values": {
+        "content": "ethers"
+      }
+    },
+    "CODE-bf5298": {
+      "type": "inline-code",
+      "values": {
+        "content": "artifacts/contracts/MyNFT.sol/MyNFT.json"
+      }
+    },
+    "CODE-480e30": {
+      "type": "inline-code",
+      "values": {
+        "content": "mintNFT"
+      }
+    },
+    "CODE-184f37": {
+      "type": "inline-code",
+      "values": {
+        "content": "https://gateway.pinata.cloud/ipfs/<CID>"
+      }
+    },
+    "CODE-7fc331": {
+      "type": "inline-code",
+      "values": {
+        "content": "nft-metadata.json"
+      }
+    },
+    "CODE-1f7adc": {
+      "type": "inline-code",
+      "values": {
+        "content": "ipfs://<image-CID>"
+      }
+    },
+    "CODE-7da047": {
+      "type": "inline-code",
+      "values": {
+        "content": "getContractAt"
+      }
+    },
+    "CODE-e9cbb0": {
+      "type": "inline-code",
+      "values": {
+        "content": ".env"
+      }
+    },
+    "CODE-cfc55d": {
+      "type": "inline-code",
+      "values": {
+        "content": "mintNFT(tokenURI)"
+      }
+    },
+    "CODE-c50ecc": {
+      "type": "inline-code",
+      "values": {
+        "content": "ethers.getSigners()"
+      }
+    },
+    "CODE-1db978": {
+      "type": "inline-code",
+      "values": {
+        "content": "onlyOwner"
+      }
+    },
+    "CODE-b51117": {
+      "type": "inline-code",
+      "values": {
+        "content": "tx.wait()"
+      }
+    },
+    "CODE-e2dc06": {
+      "type": "inline-code",
+      "values": {
+        "content": "ipfs://<metadata-CID>"
+      }
+    },
+    "CODE-b5df5e": {
+      "type": "inline-code",
+      "values": {
+        "content": "ipfs://"
+      }
+    },
+    "CODE-ff4c0b": {
+      "type": "inline-code",
+      "values": {
+        "content": "https://gateway.pinata.cloud/ipfs/<metadata-CID>"
+      }
+    },
+    "IMAGE-5d97c0": {
+      "type": "image",
+      "values": {
+        "path": "./view-contract-etherscan.png"
+      }
+    },
+    "IMAGE-c8abbd": {
+      "type": "image",
+      "values": {
+        "path": "./metadataJSON.png"
+      }
+    },
+    "IMAGE-4ded4a": {
+      "type": "image",
+      "values": {
+        "path": "./view-nft-etherscan.png"
+      }
+    },
+    "LINK-13a07c": {
+      "type": "link",
+      "values": {
+        "url": "/developers/tutorials/how-to-write-and-deploy-an-nft/"
+      }
+    },
+    "LINK-2b67ba": {
+      "type": "link",
+      "values": {
+        "url": "https://hardhat.org/docs/plugins/hardhat-ethers"
+      }
+    },
+    "LINK-faa750": {
+      "type": "link",
+      "values": {
+        "url": "https://docs.ethers.org/v6/"
+      }
+    },
+    "LINK-a21a82": {
+      "type": "link",
+      "values": {
+        "url": "/"
+      }
+    },
+    "LINK-e7d1d5": {
+      "type": "link",
+      "values": {
+        "url": "/glossary/#abi"
+      }
+    },
+    "LINK-ff7422": {
+      "type": "link",
+      "values": {
+        "url": "https://app.pinata.cloud"
+      }
+    },
+    "LINK-861517": {
+      "type": "link",
+      "values": {
+        "url": "https://app.pinata.cloud/ipfs/files"
+      }
+    },
+    "LINK-149702": {
+      "type": "link",
+      "values": {
+        "url": "https://docs.pinata.cloud/files/private-ipfs"
+      }
+    },
+    "LINK-40c923": {
+      "type": "link",
+      "values": {
+        "url": "https://gateway.pinata.cloud/ipfs/QmZdd5KYdCFApWn7eTZJ1qgJu18urJrP9Yh1TZcZrZxxB5"
+      }
+    },
+    "LINK-f7aa37": {
+      "type": "link",
+      "values": {
+        "url": "https://sepolia.etherscan.io/"
+      }
+    },
+    "LINK-88ed30": {
+      "type": "link",
+      "values": {
+        "url": "https://eth-sepolia.blockscout.com/"
+      }
+    },
+    "LINK-c18af1": {
+      "type": "link",
+      "values": {
+        "url": "/developers/tutorials/how-to-view-nft-in-metamask/"
+      }
+    }
+  },
+  "sections": {
+    "_all": {
+      "translatedAt": "2026-10-26T17:19:15.949Z",
+      "status": "success"
+    }
+  }
+}

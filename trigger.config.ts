@@ -1,0 +1,47 @@
+import * as Sentry from "@sentry/nextjs"
+import { defineConfig } from "@trigger.dev/sdk/v3"
+
+/**
+ * Trigger.dev configuration for background jobs and scheduled tasks.
+ * See https://trigger.dev/docs for documentation.
+ */
+export default defineConfig({
+  project: process.env.TRIGGER_PROJECT_REF!,
+  // "node" pins Node 21.7.3, which Trigger.dev stops deploying on 5 Oct 2026.
+  // "node-22" (22.16.0) matches the .nvmrc the rest of the repo builds against.
+  runtime: "node-22",
+  logLevel: "log",
+  // Maximum duration for all tasks (5 minutes)
+  // See https://trigger.dev/docs/runs/max-duration
+  maxDuration: 300,
+  retries: {
+    enabledInDev: true,
+    default: {
+      maxAttempts: 1,
+      minTimeoutInMs: 1_000,
+      maxTimeoutInMs: 30_000,
+      factor: 2,
+      randomize: true,
+    },
+  },
+  // Task definitions file
+  dirs: ["./src/data-layer"],
+  // Initialize Sentry for error tracking in Trigger.dev tasks
+  // Uses the same Sentry configuration as the Next.js app
+  // Note: Trigger.dev already initializes OpenTelemetry, so we skip Sentry's OpenTelemetry setup
+  init: async () => {
+    const environment = process.env.NEXT_PUBLIC_CONTEXT || "development"
+
+    Sentry.init({
+      dsn: process.env.NEXT_PUBLIC_SENTRY_DSN,
+      tracesSampleRate: 0.01,
+      debug: environment === "development",
+      environment,
+      enabled: environment === "production",
+      initialScope: { tags: { module: "data-layer" } },
+      // Skip OpenTelemetry setup since Trigger.dev already initializes it
+      // This prevents "Attempted duplicate registration of API" errors
+      skipOpenTelemetrySetup: true,
+    } as Parameters<typeof Sentry.init>[0])
+  },
+})

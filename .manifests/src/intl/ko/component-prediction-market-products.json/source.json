@@ -1,0 +1,45 @@
+{
+  "version": 2,
+  "sourceFile": "src/intl/en/component-prediction-market-products.json",
+  "generatedAt": "2026-10-21T21:34:49.395Z",
+  "rootHash": "16f5031f472e",
+  "tree": {
+    "contentHash": "82176648aa80",
+    "anchorHash": "fadbe909da84",
+    "children": {
+      "limitless-cta": {
+        "contentHash": "3e87ddd8ed77",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "limitless-description": {
+        "contentHash": "8c61df07c142",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "limitless-title": {
+        "contentHash": "e030be5ec4cf",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "polymarket-cta": {
+        "contentHash": "6bcdd18db78f",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "polymarket-description": {
+        "contentHash": "91ea50576039",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "polymarket-title": {
+        "contentHash": "f5645b41c8d9",
+        "anchorHash": "e3b0c44298fc"
+      }
+    },
+    "childrenOrder": [
+      "limitless-cta",
+      "limitless-description",
+      "limitless-title",
+      "polymarket-cta",
+      "polymarket-description",
+      "polymarket-title"
+    ]
+  },
+  "sourceCommitSha": "9c82bea6ad613e9a18800c759b53182ae5da2f03"
+}

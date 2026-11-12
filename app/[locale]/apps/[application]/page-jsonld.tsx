@@ -1,0 +1,103 @@
+import { AppCategory, AppData, FileContributor } from "@/lib/types"
+
+import PageJsonLD from "@/components/PageJsonLD"
+
+import { normalizeUrlForJsonLd, slugify } from "@/lib/utils/url"
+
+import { getBreadcrumbListJsonLd } from "@/lib/jsonld/breadcrumbs"
+import { BASE_GRAPH_NODES } from "@/lib/jsonld/constants"
+import { REFERENCE } from "@/lib/jsonld/references"
+
+// Map internal app categories to schema.org enumerated applicationCategory values
+// https://schema.org/applicationCategory
+const APPLICATION_CATEGORY_MAP: Record<AppCategory, string> = {
+  DeFi: "FinanceApplication",
+  Collectibles: "EntertainmentApplication",
+  Social: "SocialNetworkingApplication",
+  Gaming: "GameApplication",
+  Bridge: "UtilitiesApplication",
+  Productivity: "BusinessApplication",
+  Privacy: "SecurityApplication",
+  DAO: "BusinessApplication",
+}
+
+export default async function AppsAppJsonLD({
+  locale,
+  app,
+  contributors,
+  name,
+  description,
+  sameAs,
+}: {
+  locale: string
+  app: AppData
+  contributors: FileContributor[]
+  name: string
+  description: string
+  sameAs: string[]
+}) {
+  const url = normalizeUrlForJsonLd(locale, `/apps/${slugify(app.name)}/`)
+
+  const contributorList = contributors.map((contributor) => ({
+    "@type": "Person",
+    name: contributor.login,
+    url: contributor.html_url,
+  }))
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      ...BASE_GRAPH_NODES,
+      {
+        "@type": "WebPage",
+        "@id": url,
+        name,
+        description,
+        url,
+        inLanguage: locale,
+        contributor: contributorList,
+        author: [REFERENCE.ETHEREUM_COMMUNITY],
+        isPartOf: REFERENCE.ETHEREUM_ORG_WEBSITE,
+        breadcrumb: await getBreadcrumbListJsonLd(
+          locale,
+          `/apps/${slugify(app.name)}`,
+          app.name
+        ),
+        publisher: REFERENCE.ETHEREUM_FOUNDATION,
+        reviewedBy: REFERENCE.ETHEREUM_FOUNDATION,
+        mainEntity: { "@id": `${url}#applications` },
+      },
+      {
+        "@type": "WebApplication",
+        "@id": `${url}#applications`,
+        name: app.name,
+        description,
+        url: app.url,
+        image: app.image,
+        applicationCategory:
+          APPLICATION_CATEGORY_MAP[app.category] ?? "UtilitiesApplication",
+        applicationSubCategory: app.subCategory.join(", "),
+        operatingSystem: "Web Browser",
+        offers: {
+          "@type": "Offer",
+          price: "0",
+          priceCurrency: "USD",
+          availability: "https://schema.org/OnlineOnly",
+        },
+        author: [
+          {
+            "@type": "Organization",
+            name: app.parentCompany,
+          },
+        ],
+        datePublished: app.dateOfLaunch,
+        dateModified: app.lastUpdated,
+        inLanguage: app.languages,
+        screenshot: app.screenshots.slice(0, 5),
+        sameAs,
+      },
+    ],
+  }
+
+  return <PageJsonLD structuredData={jsonLd} />
+}

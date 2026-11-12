@@ -1,0 +1,1156 @@
+{
+  "version": 2,
+  "sourceFile": "public/content/roadmap/glamsterdam/index.md",
+  "generatedAt": "2026-10-14T17:50:25.799Z",
+  "rootHash": "acc9df21014e",
+  "tree": {
+    "contentHash": "d3f98cb8e125",
+    "anchorHash": "84eb10562e61",
+    "children": {
+      "frontmatter:title": {
+        "contentHash": "e2c1912b24c8",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:description": {
+        "contentHash": "cd30d456d5ac",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:lang": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "dbd3a49d0d90"
+      },
+      "frontmatter:template": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "7fef9479c8bc"
+      },
+      "component:4": {
+        "contentHash": "1a1cc0e13c4c",
+        "anchorHash": "f3451d4448cb",
+        "children": {
+          "attr:variant": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "2937013f2181"
+          },
+          "component:0": {
+            "contentHash": "be66ddc12d45",
+            "anchorHash": "094caeab9e7f",
+            "children": {
+              "component:0": {
+                "contentHash": "4ecdc49493a6",
+                "anchorHash": "e322422f644f",
+                "children": {
+                  "prose:2": {
+                    "contentHash": "36dbd6808c59",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "link:0": {
+                    "contentHash": "8df1943120cf",
+                    "anchorHash": "0d9f7701bb4e"
+                  },
+                  "prose:3": {
+                    "contentHash": "6201111b83a0",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "link:1": {
+                    "contentHash": "98f627860c82",
+                    "anchorHash": "6f8fd5f112c4"
+                  },
+                  "prose:4": {
+                    "contentHash": "cdb4ee2aea69",
+                    "anchorHash": "e3b0c44298fc"
+                  }
+                },
+                "childrenOrder": [
+                  "prose:2",
+                  "link:0",
+                  "prose:3",
+                  "link:1",
+                  "prose:4"
+                ]
+              }
+            }
+          }
+        },
+        "childrenOrder": [
+          "attr:variant",
+          "component:0"
+        ]
+      },
+      "link:0": {
+        "contentHash": "5f0845d8b16a",
+        "anchorHash": "8a5edab28263"
+      },
+      "prose:4": {
+        "contentHash": "f8e47f3b0fdd",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:1": {
+        "contentHash": "8547dcd6bf46",
+        "anchorHash": "73127bba9213"
+      },
+      "prose:5": {
+        "contentHash": "ff7b39415ff7",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:2": {
+        "contentHash": "4ba69735ca53",
+        "anchorHash": "591588a54a51"
+      },
+      "prose:6": {
+        "contentHash": "2d3deb6a31d2",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:3": {
+        "contentHash": "45978ecb2996",
+        "anchorHash": "7738661d8492"
+      },
+      "prose:7": {
+        "contentHash": "e73fdebac5bd",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "component:13": {
+        "contentHash": "4b9f7d802648",
+        "anchorHash": "ed6d0da8a1a5",
+        "children": {
+          "attr:slug": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "029971cb1e3f"
+          }
+        }
+      },
+      "improvements-in-glamsterdam": {
+        "contentHash": "94454f51f2f0",
+        "anchorHash": "89622158d50c",
+        "labelHash": "bdda2cd5d59b",
+        "children": {
+          "_label": {
+            "contentHash": "bdda2cd5d59b",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "component:1": {
+            "contentHash": "34d358f7c513",
+            "anchorHash": "23cebcd0ac3d",
+            "children": {
+              "attr:variant": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "06271baf4953"
+              },
+              "component:0": {
+                "contentHash": "5ec3fb50f0f0",
+                "anchorHash": "1024db4ed843",
+                "children": {
+                  "component:0": {
+                    "contentHash": "040562854ae9",
+                    "anchorHash": "83625f34f396",
+                    "children": {
+                      "prose:2": {
+                        "contentHash": "b5406978392f",
+                        "anchorHash": "e3b0c44298fc"
+                      },
+                      "link:0": {
+                        "contentHash": "673d5f7a2003",
+                        "anchorHash": "8703aee78315"
+                      },
+                      "prose:3": {
+                        "contentHash": "80da4c6d5c37",
+                        "anchorHash": "e3b0c44298fc"
+                      },
+                      "link:1": {
+                        "contentHash": "dd605bfe9bd0",
+                        "anchorHash": "73847946c646"
+                      },
+                      "prose:4": {
+                        "contentHash": "cdb4ee2aea69",
+                        "anchorHash": "e3b0c44298fc"
+                      }
+                    },
+                    "childrenOrder": [
+                      "prose:2",
+                      "link:0",
+                      "prose:3",
+                      "link:1",
+                      "prose:4"
+                    ]
+                  }
+                }
+              }
+            },
+            "childrenOrder": [
+              "attr:variant",
+              "component:0"
+            ]
+          },
+          "prose:0": {
+            "contentHash": "baedeefb8ce0",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "component:1",
+          "prose:0"
+        ]
+      },
+      "scale-l1": {
+        "contentHash": "4e2182c8c326",
+        "anchorHash": "8e808ca0acfc",
+        "labelHash": "b5fa01762b66",
+        "children": {
+          "_label": {
+            "contentHash": "b5fa01762b66",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "54b84ba88a71",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "epbs": {
+            "contentHash": "989d3ca53d7f",
+            "anchorHash": "4f8c2c0c17c4",
+            "labelHash": "5847881fc61e",
+            "children": {
+              "_label": {
+                "contentHash": "5847881fc61e",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "3fbc74eedf3a",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "61f4a24677e0"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "980f6c78625b",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "82773549b8c1",
+                "anchorHash": "8b2fb33bfe31"
+              },
+              "prose:2": {
+                "contentHash": "12db235acd9f",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:5": {
+                "contentHash": "4b9f7d802648",
+                "anchorHash": "b743fd2a4468",
+                "children": {
+                  "attr:slug": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "37e7474bf924"
+                  }
+                }
+              },
+              "prose:3": {
+                "contentHash": "dd2af295c385",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:1": {
+                "contentHash": "ef20885e228f",
+                "anchorHash": "7eb797741da1"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0",
+              "prose:2",
+              "component:5",
+              "prose:2",
+              "link:0",
+              "prose:3",
+              "link:1"
+            ]
+          },
+          "bals": {
+            "contentHash": "3b2cec657693",
+            "anchorHash": "5dc336983e8a",
+            "labelHash": "f6b88ecd5b6c",
+            "children": {
+              "_label": {
+                "contentHash": "f6b88ecd5b6c",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "0e51efa62feb",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "9e3185c10091"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:0": {
+                "contentHash": "39156c300676",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "bale": {
+                "contentHash": "2a12aa081e20",
+                "anchorHash": "f52e093a0804",
+                "labelHash": "a8a67bc4a8f5",
+                "children": {
+                  "_label": {
+                    "contentHash": "a8a67bc4a8f5",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "component:1": {
+                    "contentHash": "f5818652a990",
+                    "anchorHash": "fd5ce5e8f73f",
+                    "children": {
+                      "attr:upgrade": {
+                        "contentHash": "e3b0c44298fc",
+                        "anchorHash": "ddab2add1fa1"
+                      },
+                      "attr:id": {
+                        "contentHash": "e3b0c44298fc",
+                        "anchorHash": "5cb58b248a74"
+                      }
+                    },
+                    "childrenOrder": [
+                      "attr:upgrade",
+                      "attr:id"
+                    ]
+                  },
+                  "prose:2": {
+                    "contentHash": "793032680270",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "link:0": {
+                    "contentHash": "0a3c64cdbfe8",
+                    "anchorHash": "8e70b0beca37"
+                  },
+                  "prose:3": {
+                    "contentHash": "3973e022e932",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "link:1": {
+                    "contentHash": "82d20abeb65a",
+                    "anchorHash": "f4f5e38e43d1"
+                  }
+                },
+                "childrenOrder": [
+                  "_label",
+                  "component:1",
+                  "prose:2",
+                  "link:0",
+                  "prose:3",
+                  "link:1"
+                ]
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:0",
+              "bale"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "epbs",
+          "bals"
+        ]
+      },
+      "network-sustainability": {
+        "contentHash": "e1223aa33df4",
+        "anchorHash": "a69caedd46e2",
+        "labelHash": "09e03c669b72",
+        "children": {
+          "_label": {
+            "contentHash": "09e03c669b72",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "584bf987d064",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "state-creation-gas-cost-increase": {
+            "contentHash": "7846fb2b146c",
+            "anchorHash": "462a17f0b92f",
+            "labelHash": "ae2935e78ca6",
+            "children": {
+              "_label": {
+                "contentHash": "ae2935e78ca6",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "b4545e09a3d4",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "d0d1ec183968"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:5": {
+                "contentHash": "ccc9040eec3e",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "81fbd2f198c9",
+                "anchorHash": "89d756280b47"
+              },
+              "prose:6": {
+                "contentHash": "a4e3dbd7c6c7",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "inline-code:1": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "beb87d648d86"
+              },
+              "prose:7": {
+                "contentHash": "c3282a352ec8",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "inline-code:2": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "2c5df905f512"
+              },
+              "prose:8": {
+                "contentHash": "ccf4a81c1c4c",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "inline-code:3": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "0f95bd3adb62"
+              },
+              "prose:9": {
+                "contentHash": "0e4504964233",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:4": {
+                "contentHash": "8c8bfd5c778f",
+                "anchorHash": "6af932acf0f9"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:5",
+              "link:0",
+              "prose:6",
+              "inline-code:1",
+              "prose:7",
+              "inline-code:2",
+              "prose:8",
+              "inline-code:3",
+              "prose:9",
+              "link:4"
+            ]
+          },
+          "state-access-gas-cost-update": {
+            "contentHash": "d98957b0bcea",
+            "anchorHash": "fa2296ae44d8",
+            "labelHash": "d7b5c8eda413",
+            "children": {
+              "_label": {
+                "contentHash": "d7b5c8eda413",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "69040c2c49a0",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "7a0fc5c7060a"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:3": {
+                "contentHash": "683ee2839c28",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "inline-code:0": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "90efef57fb9f"
+              },
+              "prose:4": {
+                "contentHash": "6201111b83a0",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "inline-code:1": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "3e9c1fd7b10b"
+              },
+              "prose:5": {
+                "contentHash": "b343ac83ad49",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:2": {
+                "contentHash": "08290ad3faec",
+                "anchorHash": "420df13ab349"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:3",
+              "inline-code:0",
+              "prose:4",
+              "inline-code:1",
+              "prose:5",
+              "link:2"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "state-creation-gas-cost-increase",
+          "state-access-gas-cost-update"
+        ]
+      },
+      "network-resilience": {
+        "contentHash": "244d62a230ad",
+        "anchorHash": "67f11464331b",
+        "labelHash": "8ad1bc112fdd",
+        "children": {
+          "_label": {
+            "contentHash": "8ad1bc112fdd",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "c4653f8db5aa",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "exclude-slashed-validators": {
+            "contentHash": "85cf35c9eb49",
+            "anchorHash": "77aff009f850",
+            "labelHash": "e0d1949d7473",
+            "children": {
+              "_label": {
+                "contentHash": "e0d1949d7473",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "7b21ec069068",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "577f11e5831c"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "5e8f9028f82d",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "6d73c00e7c21",
+                "anchorHash": "37d60c4ffa5e"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0"
+            ]
+          },
+          "increase-exit-and-consolidation-churn": {
+            "contentHash": "88b1f2414c0b",
+            "anchorHash": "85f160d38f60",
+            "labelHash": "91fda19dbac1",
+            "children": {
+              "_label": {
+                "contentHash": "91fda19dbac1",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "4a8040c73fc9",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "a1913ec75b7a"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:2": {
+                "contentHash": "3f58e7953a6b",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "00f384b17c1b",
+                "anchorHash": "af345cf3e364"
+              },
+              "prose:3": {
+                "contentHash": "6b74483ca2de",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:1": {
+                "contentHash": "5aba56e18ce8",
+                "anchorHash": "db2ea773326b"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:2",
+              "link:0",
+              "prose:3",
+              "link:1"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "exclude-slashed-validators",
+          "increase-exit-and-consolidation-churn"
+        ]
+      },
+      "improve-user-developer-experience": {
+        "contentHash": "0d4ef4ba9424",
+        "anchorHash": "3f5b87ef0079",
+        "labelHash": "5cd7d0f76ff1",
+        "children": {
+          "_label": {
+            "contentHash": "5cd7d0f76ff1",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "c5bc93ac5f45",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "reduce-intrinsic-transaction-gas-costs": {
+            "contentHash": "37e5be61aeb1",
+            "anchorHash": "0f771487ebe2",
+            "labelHash": "e1960212927e",
+            "children": {
+              "_label": {
+                "contentHash": "e1960212927e",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "b8610ba283e3",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ae5ca0b50c33"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "a0eb9fb00e56",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "6e2b02b2ed70",
+                "anchorHash": "a14e7230fb77"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0"
+            ]
+          },
+          "deterministic-factory-predeploy": {
+            "contentHash": "457bb7aa478d",
+            "anchorHash": "4ced915aa029",
+            "labelHash": "ad9eaaf890b8",
+            "children": {
+              "_label": {
+                "contentHash": "ad9eaaf890b8",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "2d6cb1bdc31c",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "5636ef939535"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "f8599f6e7b24",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "8a92abc8f073",
+                "anchorHash": "69048b91abd1"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0"
+            ]
+          },
+          "eth-transfers-and-burns-emit-a-log": {
+            "contentHash": "030a3e9908e0",
+            "anchorHash": "8cb2901a3101",
+            "labelHash": "6e908c9ed571",
+            "children": {
+              "_label": {
+                "contentHash": "6e908c9ed571",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "f13d8172aa78",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "7c5fab57f8c1"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "ea3046d4f989",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "d4d0da4e240e",
+                "anchorHash": "230be6d1147e"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0"
+            ]
+          },
+          "eth-70-partial-block-receipt-lists": {
+            "contentHash": "c9b00724c5ce",
+            "anchorHash": "c7d045c08586",
+            "labelHash": "4aa1724a11dd",
+            "children": {
+              "_label": {
+                "contentHash": "4aa1724a11dd",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "component:1": {
+                "contentHash": "f5818652a990",
+                "anchorHash": "db3778b69425",
+                "children": {
+                  "attr:upgrade": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "ddab2add1fa1"
+                  },
+                  "attr:id": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "6c210f0cac73"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:upgrade",
+                  "attr:id"
+                ]
+              },
+              "prose:1": {
+                "contentHash": "47c5b3d41eea",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "921ca669ad8d",
+                "anchorHash": "5dd58d959384"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "component:1",
+              "prose:1",
+              "link:0"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "reduce-intrinsic-transaction-gas-costs",
+          "deterministic-factory-predeploy",
+          "eth-transfers-and-burns-emit-a-log",
+          "eth-70-partial-block-receipt-lists"
+        ]
+      },
+      "further-reading": {
+        "contentHash": "f1a281885e69",
+        "anchorHash": "04bb51e8836e",
+        "labelHash": "4082f515b2f4",
+        "children": {
+          "_label": {
+            "contentHash": "4082f515b2f4",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:5": {
+            "contentHash": "3973e022e932",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:0": {
+            "contentHash": "be50ffa0fc02",
+            "anchorHash": "0d9f7701bb4e"
+          },
+          "prose:6": {
+            "contentHash": "3973e022e932",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:1": {
+            "contentHash": "519b6edb5f3d",
+            "anchorHash": "8703aee78315"
+          },
+          "prose:7": {
+            "contentHash": "3973e022e932",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:2": {
+            "contentHash": "2df1bde32c35",
+            "anchorHash": "fc63da91c844"
+          },
+          "prose:8": {
+            "contentHash": "3973e022e932",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:3": {
+            "contentHash": "33659ec58247",
+            "anchorHash": "efde2318c016"
+          },
+          "prose:9": {
+            "contentHash": "3973e022e932",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:4": {
+            "contentHash": "193a50aab7a8",
+            "anchorHash": "2ac50c99085c"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:5",
+          "link:0",
+          "prose:6",
+          "link:1",
+          "prose:7",
+          "link:2",
+          "prose:8",
+          "link:3",
+          "prose:9",
+          "link:4"
+        ]
+      },
+      "faq": {
+        "contentHash": "113990932f70",
+        "anchorHash": "c98e0219901a",
+        "labelHash": "dbc468a14b60",
+        "children": {
+          "_label": {
+            "contentHash": "dbc468a14b60",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "how-can-eth-be-converted-after-the-hardfork": {
+            "contentHash": "688ddddcbcd5",
+            "anchorHash": "cd324c2c3d88",
+            "labelHash": "5eee5037f1d4",
+            "children": {
+              "_label": {
+                "contentHash": "5eee5037f1d4",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:2": {
+                "contentHash": "7ced02c78acd",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "html-tag:0": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:3": {
+                "contentHash": "a3c10c7ecef8",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:1": {
+                "contentHash": "d108e3435588",
+                "anchorHash": "a66cf66c9cba"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:2",
+              "html-tag:0",
+              "prose:3",
+              "link:1"
+            ]
+          },
+          "does-the-glamsterdam-upgrade-affect-all-ethereum-nodes-and-validators": {
+            "contentHash": "542e8a638a3f",
+            "anchorHash": "c83dbc0ab23d",
+            "labelHash": "68e1dcadd2f6",
+            "children": {
+              "_label": {
+                "contentHash": "68e1dcadd2f6",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:3": {
+                "contentHash": "d7d86421500e",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "43fadc74a052",
+                "anchorHash": "94d095604d5e"
+              },
+              "prose:4": {
+                "contentHash": "c48c7665d952",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:1": {
+                "contentHash": "ce534264c79d",
+                "anchorHash": "9dd64479588f"
+              },
+              "prose:5": {
+                "contentHash": "3538a0b69856",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:2": {
+                "contentHash": "7d1123714196",
+                "anchorHash": "5e1be939b077"
+              },
+              "prose:6": {
+                "contentHash": "15fa535b1c6e",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:3",
+              "link:0",
+              "prose:4",
+              "link:1",
+              "prose:5",
+              "link:2",
+              "prose:6"
+            ]
+          },
+          "as-a-staker-what-do-i-need-to-do-for-the-glamsterdam-upgrade": {
+            "contentHash": "816af23cc73c",
+            "anchorHash": "b9c3651b3ea6",
+            "labelHash": "3a54202c8882",
+            "children": {
+              "_label": {
+                "contentHash": "3a54202c8882",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:1": {
+                "contentHash": "b919b0a3d6f8",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "link:0": {
+                "contentHash": "223f2cda188d",
+                "anchorHash": "83239f7f3dad"
+              },
+              "prose:2": {
+                "contentHash": "7eca907e8f1a",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:1",
+              "link:0",
+              "prose:2"
+            ]
+          },
+          "what-improvements-will-glamsterdam-include-for-l1-scaling": {
+            "contentHash": "62c6e43d0172",
+            "anchorHash": "4b9f7d802648",
+            "labelHash": "2a864ddb13e1",
+            "children": {
+              "_label": {
+                "contentHash": "2a864ddb13e1",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:0": {
+                "contentHash": "04d48d78c95f",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:0"
+            ]
+          },
+          "will-glamsterdam-lower-fees-on-ethereum-layer-1": {
+            "contentHash": "6001c584bcb2",
+            "anchorHash": "4b9f7d802648",
+            "labelHash": "3a742dc6bfe4",
+            "children": {
+              "_label": {
+                "contentHash": "3a742dc6bfe4",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:0": {
+                "contentHash": "e6b970b9a57a",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:0"
+            ]
+          },
+          "will-my-smart-contracts-change": {
+            "contentHash": "cd21c822117b",
+            "anchorHash": "4b9f7d802648",
+            "labelHash": "8c77ff46233b",
+            "children": {
+              "_label": {
+                "contentHash": "8c77ff46233b",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:0": {
+                "contentHash": "1c3344b699f3",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:0"
+            ]
+          },
+          "how-will-glamsterdam-affect-node-storage-and-hardware-requirements": {
+            "contentHash": "44378250122d",
+            "anchorHash": "4b9f7d802648",
+            "labelHash": "a0a209c6d7ad",
+            "children": {
+              "_label": {
+                "contentHash": "a0a209c6d7ad",
+                "anchorHash": "e3b0c44298fc"
+              },
+              "prose:0": {
+                "contentHash": "39ea8a6c8ffe",
+                "anchorHash": "e3b0c44298fc"
+              }
+            },
+            "childrenOrder": [
+              "_label",
+              "prose:0"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "how-can-eth-be-converted-after-the-hardfork",
+          "does-the-glamsterdam-upgrade-affect-all-ethereum-nodes-and-validators",
+          "as-a-staker-what-do-i-need-to-do-for-the-glamsterdam-upgrade",
+          "what-improvements-will-glamsterdam-include-for-l1-scaling",
+          "will-glamsterdam-lower-fees-on-ethereum-layer-1",
+          "will-my-smart-contracts-change",
+          "how-will-glamsterdam-affect-node-storage-and-hardware-requirements"
+        ]
+      }
+    },
+    "childrenOrder": [
+      "frontmatter:title",
+      "frontmatter:description",
+      "frontmatter:lang",
+      "frontmatter:template",
+      "component:4",
+      "link:0",
+      "prose:4",
+      "link:1",
+      "prose:5",
+      "link:2",
+      "prose:6",
+      "link:3",
+      "prose:7",
+      "component:13",
+      "improvements-in-glamsterdam",
+      "scale-l1",
+      "network-sustainability",
+      "network-resilience",
+      "improve-user-developer-experience",
+      "further-reading",
+      "faq"
+    ]
+  },
+  "sourceCommitSha": "a63429a9b154ac158fc9c25a876eb2008126c473"
+}

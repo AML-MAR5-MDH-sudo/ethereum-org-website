@@ -1,0 +1,462 @@
+{
+  "version": 2,
+  "sourceFile": "public/content/prediction-markets/index.md",
+  "generatedAt": "2026-10-21T22:18:04.130Z",
+  "rootHash": "ee3864d09cf4",
+  "tree": {
+    "contentHash": "98d3ef3c2af9",
+    "anchorHash": "7a9503e17384",
+    "children": {
+      "frontmatter:title": {
+        "contentHash": "3b50eae8b6b6",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:lang": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "dbd3a49d0d90"
+      },
+      "frontmatter:template": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "2290d7d70dea"
+      },
+      "frontmatter:image": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "a0fc9b257a5d"
+      },
+      "frontmatter:sidebarDepth": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "d4735e3a265e"
+      },
+      "frontmatter:summaryPoints": {
+        "contentHash": "2dea4a05bdce",
+        "anchorHash": "f5818652a990",
+        "children": {
+          "0": {
+            "contentHash": "cfa8d23aabd7",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "1": {
+            "contentHash": "941751207f5d",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "0",
+          "1"
+        ]
+      },
+      "frontmatter:buttons": {
+        "contentHash": "e13a80477531",
+        "anchorHash": "edb9bccab94d",
+        "children": {
+          "0": {
+            "contentHash": "f5818652a990",
+            "anchorHash": "b2a46786b6fa",
+            "children": {
+              "content": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "1445799c033a"
+              },
+              "toId": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "7205d55c98c4"
+              }
+            },
+            "childrenOrder": [
+              "content",
+              "toId"
+            ]
+          },
+          "1": {
+            "contentHash": "918e1f78a588",
+            "anchorHash": "bc8c4bf626db",
+            "children": {
+              "content": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "e0ab0ec18559"
+              },
+              "toId": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "2555fb2f1375"
+              },
+              "isSecondary": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "fcbcf165908d"
+              }
+            },
+            "childrenOrder": [
+              "content",
+              "toId",
+              "isSecondary"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "0",
+          "1"
+        ]
+      },
+      "prose:0": {
+        "contentHash": "1a51f6293449",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "how-prediction-markets-work": {
+        "contentHash": "5e98fd5b96f9",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "e42f39f8bfa9",
+        "children": {
+          "_label": {
+            "contentHash": "e42f39f8bfa9",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "e2100d623ab0",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "why-does-this-matter": {
+        "contentHash": "94ad3ceefb01",
+        "anchorHash": "89905164477a",
+        "labelHash": "896b3fc7f7d4",
+        "children": {
+          "_label": {
+            "contentHash": "896b3fc7f7d4",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "e5a840f38668",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "component:2": {
+            "contentHash": "5de7ee2645f9",
+            "anchorHash": "c7e2a402ee17",
+            "children": {
+              "component:0": {
+                "contentHash": "0bc261f6f547",
+                "anchorHash": "61101dfe5392",
+                "children": {
+                  "attr:title": {
+                    "contentHash": "b12598978cf8",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:description": {
+                    "contentHash": "af71fa3fc1ed",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:emoji": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "8abc19d71e24"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:title",
+                  "attr:description",
+                  "attr:emoji"
+                ]
+              },
+              "component:1": {
+                "contentHash": "ee1a544d3b13",
+                "anchorHash": "611101bcdfd9",
+                "children": {
+                  "attr:title": {
+                    "contentHash": "650d7b564b55",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:description": {
+                    "contentHash": "951c74b8a485",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:emoji": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "c4b4332a65af"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:title",
+                  "attr:description",
+                  "attr:emoji"
+                ]
+              },
+              "component:2": {
+                "contentHash": "0947edcee2d5",
+                "anchorHash": "31870943ce02",
+                "children": {
+                  "attr:title": {
+                    "contentHash": "5bcbcbde33ed",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:description": {
+                    "contentHash": "2e4bb78f6d0a",
+                    "anchorHash": "e3b0c44298fc"
+                  },
+                  "attr:emoji": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "68b979d698eb"
+                  }
+                },
+                "childrenOrder": [
+                  "attr:title",
+                  "attr:description",
+                  "attr:emoji"
+                ]
+              }
+            },
+            "childrenOrder": [
+              "component:0",
+              "component:1",
+              "component:2"
+            ]
+          },
+          "prose:2": {
+            "contentHash": "504b789cdcf5",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:0": {
+            "contentHash": "3baf8b6e3325",
+            "anchorHash": "f9eb86c87274"
+          },
+          "prose:3": {
+            "contentHash": "774e4444ddb9",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:1": {
+            "contentHash": "9202af6ce925",
+            "anchorHash": "8c881c9c51dc"
+          },
+          "prose:4": {
+            "contentHash": "7dbc0bc68558",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "component:2",
+          "prose:2",
+          "link:0",
+          "prose:3",
+          "link:1",
+          "prose:4"
+        ]
+      },
+      "find-a-prediction-market": {
+        "contentHash": "871b6137131c",
+        "anchorHash": "2e2d0fcfb790",
+        "labelHash": "6933cffd11dc",
+        "children": {
+          "_label": {
+            "contentHash": "6933cffd11dc",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "81fd422cc716",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "component:2": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "component:3": {
+            "contentHash": "a6918901e13e",
+            "anchorHash": "60cacf696d4f",
+            "children": {
+              "attr:variant": {
+                "contentHash": "e3b0c44298fc",
+                "anchorHash": "4bd9354bb652"
+              },
+              "component:0": {
+                "contentHash": "4b9f7d802648",
+                "anchorHash": "a86755f4507d",
+                "children": {
+                  "attr:text": {
+                    "contentHash": "e3b0c44298fc",
+                    "anchorHash": "8aa6471e16db"
+                  }
+                }
+              },
+              "component:1": {
+                "contentHash": "4ee84978ac85",
+                "anchorHash": "a23d45cd8f6d",
+                "children": {
+                  "component:0": {
+                    "contentHash": "fa76b932385b",
+                    "anchorHash": "ab686fbd763c",
+                    "children": {
+                      "html-tag:0": {
+                        "contentHash": "e3b0c44298fc",
+                        "anchorHash": "e3b0c44298fc"
+                      },
+                      "prose:2": {
+                        "contentHash": "4e9b50a27210",
+                        "anchorHash": "e3b0c44298fc"
+                      },
+                      "html-tag:1": {
+                        "contentHash": "f734b016ff2b",
+                        "anchorHash": "af2846cf76a6"
+                      }
+                    },
+                    "childrenOrder": [
+                      "html-tag:0",
+                      "prose:2",
+                      "html-tag:1"
+                    ]
+                  }
+                }
+              }
+            },
+            "childrenOrder": [
+              "attr:variant",
+              "component:0",
+              "component:1"
+            ]
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0",
+          "component:2",
+          "component:3"
+        ]
+      },
+      "challenges-and-risks": {
+        "contentHash": "4515ac42edca",
+        "anchorHash": "9ac5787d6826",
+        "labelHash": "ba4c44473c27",
+        "children": {
+          "_label": {
+            "contentHash": "ba4c44473c27",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:3": {
+            "contentHash": "fb4c43634004",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:0": {
+            "contentHash": "4d263982720f",
+            "anchorHash": "f9eb86c87274"
+          },
+          "prose:4": {
+            "contentHash": "845f7b828eb2",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:1": {
+            "contentHash": "7036e30bded3",
+            "anchorHash": "2ce6fcffe899"
+          },
+          "prose:5": {
+            "contentHash": "8f2fcd279039",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:2": {
+            "contentHash": "cc3416055121",
+            "anchorHash": "a9405d77ee04"
+          },
+          "prose:6": {
+            "contentHash": "1b8d7b8078db",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:3",
+          "link:0",
+          "prose:4",
+          "link:1",
+          "prose:5",
+          "link:2",
+          "prose:6"
+        ]
+      },
+      "experimenting-with-prediction-markets": {
+        "contentHash": "2090820a1bbd",
+        "anchorHash": "c191c53f1203",
+        "labelHash": "5eb424be9691",
+        "children": {
+          "_label": {
+            "contentHash": "5eb424be9691",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:1": {
+            "contentHash": "72ab748acf4a",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:0": {
+            "contentHash": "d22afee7d2ac",
+            "anchorHash": "fa35efcadb12"
+          },
+          "prose:2": {
+            "contentHash": "050507165d1f",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:1",
+          "link:0",
+          "prose:2"
+        ]
+      },
+      "further-reading": {
+        "contentHash": "0d301985ab6b",
+        "anchorHash": "308b06c36cf3",
+        "labelHash": "4082f515b2f4",
+        "children": {
+          "_label": {
+            "contentHash": "4082f515b2f4",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:0": {
+            "contentHash": "9d017acf0056",
+            "anchorHash": "216409c7461d"
+          },
+          "prose:3": {
+            "contentHash": "a96eabddfeeb",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:1": {
+            "contentHash": "dc8be7d46963",
+            "anchorHash": "f9eb86c87274"
+          },
+          "prose:4": {
+            "contentHash": "fd9646a23cb7",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "link:2": {
+            "contentHash": "a9735edabf86",
+            "anchorHash": "e535c66779be"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "link:0",
+          "prose:3",
+          "link:1",
+          "prose:4",
+          "link:2"
+        ]
+      }
+    },
+    "childrenOrder": [
+      "frontmatter:title",
+      "frontmatter:lang",
+      "frontmatter:template",
+      "frontmatter:image",
+      "frontmatter:sidebarDepth",
+      "frontmatter:summaryPoints",
+      "frontmatter:buttons",
+      "prose:0",
+      "how-prediction-markets-work",
+      "why-does-this-matter",
+      "find-a-prediction-market",
+      "challenges-and-risks",
+      "experimenting-with-prediction-markets",
+      "further-reading"
+    ]
+  },
+  "sourceCommitSha": "9c82bea6ad613e9a18800c759b53182ae5da2f03"
+}

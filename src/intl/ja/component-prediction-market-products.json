@@ -1,0 +1,8 @@
+{
+  "limitless-cta": "Limitlessを詳しく見る",
+  "limitless-description": "イーサリアムのレイヤー2 (L2)であるBase上に構築された予測市場です。取引はUSDCを使用してオンチェーンで決済され、ほとんどの価格市場はオンチェーンの価格フィードを通じて自動的に解決されます。一部の国ではご利用いただけません。",
+  "limitless-title": "Limitless",
+  "polymarket-cta": "Polymarketを詳しく見る",
+  "polymarket-description": "最大規模の予測市場の1つです。取引はポリゴン上で決済され、結果はUMAオラクルを通じて決定されます。一部の国ではご利用いただけません。",
+  "polymarket-title": "Polymarket"
+}

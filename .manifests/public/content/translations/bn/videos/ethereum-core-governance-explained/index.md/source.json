@@ -1,0 +1,284 @@
+{
+  "version": 2,
+  "sourceFile": "public/content/videos/ethereum-core-governance-explained/index.md",
+  "generatedAt": "2026-09-30T18:38:50.875Z",
+  "rootHash": "6647a31d3b36",
+  "tree": {
+    "contentHash": "44744042713d",
+    "anchorHash": "5c45cc8dc58f",
+    "children": {
+      "frontmatter:title": {
+        "contentHash": "7ba44d4dab89",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:description": {
+        "contentHash": "dec2de7d0242",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:lang": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "dbd3a49d0d90"
+      },
+      "frontmatter:youtubeId": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "aba816d5f5f9"
+      },
+      "frontmatter:uploadDate": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "aa478cd3f1b6"
+      },
+      "frontmatter:duration": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "6254fe3465a4"
+      },
+      "frontmatter:educationLevel": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "94e6f02a5aca"
+      },
+      "frontmatter:topic": {
+        "contentHash": "918e1f78a588",
+        "anchorHash": "b2aa1074fa9d",
+        "children": {
+          "0": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "3ddeb596fa81"
+          },
+          "1": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "6a4444a31955"
+          },
+          "2": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "dd2026a793e9"
+          }
+        },
+        "childrenOrder": [
+          "0",
+          "1",
+          "2"
+        ]
+      },
+      "frontmatter:format": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "bfac314fefdc"
+      },
+      "frontmatter:author": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "0038b8b17ecb"
+      },
+      "frontmatter:breadcrumb": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "0c00f778d680"
+      },
+      "prose:1": {
+        "contentHash": "39801b63b541",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:0": {
+        "contentHash": "82b9caff648d",
+        "anchorHash": "69652dbdde7b"
+      },
+      "prose:2": {
+        "contentHash": "644f0bb7c4fa",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "introduction-012": {
+        "contentHash": "04c3d1b93436",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "d7c8151eb6fc",
+        "children": {
+          "_label": {
+            "contentHash": "d7c8151eb6fc",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "4e43359e04b1",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "misconceptions-523": {
+        "contentHash": "9c89b95cd05c",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "1f7665a42a3e",
+        "children": {
+          "_label": {
+            "contentHash": "1f7665a42a3e",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "f34fcd2f931b",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "meritocracy-and-participation-stats-1018": {
+        "contentHash": "5851dda62343",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "cddbbb8cb0e2",
+        "children": {
+          "_label": {
+            "contentHash": "cddbbb8cb0e2",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "a6da74976bfe",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "how-the-governance-process-works-1152": {
+        "contentHash": "a71ca2073b34",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "b731d4556517",
+        "children": {
+          "_label": {
+            "contentHash": "b731d4556517",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "03a9564e7a02",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "call-structure-and-coordination-1501": {
+        "contentHash": "eee94fd3988a",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "5bbcf030e4e9",
+        "children": {
+          "_label": {
+            "contentHash": "5bbcf030e4e9",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "5017e68833a6",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "an-evolving-process-1529": {
+        "contentHash": "2b05271dd0f8",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "2fb1f377b7c5",
+        "children": {
+          "_label": {
+            "contentHash": "2fb1f377b7c5",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "1402d6488dd6",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "comparable-governance-systems-2021": {
+        "contentHash": "cf60f9337127",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "b379af0e7881",
+        "children": {
+          "_label": {
+            "contentHash": "b379af0e7881",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "c6645fa36b75",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "why-builders-care-2238": {
+        "contentHash": "0ab13f562833",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "6197cbc0a09f",
+        "children": {
+          "_label": {
+            "contentHash": "6197cbc0a09f",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "f3cea0fd524e",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "how-to-participate-2440": {
+        "contentHash": "9b32f1d1fae7",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "dc9030e3f517",
+        "children": {
+          "_label": {
+            "contentHash": "dc9030e3f517",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "0ceddb704cd2",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      }
+    },
+    "childrenOrder": [
+      "frontmatter:title",
+      "frontmatter:description",
+      "frontmatter:lang",
+      "frontmatter:youtubeId",
+      "frontmatter:uploadDate",
+      "frontmatter:duration",
+      "frontmatter:educationLevel",
+      "frontmatter:topic",
+      "frontmatter:format",
+      "frontmatter:author",
+      "frontmatter:breadcrumb",
+      "prose:1",
+      "link:0",
+      "prose:2",
+      "introduction-012",
+      "misconceptions-523",
+      "meritocracy-and-participation-stats-1018",
+      "how-the-governance-process-works-1152",
+      "call-structure-and-coordination-1501",
+      "an-evolving-process-1529",
+      "comparable-governance-systems-2021",
+      "why-builders-care-2238",
+      "how-to-participate-2440"
+    ]
+  },
+  "sourceCommitSha": "8091512f99874c31008351459e68ffcbfef78b79"
+}

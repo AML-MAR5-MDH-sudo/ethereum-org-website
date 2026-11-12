@@ -1,0 +1,912 @@
+/**
+ * Incremental section-level translation via Gemini.
+ *
+ * When drift detection identifies prose changes in specific sections,
+ * this module sends ONE batched Gemini call per file with all changed
+ * sections marked for translation and unchanged sections as context.
+ *
+ * Gemini returns each translated section in the same <SECTION> envelope it
+ * arrived in, which are surgically placed back into the locale file.
+ */
+
+import { MAX_PROMPT_BYTES } from "../../constants"
+import { TRANSLATABLE_ATTRIBUTES } from "../shared-patterns"
+
+import {
+  FRONTMATTER_PREFIX,
+  frontmatterFieldText,
+  parseFrontmatterDoc,
+} from "./frontmatter"
+import { getLanguageGroup, getSiteSpecificNotes } from "./language-groups"
+
+// Types for section-level translation
+interface SectionForPrompt {
+  /** Section heading ID */
+  id: string
+  /** "TRANSLATE" for changed sections, "CONTEXT" for surrounding context */
+  action: "TRANSLATE" | "CONTEXT"
+  /** The section content (normalized English for TRANSLATE, existing locale for CONTEXT) */
+  content: string
+  /** Heading text (for reference) */
+  headingText?: string
+  /** Heading level */
+  level?: number
+}
+
+interface IncrementalTranslateOptions {
+  /** English file path */
+  filePath: string
+  /** Source file type -- controls per-format rules in the prompt (e.g. RTL BiDi syntax) */
+  fileType: "markdown" | "json"
+  /** Target language code */
+  targetLanguage: string
+  /** Language display name */
+  languageName: string
+  /** Sections in document order with action tags */
+  sections: SectionForPrompt[]
+  /** Filtered glossary terms for this file */
+  glossaryTerms: Map<string, string>
+}
+
+interface IncrementalTranslateResult {
+  /** Map of section ID -> translated content */
+  translations: Record<string, string>
+  /** Token usage */
+  tokensUsed: { input: number; output: number }
+}
+
+// ---------------------------------------------------------------------------
+// Prompt builder
+// ---------------------------------------------------------------------------
+
+/**
+ * One section as it appears in the prompt. The single source of truth for the
+ * envelope: sectionWireBytes measures this, so batching splits on what is
+ * actually sent rather than on an estimate of it.
+ */
+export function renderSectionBlock(s: {
+  id: string
+  action: "TRANSLATE" | "CONTEXT"
+  content: string
+  headingText?: string
+  level?: number
+}): string {
+  const headingAttr = s.headingText
+    ? ` heading="${(s.level ? "#".repeat(s.level) + " " : "") + s.headingText.replace(/"/g, "&quot;")}"`
+    : ""
+  return `<SECTION id="${s.id}" action="${s.action}"${headingAttr}>\n${s.content}\n</SECTION>`
+}
+
+/**
+ * Build a batched section-level translation prompt.
+ *
+ * All sections are included in document order. Changed sections are
+ * tagged TRANSLATE; unchanged sections are tagged CONTEXT (existing
+ * locale translation for voice/tone consistency).
+ *
+ * Gemini returns only the TRANSLATE sections, each in its own <SECTION>
+ * envelope.
+ */
+export function buildIncrementalPrompt(
+  options: IncrementalTranslateOptions
+): string {
+  const {
+    filePath,
+    fileType,
+    targetLanguage,
+    languageName,
+    sections,
+    glossaryTerms,
+  } = options
+
+  const group = getLanguageGroup(targetLanguage)
+  const siteNotes = getSiteSpecificNotes(group, fileType)
+  const glossarySection = formatGlossary(glossaryTerms)
+
+  const translateIds = sections
+    .filter((s) => s.action === "TRANSLATE")
+    .map((s) => s.id)
+
+  const sectionBlocks = sections.map(renderSectionBlock).join("\n\n")
+
+  return `You are updating an existing translation. Some sections of this file changed in English and need retranslation. Other sections are provided as CONTEXT ONLY -- they show the existing translation voice and terminology.
+
+File: ${filePath}
+Target language: ${languageName} (${targetLanguage})
+Sections to translate: ${translateIds.join(", ")}
+
+${siteNotes}
+
+${glossarySection}
+
+RULES:
+- Translate ONLY the content within <SECTION action="TRANSLATE"> tags.
+- Use <SECTION action="CONTEXT"> sections for tone and terminology reference. Do NOT retranslate them.
+- Preserve all markdown syntax, heading anchors {#id}, and placeholder tags exactly.
+- Preserve heading anchor IDs exactly as in English ({#anchor-id}).
+- Sections whose id starts with "frontmatter:" are page metadata (title, description, summary bullets, tags), not prose. Return plain text only: no markdown, no surrounding quotes, no YAML syntax. When the content has several lines, each line is one list item -- return exactly the same number of lines, one translated item per line.
+- Never translate the English word "or" when it appears as a substring inside a larger word, a URL, a domain, or an identifier (for example inside "tutorial", "uniform", "information", or the ".org" in "ethers.org"). Only translate "or" when it stands alone as a separate English word.
+
+PLACEHOLDER RULES:
+HTML comment placeholders like \`<!-- CODE_BLOCK_0 -->\` are code block stand-ins managed by our pipeline. You MUST preserve them EXACTLY as-is -- same text, same position, same line. Do NOT remove, translate, modify, or replace them with code. They will be restored automatically after translation.
+Self-closing placeholders (preserve exactly): <HTML-PLACEHOLDER-CODEBLOCK-****** />, <HTML-PLACEHOLDER-CODE-****** />, <HTML-PLACEHOLDER-IMAGE-****** />
+Wrapper placeholders (translate text between tags): <HTML-PLACEHOLDER-LINK-******>text</...>, <HTML-PLACEHOLDER-HTMLTAG-******>text</...>, <HTML-PLACEHOLDER-COMPONENT-******>text</...>
+You MAY reorder wrapper placeholders to match natural ${targetLanguage} word order.
+
+OUTPUT FORMAT:
+Return one <SECTION> block per section ID in the TRANSLATE list, with the opening and closing tags each on their own line. Carry the id attribute only -- do not repeat action or heading. Example:
+
+<SECTION id="section-id-1">
+translated content...
+</SECTION>
+
+<SECTION id="section-id-2">
+translated content...
+</SECTION>
+
+Every ID in the TRANSLATE list must appear exactly once; a response missing any of them is discarded in full. Write the translation exactly as it should appear in the file: quotes, backslashes and newlines are literal and MUST NOT be escaped. Return nothing for CONTEXT sections. No JSON, no markdown wrapping, no explanations.
+
+=== SECTIONS ===
+${sectionBlocks}
+=== END SECTIONS ===`
+}
+
+// ---------------------------------------------------------------------------
+// Response parser
+// ---------------------------------------------------------------------------
+
+/**
+ * One returned section: the opening tag's attributes, then the body up to a
+ * closing tag. Attributes are read as "anything but > or a quoted string", so
+ * a `>` inside a heading value (`heading="## 32 >= limit"`) cannot end the tag
+ * early and bleed the rest of the attribute into the body.
+ */
+const RESPONSE_SECTION_RE =
+  /<SECTION\b((?:[^>"]|"[^"]*")*)>([\s\S]*?)<\/SECTION\s*>/g
+
+const ID_ATTR_RE = /\bid="([^"]*)"/
+
+/**
+ * Parse Gemini's response into a section ID -> translation map.
+ *
+ * The response repeats the <SECTION> envelope the prompt sent, so a quote or
+ * a backslash in the translation is just that character. The format used to
+ * be JSON, which made every `"` in an attribute (RTL files carry ~100
+ * `<span dir="ltr">` wrappers) a `\"` the model had to get right; it did not,
+ * and five tasks a run died on it.
+ */
+export function parseIncrementalResponse(
+  responseText: string,
+  expectedIds: string[]
+): Record<string, string> {
+  // Strip markdown code block wrapping if present
+  let cleaned = responseText.trim()
+  if (cleaned.startsWith("```")) {
+    cleaned = cleaned.replace(/^```[a-zA-Z]*\s*\n/, "").replace(/\n```\s*$/, "")
+  }
+
+  // Null prototype: a section id like "constructor" (erc-721-vyper-annotated-code
+  // has one) would otherwise report present on a plain object and read back as
+  // Object itself, defeating both the check below and the English fallback.
+  const translations: Record<string, string> = Object.create(null)
+  for (const m of cleaned.matchAll(RESPONSE_SECTION_RE)) {
+    const id = ID_ATTR_RE.exec(m[1])?.[1]
+    if (!id) {
+      throw fail("a <SECTION> block carries no id", responseText)
+    }
+    if (Object.hasOwn(translations, id)) {
+      throw fail(`section "${id}" was returned more than once`, responseText)
+    }
+    // A body that swallowed the next opening tag means a closing tag was
+    // dropped. The lazy match would merge two sections into one and lose the
+    // second silently, so fail and let the retry re-send instead.
+    if (m[2].includes("<SECTION")) {
+      throw fail(`section "${id}" is missing its closing tag`, responseText)
+    }
+    // The envelope puts the body on its own lines; those newlines are the
+    // envelope's, not the content's.
+    translations[id] = m[2].replace(/^\r?\n/, "").replace(/\r?\n$/, "")
+  }
+
+  if (Object.keys(translations).length === 0) {
+    throw fail(
+      'no <SECTION id="...">...</SECTION> block found in the response',
+      responseText
+    )
+  }
+
+  // Output that stops early -- a token limit, a dropped connection -- still
+  // parses, because every block before the cut is well formed. callGeminiRaw
+  // only refuses a response that is entirely empty, so a truncated one arrives
+  // here looking like a success; assembly would fall the absent sections back
+  // to English, commit that, and stamp the manifest, after which no drift is
+  // ever detected again. Demanding every requested id makes that a parse
+  // failure the retry can clear.
+  const missing = expectedIds.filter((id) => !Object.hasOwn(translations, id))
+  if (missing.length > 0) {
+    const shown = missing.slice(0, 5).join(", ")
+    throw fail(
+      `response is missing ${missing.length} of ${expectedIds.length} requested section(s): ${shown}${missing.length > 5 ? ", ..." : ""}`,
+      responseText
+    )
+  }
+
+  return translations
+}
+
+function fail(reason: string, responseText: string): Error {
+  return new Error(
+    `Failed to parse incremental translation response: ${reason}\nRaw response (first 500 chars): ${responseText.slice(0, 500)}`
+  )
+}
+
+// ---------------------------------------------------------------------------
+// Batch call with parse retry
+// ---------------------------------------------------------------------------
+
+/** Attempts allowed for one batch whose response will not parse. */
+export const PARSE_ATTEMPTS = 3
+
+/** Keeps the note inside RETRY_NOTE_RESERVE_BYTES whatever the parser says. */
+const MAX_COMPLAINT_CHARS = 200
+
+function parserComplaint(error: Error): string {
+  return error.message.split("\n")[0].slice(0, MAX_COMPLAINT_CHARS)
+}
+
+/**
+ * Sent back with the prompt after a response cannot be read.
+ *
+ * With the envelope format the remaining failure is structural -- a dropped
+ * or malformed tag -- so the note restates the envelope rather than escaping
+ * rules. The model is told what the reader saw.
+ */
+function reparseInstruction(error: Error): string {
+  return [
+    "",
+    "YOUR PREVIOUS RESPONSE COULD NOT BE READ and was discarded.",
+    `The reader reported: ${parserComplaint(error)}`,
+    "Send every translated section again, each in its own envelope:",
+    '- Open with <SECTION id="the-section-id"> on its own line, id only.',
+    "- Close with </SECTION> on its own line.",
+    "- Include every section ID that was asked for, exactly once.",
+    "- Write the translation literally -- do not escape quotes or backslashes.",
+    "- Output the blocks only: no JSON, no markdown fences, no commentary.",
+  ].join("\n")
+}
+
+type BatchCaller = (prompt: string) => Promise<{
+  text: string
+  tokensUsed: { input: number; output: number }
+}>
+
+/** Only what the retry needs of a PlannedBatch. */
+interface RetryableBatch {
+  prompt: string
+  irreducible: boolean
+  /** Every id the response must carry back, or the batch failed. */
+  translateIds: string[]
+}
+
+/**
+ * The batch re-sent with the parser's complaint attached, or null when that
+ * note would push a near-ceiling prompt past what callGeminiRaw will send.
+ * Its refusal would replace the parse error the quarantine classifies on, so
+ * the caller stops with the parse error instead. The planner reserves
+ * RETRY_NOTE_RESERVE_BYTES to keep this from happening in the first place.
+ */
+function retryPrompt(batch: RetryableBatch, error: Error): string | null {
+  const prompt = batch.prompt + "\n" + reparseInstruction(error)
+  const fits =
+    batch.irreducible || Buffer.byteLength(prompt, "utf-8") <= MAX_PROMPT_BYTES
+  return fits ? prompt : null
+}
+
+/**
+ * Send one batch, re-sending it when the response will not parse.
+ *
+ * A malformed response is a sampling artifact, not a property of the pair --
+ * the model mis-escapes one character in a multi-KB JSON body and the whole
+ * file+locale task dies. Re-sending with the parser's complaint attached
+ * clears it; the prompt differs each time, so a temperature-0 model does not
+ * simply reproduce the same bad output.
+ *
+ * Tokens from failed attempts are returned too. They were billed.
+ */
+export async function translateBatchWithParseRetry(
+  batch: RetryableBatch,
+  call: BatchCaller,
+  onRetry?: (attempt: number, error: Error) => void
+): Promise<{
+  translations: Record<string, string>
+  tokens: { input: number; output: number }
+}> {
+  const tokens = { input: 0, output: 0 }
+  let prompt = batch.prompt
+  let lastError: Error | undefined
+
+  for (let attempt = 1; attempt <= PARSE_ATTEMPTS; attempt++) {
+    const result = await call(prompt)
+    tokens.input += result.tokensUsed.input
+    tokens.output += result.tokensUsed.output
+
+    try {
+      return {
+        translations: parseIncrementalResponse(result.text, batch.translateIds),
+        tokens,
+      }
+    } catch (error) {
+      lastError = error instanceof Error ? error : new Error(String(error))
+      if (attempt === PARSE_ATTEMPTS) break
+      const next = retryPrompt(batch, lastError)
+      if (!next) break
+      prompt = next
+      onRetry?.(attempt, lastError)
+    }
+  }
+
+  throw lastError
+}
+
+// ---------------------------------------------------------------------------
+// Section replacement
+// ---------------------------------------------------------------------------
+
+/**
+ * Replace specific sections in a locale file with fresh translations.
+ *
+ * Finds each section by its heading ID and replaces the body content
+ * between the heading line and the next heading of equal or higher level.
+ * Preserves the heading line with its {#id} anchor.
+ */
+export function replaceSections(
+  localeContent: string,
+  translations: Record<string, string>
+): string {
+  const lines = localeContent.split("\n")
+  const result: string[] = []
+
+  // Build a map of heading ID -> { lineIndex, level } for the locale file
+  const headingPattern = /^(#{1,6})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/
+  const sectionRanges: Array<{
+    id: string
+    level: number
+    startLine: number
+    endLine: number
+  }> = []
+
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].match(headingPattern)
+    if (match) {
+      const level = match[1].length
+      const customId = match[3]
+      if (customId) {
+        sectionRanges.push({ id: customId, level, startLine: i, endLine: -1 })
+      }
+    }
+  }
+
+  // Calculate end lines (next heading of ANY level, or EOF).
+  // Each section only covers its own direct body, not nested subsections.
+  // This prevents duplicate content when both parent and child are replaced.
+  for (let i = 0; i < sectionRanges.length; i++) {
+    sectionRanges[i].endLine =
+      i + 1 < sectionRanges.length
+        ? sectionRanges[i + 1].startLine
+        : lines.length
+  }
+
+  // Handle _preamble replacement (content between frontmatter and first heading)
+  let lineIdx = 0
+  if (translations["_preamble"] !== undefined) {
+    const fmEnd = findFrontmatterEnd(lines)
+    const firstHeading =
+      sectionRanges.length > 0 ? sectionRanges[0].startLine : lines.length
+    // Copy frontmatter
+    for (let i = 0; i < fmEnd; i++) {
+      result.push(lines[i])
+    }
+    // Insert translated preamble
+    result.push("")
+    result.push(translations["_preamble"].trim())
+    result.push("")
+    // Skip old preamble, start processing from first heading (or EOF)
+    lineIdx = firstHeading
+  }
+
+  // Build the output, replacing heading sections that have translations
+  for (const section of sectionRanges) {
+    // Copy lines before this section (or between sections)
+    while (lineIdx < section.startLine) {
+      result.push(lines[lineIdx])
+      lineIdx++
+    }
+
+    if (translations[section.id] !== undefined) {
+      // Keep the heading line (with {#id})
+      result.push(lines[section.startLine])
+      // Insert translated content
+      const translated = translations[section.id].trim()
+      result.push("")
+      result.push(translated)
+      result.push("")
+      // Skip the old section body
+      lineIdx = section.endLine
+    } else {
+      // Keep existing content
+      while (lineIdx < section.endLine) {
+        result.push(lines[lineIdx])
+        lineIdx++
+      }
+    }
+  }
+
+  // Copy any remaining lines after the last section
+  while (lineIdx < lines.length) {
+    result.push(lines[lineIdx])
+    lineIdx++
+  }
+
+  return result.join("\n")
+}
+
+// ---------------------------------------------------------------------------
+// Section extraction
+// ---------------------------------------------------------------------------
+
+interface ExtractedSection {
+  id: string
+  level: number
+  headingText: string
+  /** Body content below the heading (excludes heading line) */
+  body: string
+}
+
+/**
+ * Extract sections from a markdown file, keyed by heading {#id}.
+ * Returns sections in document order.
+ */
+export function extractSections(content: string): ExtractedSection[] {
+  const lines = content.split("\n")
+  const headingPattern = /^(#{1,6})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/
+  const sections: ExtractedSection[] = []
+
+  // Find all heading positions
+  const headings: Array<{
+    line: number
+    level: number
+    id: string
+    text: string
+  }> = []
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].match(headingPattern)
+    if (match) {
+      const level = match[1].length
+      const rawText = match[2]
+      const customId = match[3]
+      if (customId) {
+        headings.push({
+          line: i,
+          level,
+          id: customId,
+          text: rawText.replace(/\s*\{#[^}]+\}/, "").trim(),
+        })
+      }
+    }
+  }
+
+  // Translatable frontmatter fields, one pseudo-section each. Their ids match
+  // the content tree (`frontmatter:<key>`), so drift detection, batching, and
+  // assembly all speak the same name; sequences travel as one item per line.
+  const fm = parseFrontmatterDoc(content)
+  if (fm) {
+    for (const key of TRANSLATABLE_ATTRIBUTES) {
+      const text = frontmatterFieldText(fm.doc, key)
+      if (!text) continue
+      sections.push({
+        id: `${FRONTMATTER_PREFIX}${key}`,
+        level: 0,
+        headingText: "",
+        body: text,
+      })
+    }
+  }
+
+  // Extract preamble: content between frontmatter and first heading.
+  // Many pages use the frontmatter title as h1, so prose between
+  // frontmatter and the first ## is the intro paragraph.
+  const frontmatterEnd = findFrontmatterEnd(lines)
+  const firstHeadingLine = headings.length > 0 ? headings[0].line : lines.length
+  if (frontmatterEnd < firstHeadingLine) {
+    const preamble = lines
+      .slice(frontmatterEnd, firstHeadingLine)
+      .join("\n")
+      .trim()
+    if (preamble.length > 0) {
+      sections.push({
+        id: "_preamble",
+        level: 0,
+        headingText: "",
+        body: preamble,
+      })
+    }
+  }
+
+  // Extract body content for each heading.
+  // Each section only covers its own direct body (up to next heading of ANY
+  // level), not nested subsections. Mirrors replaceSections logic.
+  for (let i = 0; i < headings.length; i++) {
+    const current = headings[i]
+    const bodyStart = current.line + 1
+    const bodyEnd =
+      i + 1 < headings.length ? headings[i + 1].line : lines.length
+
+    const body = lines.slice(bodyStart, bodyEnd).join("\n").trim()
+    sections.push({
+      id: current.id,
+      level: current.level,
+      headingText: current.text,
+      body,
+    })
+  }
+
+  return sections
+}
+
+/**
+ * Build the TRANSLATE/CONTEXT section list for an incremental prompt.
+ *
+ * @param englishSections - Sections from current English file
+ * @param localeSections - Sections from existing locale file
+ * @param translateIds - Section IDs that need translation (from drift detection)
+ */
+export function buildSectionList(
+  englishSections: ExtractedSection[],
+  localeSections: ExtractedSection[],
+  translateIds: string[]
+): SectionForPrompt[] {
+  const localeMap = new Map<string, ExtractedSection>()
+  for (const s of localeSections) {
+    localeMap.set(s.id, s)
+  }
+
+  const translateSet = new Set(translateIds)
+  const result: SectionForPrompt[] = []
+
+  for (const section of englishSections) {
+    if (translateSet.has(section.id)) {
+      // Changed section: send English content for translation
+      result.push({
+        id: section.id,
+        action: "TRANSLATE",
+        content: section.body,
+        headingText: section.headingText,
+        level: section.level,
+      })
+    } else {
+      // Unchanged section: send existing locale translation as context
+      const localeSection = localeMap.get(section.id)
+      if (localeSection) {
+        result.push({
+          id: section.id,
+          action: "CONTEXT",
+          content: localeSection.body,
+          headingText: localeSection.headingText,
+          level: section.level,
+        })
+      }
+    }
+  }
+
+  return result
+}
+
+// ---------------------------------------------------------------------------
+// Section removal
+// ---------------------------------------------------------------------------
+
+/**
+ * Remove a markdown section by its heading {#id} anchor.
+ * Removes the heading line and all body content up to the next heading
+ * of the same or higher level (or EOF). For removal, we DO want to
+ * remove nested subsections (unlike replaceSections which is leaf-only).
+ */
+export function removeMarkdownSection(
+  content: string,
+  sectionId: string
+): string {
+  const lines = content.split("\n")
+  const headingPattern = /^(#{1,6})\s+(.+?)(?:\s*\{#([^}]+)\})?\s*$/
+  let startLine = -1
+  let startLevel = 0
+
+  // Find the heading with this ID
+  for (let i = 0; i < lines.length; i++) {
+    const match = lines[i].match(headingPattern)
+    if (match && match[3] === sectionId) {
+      startLine = i
+      startLevel = match[1].length
+      break
+    }
+  }
+
+  if (startLine === -1) return content
+
+  // Find the end: next heading of same or higher level (remove entire subtree)
+  let endLine = lines.length
+  for (let i = startLine + 1; i < lines.length; i++) {
+    const match = lines[i].match(headingPattern)
+    if (match && match[1].length <= startLevel) {
+      endLine = i
+      break
+    }
+  }
+
+  // Remove the section (and any trailing blank line)
+  const result = [...lines.slice(0, startLine), ...lines.slice(endLine)]
+
+  return result.join("\n")
+}
+
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+/** Find the line after frontmatter ends (after closing ---). Returns 0 if no frontmatter. */
+function findFrontmatterEnd(lines: string[]): number {
+  if (lines.length === 0 || lines[0].trim() !== "---") return 0
+  for (let i = 1; i < lines.length; i++) {
+    if (lines[i].trim() === "---") return i + 1
+  }
+  return 0
+}
+
+function formatGlossary(terms: Map<string, string>): string {
+  if (terms.size === 0) return ""
+
+  const entries: string[] = []
+  terms.forEach((translated, en) => {
+    entries.push(`- "${en}" -> "${translated}"`)
+  })
+
+  return `Community-voted glossary (use these exact translations):
+${entries.join("\n")}`
+}
+
+// ---------------------------------------------------------------------------
+// JSON section extraction / replacement
+// ---------------------------------------------------------------------------
+
+/**
+ * Extract "sections" from a JSON file. Each top-level key (or nested
+ * key path) becomes a section whose body is the string value.
+ * Non-string values (objects) are flattened with "/" separators.
+ */
+export function extractJsonSections(content: string): ExtractedSection[] {
+  const obj = JSON.parse(content)
+  const sections: ExtractedSection[] = []
+
+  function walk(o: Record<string, unknown>, prefix: string) {
+    for (const [key, value] of Object.entries(o)) {
+      const id = prefix ? `${prefix}/${key}` : key
+      if (typeof value === "string") {
+        sections.push({
+          id,
+          level: prefix ? 2 : 1,
+          headingText: id,
+          body: value,
+        })
+      } else if (
+        typeof value === "object" &&
+        value !== null &&
+        !Array.isArray(value)
+      ) {
+        walk(value as Record<string, unknown>, id)
+      }
+    }
+  }
+
+  walk(obj, "")
+  return sections
+}
+
+/**
+ * Replace specific key values in a JSON string with fresh translations.
+ * Handles nested keys using "/" separator (e.g., "test-nested/section-title").
+ * Preserves formatting by operating on the parsed object and re-serializing.
+ */
+export function replaceJsonValues(
+  localeContent: string,
+  translations: Record<string, string>
+): string {
+  const obj = JSON.parse(localeContent)
+
+  for (const [keyPath, translated] of Object.entries(translations)) {
+    const parts = keyPath.split("/")
+    let target = obj
+    for (let i = 0; i < parts.length - 1; i++) {
+      if (target[parts[i]] && typeof target[parts[i]] === "object") {
+        target = target[parts[i]]
+      } else {
+        target = null as unknown as Record<string, unknown>
+        break
+      }
+    }
+    if (target) {
+      target[parts[parts.length - 1]] = translated
+    }
+  }
+
+  return JSON.stringify(obj, null, 2) + "\n"
+}
+
+// Re-export types for consumers
+export type {
+  IncrementalTranslateOptions,
+  IncrementalTranslateResult,
+  SectionForPrompt,
+}
+
+// ---------------------------------------------------------------------------
+// Byte-size-aware section batching (CONCURRENCY-SPEC.md Part 2C)
+// ---------------------------------------------------------------------------
+
+import { MAX_CHUNK_BYTES, MAX_CONTEXT_BYTES } from "../../constants"
+
+type BatchSection = {
+  id: string
+  content: string
+  action: "TRANSLATE" | "CONTEXT"
+  /** Markdown only; feeds the heading="..." attribute and its wire cost */
+  headingText?: string
+  level?: number
+}
+
+/**
+ * Bytes a section costs on the wire, not just its content: buildIncrementalPrompt
+ * wraps each one in a <SECTION id=".." action=".." heading=".."> envelope that
+ * repeats the id twice. JSON leaves are small and numerous with long key paths
+ * (~134 bytes of envelope each for quiz keys), so counting content alone
+ * understates a batch by more than the content itself.
+ */
+export function sectionWireBytes(section: {
+  id: string
+  content: string
+  action?: "TRANSLATE" | "CONTEXT"
+  headingText?: string
+  level?: number
+}): number {
+  // Measures the rendered block rather than approximating it, so the batcher
+  // and the prompt builder cannot disagree about what a section costs. Both
+  // call renderSectionBlock; +2 covers the "\n\n" join between blocks.
+  const action = section.action ?? "TRANSLATE"
+  const block =
+    Buffer.byteLength(
+      renderSectionBlock({
+        id: section.id,
+        content: section.content,
+        action,
+        headingText: section.headingText,
+        level: section.level,
+      }),
+      "utf-8"
+    ) + 2
+  // A TRANSLATE section is also named in the prompt's "Sections to translate:"
+  // list, which scales with the batch and is invisible to a zero-section
+  // overhead measurement -- 4KB unaccounted at ~120 JSON keys per batch.
+  const idListEntry =
+    action === "TRANSLATE" ? Buffer.byteLength(section.id, "utf-8") + 2 : 0
+  return block + idListEntry
+}
+
+/**
+ * Pick up to `budget` bytes of CONTEXT sections nearest (in document order) to
+ * this batch's TRANSLATE sections, returned in document order.
+ *
+ * Context is replicated into every batch, so it is a per-call tax rather than a
+ * one-off: an uncapped context payload multiplies by the batch count. Nearest
+ * neighbours are the useful ones -- surrounding voice and terminology.
+ */
+function selectContext(
+  contextSections: Array<BatchSection & { index: number }>,
+  translateIndexes: number[],
+  budget: number
+): BatchSection[] {
+  if (contextSections.length === 0 || budget <= 0) return []
+
+  const distance = (index: number) =>
+    Math.min(...translateIndexes.map((t) => Math.abs(index - t)))
+
+  const selected: Array<BatchSection & { index: number }> = []
+  let used = 0
+
+  for (const section of [...contextSections].sort(
+    (a, b) => distance(a.index) - distance(b.index) || a.index - b.index
+  )) {
+    const bytes = sectionWireBytes(section)
+    if (used + bytes > budget) continue
+    selected.push(section)
+    used += bytes
+  }
+
+  return selected
+    .sort((a, b) => a.index - b.index)
+    .map(({ id, content, action, headingText }) => ({
+      id,
+      content,
+      action,
+      headingText,
+    }))
+}
+
+/**
+ * Split sections into batches that fit within the byte budget.
+ * Each batch carries up to MAX_CONTEXT_BYTES of nearby CONTEXT sections.
+ * Only TRANSLATE sections count toward splitting decisions.
+ *
+ * Returns empty array if there are no TRANSLATE sections.
+ */
+export function batchSections(
+  sections: BatchSection[],
+  maxBytes: number = MAX_CHUNK_BYTES,
+  maxContextBytes: number = MAX_CONTEXT_BYTES
+): BatchSection[][] {
+  const contextSections = sections
+    .map((s, index) => ({ ...s, index }))
+    .filter((s) => s.action === "CONTEXT")
+  const translateSections = sections
+    .map((s, index) => ({ ...s, index }))
+    .filter((s) => s.action === "TRANSLATE")
+
+  if (translateSections.length === 0) return []
+
+  // TRANSLATE content gets the whole chunk budget. Subtracting the context size
+  // here floored the budget at 1 byte for any file with >32KB of existing
+  // translation, emitting one full-context call per changed section: 488
+  // sections x 24 locales = 11,712 calls and $1,108 on 2026-08-07 (run
+  // 31149083965) for 42KB of new text.
+  const translateBudget = maxBytes
+
+  const batches: BatchSection[][] = []
+  let currentTranslate: Array<BatchSection & { index: number }> = []
+  let currentBytes = 0
+
+  const flush = () => {
+    if (currentTranslate.length === 0) return
+    const context = selectContext(
+      contextSections,
+      currentTranslate.map((s) => s.index),
+      maxContextBytes
+    )
+    batches.push([
+      ...context,
+      ...currentTranslate.map(({ id, content, action, headingText }) => ({
+        id,
+        content,
+        action,
+        headingText,
+      })),
+    ])
+    currentTranslate = []
+    currentBytes = 0
+  }
+
+  for (const section of translateSections) {
+    const sectionBytes = sectionWireBytes(section)
+
+    // If adding this section exceeds budget AND we already have sections, start new batch
+    if (
+      currentTranslate.length > 0 &&
+      currentBytes + sectionBytes > translateBudget
+    ) {
+      flush()
+    }
+
+    currentTranslate.push(section)
+    currentBytes += sectionBytes
+  }
+
+  flush()
+
+  return batches
+}

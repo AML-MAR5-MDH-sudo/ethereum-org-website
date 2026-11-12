@@ -1,0 +1,183 @@
+import { extname, join } from "path"
+
+import type { CatalogItemLink, CatalogItemLinkKind, Lang } from "@/lib/types"
+
+import {
+  DEFAULT_LOCALE,
+  DISCORD_PATH,
+  MAIN_CONTENT_ID,
+  SITE_URL,
+} from "@/lib/constants"
+
+export const isDiscordInvite = (href: string): boolean =>
+  href.includes(DISCORD_PATH) && !href.includes("http")
+
+export const isMailto = (href: string): boolean => href.includes("mailto:")
+
+export const isExternal = (href: string): boolean =>
+  href.includes("http") ||
+  isMailto(href) ||
+  href.includes("ipfs://") ||
+  isDiscordInvite(href)
+
+export const isGlossary = (href: string): boolean =>
+  href.includes("glossary") && href.includes("#")
+
+export const isPdf = (href: string): boolean => /\.pdf(?:$|\?)/i.test(href)
+
+export const isFile = (href: string): boolean => extname(href).length > 0
+
+export const sanitizeHitUrl = (url: string): string =>
+  url
+    .replace(/^https?:\/\/[^/]+(?=\/)/, "")
+    .replace(`#${MAIN_CONTENT_ID}`, "")
+    .replace("#content", "")
+    .replace("#top", "")
+
+// remove any query params or hashes from the path
+export const cleanPath = (path: string): string => path.replace(/[$#].+$/, "")
+
+/**
+ * Upgrades `http://` to `https://` for ethereum.org and its subdomains.
+ * External data sources (translations, event feeds) sometimes emit insecure
+ * ethereum.org URLs that trip SEO crawlers with a mixed-protocol warning.
+ */
+export const normalizeHref = (href: string): string => {
+  if (
+    href.startsWith("http://") &&
+    /^http:\/\/([^/]*\.)?ethereum\.org(\/|$)/.test(href)
+  ) {
+    return href.replace(/^http:\/\//, "https://")
+  }
+  return href
+}
+
+export const isHrefActive = (
+  href: string,
+  pathname: string,
+  isPartiallyActive?: boolean
+) =>
+  isPartiallyActive ? pathname.startsWith(href) : cleanPath(pathname) === href
+
+export const isHash = (href: string): boolean => href.startsWith("#")
+
+/** Extract the fragment id from a hash href (e.g. "#getting-started" -> "getting-started"). */
+export const getIdFromHash = (href: string): string => href.split("#")[1] ?? ""
+
+export const addSlashes = (href: string): string => {
+  if (isExternal(href)) return href
+  return join("/", href, "/")
+}
+
+export const getFullUrl = (locale: string | undefined, path: string) => {
+  const url =
+    DEFAULT_LOCALE === locale || !locale
+      ? new URL(path, SITE_URL)
+      : new URL(join(locale, path), SITE_URL)
+
+  if (!url.pathname.endsWith("/")) {
+    url.pathname += "/"
+  }
+
+  return url.href
+}
+
+// Remove trailing slash from slug and add leading slash
+export const normalizeSlug = (slug: string) => {
+  return `/${slug.replace(/^\/+|\/+$/g, "")}`
+}
+
+/**
+ * Extracts the first path segment from a pathname.
+ * Useful for extracting locale prefixes from URLs.
+ *
+ * @example
+ * getFirstSegment("/en/about") // "en"
+ * getFirstSegment("/about")    // "about"
+ * getFirstSegment("/")         // ""
+ */
+export const getFirstSegment = (pathname: string): string => {
+  const secondSlash = pathname.indexOf("/", 1)
+  return secondSlash === -1 ? pathname.slice(1) : pathname.slice(1, secondSlash)
+}
+
+/**
+ * Converts a string to a URL-friendly slug
+ * @param text - The text to convert (e.g., "Governance/DAO", "Bridge Aave 1", "Hello world")
+ * @returns URL slug (e.g., "governance-dao", "bridge-aave-1", "hello-world")
+ */
+export const slugify = (text: string): string => {
+  return encodeURIComponent(
+    text
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-z0-9\s-]/g, "") // Remove special characters except spaces and hyphens
+      .replace(/\s+/g, "-") // Replace spaces with hyphens
+      .replace(/-+/g, "-") // Replace multiple hyphens with single hyphen
+      .replace(/^-|-$/g, "") // Remove leading/trailing hyphens
+  )
+}
+
+/**
+ * Converts an internal locale code to a valid BCP 47 language tag.
+ * Internal codes use lowercase region subtags (e.g. "pt-br", "zh-tw")
+ * for use as URL path segments, but HTML lang and hreflang attributes
+ * require uppercase region subtags per BCP 47 (e.g. "pt-BR", "zh-TW").
+ */
+export const toLanguageTag = (locale: string): string => {
+  const parts = locale.split("-")
+  if (parts.length === 2) return `${parts[0]}-${parts[1].toUpperCase()}`
+  return locale
+}
+
+export const normalizeUrlForJsonLd = (
+  locale: string | Lang | undefined,
+  pathWithoutLocale: string
+): string => {
+  const path = locale
+    ? join(locale === DEFAULT_LOCALE ? "" : locale, pathWithoutLocale)
+    : pathWithoutLocale
+  const url = new URL(path, SITE_URL)
+  // Match the canonical URL (trailingSlash: true); files keep their extension
+  if (!url.pathname.endsWith("/") && !isFile(url.pathname)) url.pathname += "/"
+  return url.toString()
+}
+
+const X_HANDLE = /^@?([A-Za-z0-9_]{1,15})$/
+const PLACEHOLDER = /^(none|null|na|tbd)$/i
+
+/** http(s) URLs, or bare domains read as https; anything else is undefined. */
+const toWebUrl = (href: string | null | undefined): URL | undefined => {
+  const value = href?.trim()
+  if (!value) return undefined
+  try {
+    const hasScheme = /^[a-z][a-z0-9+.-]*:/i.test(value)
+    const url = new URL(hasScheme ? value : `https://${value}`)
+    const isWeb = url.protocol === "https:" || url.protocol === "http:"
+    return isWeb && url.hostname.includes(".") ? url : undefined
+  } catch {
+    return undefined
+  }
+}
+
+export const toWebHref = (href: string | null | undefined) =>
+  toWebUrl(href)?.href
+
+/**
+ * Normalises hand-entered links (bare domains, `@handle` for X) and drops
+ * anything that isn't http(s); a repo off github.com gets the generic code icon.
+ */
+export const toCatalogItemLink = (
+  kind: CatalogItemLinkKind,
+  href: string | null | undefined
+): CatalogItemLink | undefined => {
+  if (PLACEHOLDER.test(href?.trim() ?? "")) return undefined
+  const handle = kind === "x" ? href?.trim().match(X_HANDLE)?.[1] : undefined
+  const url = toWebUrl(handle ? `https://x.com/${handle}` : href)
+  if (!url) return undefined
+  const isGitHub = url.hostname.replace(/^www\./, "") === "github.com"
+  return {
+    kind: kind === "github" && !isGitHub ? "code" : kind,
+    href: url.href,
+  }
+}

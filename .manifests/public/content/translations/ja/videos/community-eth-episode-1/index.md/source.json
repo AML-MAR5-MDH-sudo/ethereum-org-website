@@ -1,0 +1,171 @@
+{
+  "version": 2,
+  "sourceFile": "public/content/videos/community-eth-episode-1/index.md",
+  "generatedAt": "2026-06-30T00:59:31.813Z",
+  "rootHash": "a16741816306",
+  "tree": {
+    "contentHash": "62c9dc176425",
+    "anchorHash": "99aacde45dec",
+    "children": {
+      "frontmatter:title": {
+        "contentHash": "30df6280ddde",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:description": {
+        "contentHash": "8ac0550c7685",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "frontmatter:lang": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "dbd3a49d0d90"
+      },
+      "frontmatter:youtubeId": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "e35d7f0af771"
+      },
+      "frontmatter:uploadDate": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "c20b5a72b2d0"
+      },
+      "frontmatter:duration": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "351d3529d656"
+      },
+      "frontmatter:educationLevel": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "d0c2ebfa3490"
+      },
+      "frontmatter:topic": {
+        "contentHash": "4b9f7d802648",
+        "anchorHash": "26a509f97223",
+        "children": {
+          "0": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "9af2994fe66a"
+          }
+        }
+      },
+      "frontmatter:format": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "02540942346f"
+      },
+      "frontmatter:author": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "25d86b1bf80b"
+      },
+      "frontmatter:breadcrumb": {
+        "contentHash": "e3b0c44298fc",
+        "anchorHash": "9d7c0e231a69"
+      },
+      "prose:1": {
+        "contentHash": "5911cf696fb6",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "link:0": {
+        "contentHash": "6e0655257a0c",
+        "anchorHash": "cacbdd2ecadd"
+      },
+      "prose:2": {
+        "contentHash": "9c4a454cfe91",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "what-is-ethereum-000": {
+        "contentHash": "7a28f44de347",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "3667c1ef4217",
+        "children": {
+          "_label": {
+            "contentHash": "3667c1ef4217",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "a03997c8cf1e",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "what-makes-it-powerful-040": {
+        "contentHash": "b0045ea925e0",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "158fb48fd724",
+        "children": {
+          "_label": {
+            "contentHash": "158fb48fd724",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "d6e51c550d07",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "why-we-build-200": {
+        "contentHash": "fa8b7e45c1de",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "820af1c501b9",
+        "children": {
+          "_label": {
+            "contentHash": "820af1c501b9",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "a158c2c9c6e7",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      },
+      "the-community-300": {
+        "contentHash": "4aa5a7eca079",
+        "anchorHash": "4b9f7d802648",
+        "labelHash": "f553a2bc37d2",
+        "children": {
+          "_label": {
+            "contentHash": "f553a2bc37d2",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "prose:0": {
+            "contentHash": "261db4d22f66",
+            "anchorHash": "e3b0c44298fc"
+          }
+        },
+        "childrenOrder": [
+          "_label",
+          "prose:0"
+        ]
+      }
+    },
+    "childrenOrder": [
+      "frontmatter:title",
+      "frontmatter:description",
+      "frontmatter:lang",
+      "frontmatter:youtubeId",
+      "frontmatter:uploadDate",
+      "frontmatter:duration",
+      "frontmatter:educationLevel",
+      "frontmatter:topic",
+      "frontmatter:format",
+      "frontmatter:author",
+      "frontmatter:breadcrumb",
+      "prose:1",
+      "link:0",
+      "prose:2",
+      "what-is-ethereum-000",
+      "what-makes-it-powerful-040",
+      "why-we-build-200",
+      "the-community-300"
+    ]
+  },
+  "sourceCommitSha": "ba63911ff40cf440ccba7536fab2f94ce336ec57"
+}

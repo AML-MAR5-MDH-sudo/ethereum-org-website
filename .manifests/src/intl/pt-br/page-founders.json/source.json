@@ -1,0 +1,338 @@
+{
+  "version": 2,
+  "sourceFile": "src/intl/en/page-founders.json",
+  "generatedAt": "2026-10-21T21:37:15.161Z",
+  "rootHash": "969316148a0b",
+  "tree": {
+    "contentHash": "702191d6d30a",
+    "anchorHash": "361bb66ccdeb",
+    "children": {
+      "page-founders-accelerators-alliance-terms-description": {
+        "contentHash": "d694102bd620",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-alliance-terms-highlight-1": {
+        "contentHash": "ba59990de826",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-alliance-terms-highlight-2": {
+        "contentHash": "e5f7b78fe25b",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-arbitrum-open-house-description": {
+        "contentHash": "9aaea3a1dc0e",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-arbitrum-open-house-highlight-1": {
+        "contentHash": "5b2eece52ae9",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-arbitrum-open-house-highlight-2": {
+        "contentHash": "7bfce86c9116",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-arbitrum-open-house-subtitle": {
+        "contentHash": "a1b38e71583d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-base-batches-description": {
+        "contentHash": "c8bfc877969d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-base-batches-highlight-1": {
+        "contentHash": "58d98aca4f3d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-kernel-description": {
+        "contentHash": "9a48f782fffe",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-kernel-highlight-1": {
+        "contentHash": "7368faa27c32",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-kernel-highlight-2": {
+        "contentHash": "150160f43efc",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-accelerators-mentorship-label": {
+        "contentHash": "c2b90433873f",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-apply-h2": {
+        "contentHash": "a7dbfdbcc4be",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-apply-p1": {
+        "contentHash": "2e35af5b78fb",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-community-ethglobal-description": {
+        "contentHash": "4f919279b034",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-community-events-description": {
+        "contentHash": "18f12beb5e8d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-community-label": {
+        "contentHash": "98f09e439ad3",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-cta-browse-events": {
+        "contentHash": "8d71009f1092",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-cta-explore-name": {
+        "contentHash": "51826f7d58e7",
+        "anchorHash": "1bb7a6278a9b",
+        "children": {
+          "prose:1": {
+            "contentHash": "3b73900b8d29",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "icu:0": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "5e291d7bcb2d"
+          }
+        },
+        "childrenOrder": [
+          "prose:1",
+          "icu:0"
+        ]
+      },
+      "page-founders-cta-visit-name": {
+        "contentHash": "fdd97f785936",
+        "anchorHash": "1bb7a6278a9b",
+        "children": {
+          "prose:1": {
+            "contentHash": "1c8ac867f052",
+            "anchorHash": "e3b0c44298fc"
+          },
+          "icu:0": {
+            "contentHash": "e3b0c44298fc",
+            "anchorHash": "5e291d7bcb2d"
+          }
+        },
+        "childrenOrder": [
+          "prose:1",
+          "icu:0"
+        ]
+      },
+      "page-founders-description": {
+        "contentHash": "e6b1e6740f13",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-base-builders-description": {
+        "contentHash": "b3f00352894e",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-base-builders-highlight-1": {
+        "contentHash": "4d6e438a5125",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-base-builders-highlight-2": {
+        "contentHash": "cc8e41a5587e",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-esp-applicants-description": {
+        "contentHash": "d21579f2680b",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-esp-applicants-highlight-1": {
+        "contentHash": "e5ead5524442",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-esp-applicants-highlight-2": {
+        "contentHash": "c86ecf58553c",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-investment-label": {
+        "contentHash": "f317fcac0a06",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-uniswap-description": {
+        "contentHash": "8ecae1b8eec5",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-uniswap-highlight-1": {
+        "contentHash": "57b2326d19ba",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-funding-uniswap-highlight-2": {
+        "contentHash": "d162122b4643",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-last-checked": {
+        "contentHash": "22da7a6cb930",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-metadata-description": {
+        "contentHash": "30f1d356f1b1",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-metadata-title": {
+        "contentHash": "1c841b44954a",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-rfpsearch-cta": {
+        "contentHash": "f8fe68f391b2",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-rfpsearch-h3": {
+        "contentHash": "2f65bfebe83f",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-rfpsearch-p": {
+        "contentHash": "63e822d6f31f",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-succeed-p1": {
+        "contentHash": "1cd5bbc9d835",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-accelerator": {
+        "contentHash": "418f3fb67e12",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-audit-subsidies": {
+        "contentHash": "8d51202fecf4",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-cohort-closed": {
+        "contentHash": "96636f996162",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-credits": {
+        "contentHash": "39640729fc7c",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-events": {
+        "contentHash": "8d14f6e72de8",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-gas": {
+        "contentHash": "1e0b43a97745",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-grants": {
+        "contentHash": "b3e1c95a4be3",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-investment": {
+        "contentHash": "40754039ee2b",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-mentorship": {
+        "contentHash": "737250f70bb3",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-ongoing": {
+        "contentHash": "a90620097624",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-open": {
+        "contentHash": "15b652ba89e5",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-tag-public-goods": {
+        "contentHash": "0d95d0a891c4",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-alchemy-description": {
+        "contentHash": "fe67f87139de",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-alchemy-highlight-1": {
+        "contentHash": "6d37e9985ee5",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-alchemy-highlight-2": {
+        "contentHash": "6683345b0632",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-arbitrum-description": {
+        "contentHash": "6af3a41758aa",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-arbitrum-highlight-1": {
+        "contentHash": "95d27a78f887",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-arbitrum-highlight-2": {
+        "contentHash": "454c213a2e41",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-technical-label": {
+        "contentHash": "d398df6cd98d",
+        "anchorHash": "e3b0c44298fc"
+      },
+      "page-founders-title": {
+        "contentHash": "f3ee838f7437",
+        "anchorHash": "e3b0c44298fc"
+      }
+    },
+    "childrenOrder": [
+      "page-founders-accelerators-alliance-terms-description",
+      "page-founders-accelerators-alliance-terms-highlight-1",
+      "page-founders-accelerators-alliance-terms-highlight-2",
+      "page-founders-accelerators-arbitrum-open-house-description",
+      "page-founders-accelerators-arbitrum-open-house-highlight-1",
+      "page-founders-accelerators-arbitrum-open-house-highlight-2",
+      "page-founders-accelerators-arbitrum-open-house-subtitle",
+      "page-founders-accelerators-base-batches-description",
+      "page-founders-accelerators-base-batches-highlight-1",
+      "page-founders-accelerators-kernel-description",
+      "page-founders-accelerators-kernel-highlight-1",
+      "page-founders-accelerators-kernel-highlight-2",
+      "page-founders-accelerators-mentorship-label",
+      "page-founders-apply-h2",
+      "page-founders-apply-p1",
+      "page-founders-community-ethglobal-description",
+      "page-founders-community-events-description",
+      "page-founders-community-label",
+      "page-founders-cta-browse-events",
+      "page-founders-cta-explore-name",
+      "page-founders-cta-visit-name",
+      "page-founders-description",
+      "page-founders-funding-base-builders-description",
+      "page-founders-funding-base-builders-highlight-1",
+      "page-founders-funding-base-builders-highlight-2",
+      "page-founders-funding-esp-applicants-description",
+      "page-founders-funding-esp-applicants-highlight-1",
+      "page-founders-funding-esp-applicants-highlight-2",
+      "page-founders-funding-investment-label",
+      "page-founders-funding-uniswap-description",
+      "page-founders-funding-uniswap-highlight-1",
+      "page-founders-funding-uniswap-highlight-2",
+      "page-founders-last-checked",
+      "page-founders-metadata-description",
+      "page-founders-metadata-title",
+      "page-founders-rfpsearch-cta",
+      "page-founders-rfpsearch-h3",
+      "page-founders-rfpsearch-p",
+      "page-founders-succeed-p1",
+      "page-founders-tag-accelerator",
+      "page-founders-tag-audit-subsidies",
+      "page-founders-tag-cohort-closed",
+      "page-founders-tag-credits",
+      "page-founders-tag-events",
+      "page-founders-tag-gas",
+      "page-founders-tag-grants",
+      "page-founders-tag-investment",
+      "page-founders-tag-mentorship",
+      "page-founders-tag-ongoing",
+      "page-founders-tag-open",
+      "page-founders-tag-public-goods",
+      "page-founders-technical-alchemy-description",
+      "page-founders-technical-alchemy-highlight-1",
+      "page-founders-technical-alchemy-highlight-2",
+      "page-founders-technical-arbitrum-description",
+      "page-founders-technical-arbitrum-highlight-1",
+      "page-founders-technical-arbitrum-highlight-2",
+      "page-founders-technical-label",
+      "page-founders-title"
+    ]
+  },
+  "sourceCommitSha": "9c82bea6ad613e9a18800c759b53182ae5da2f03"
+}

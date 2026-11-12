@@ -5,4 +5,8 @@
 
 # These owners will be the default owners for everything in
 # the repo. Unless a later match takes precedence,
-*       @samajammin @ryancreatescopy @jjmstark
+*       @wackerow @pettinarip
+
+# Owners of specific files
+/src/data/*-bounty-hunters.json @fredriksvantes @0xMushow @bshastry @0xTylerHolmes
+/src/data/wallets/new-to-crypto.ts @konopkja @nloureiro

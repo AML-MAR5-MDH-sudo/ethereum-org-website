@@ -1,0 +1,426 @@
+{
+  "version": 2,
+  "locale": "ur",
+  "translatedAt": "2026-10-26T17:18:51.632Z",
+  "englishManifestHash": "f5b14801f6d1",
+  "placeholderOrder": [
+    "LINK-526327",
+    "CODE-4c61a5",
+    "CODE-29f7ca",
+    "LINK-68f992",
+    "LINK-a04871",
+    "LINK-c11257",
+    "CODE-29f606",
+    "LINK-f99ca4",
+    "CODEBLOCK-26908b",
+    "CODE-62b67e",
+    "CODE-dabd3a",
+    "LINK-177004",
+    "CODE-a61d35",
+    "CODE-66dfee",
+    "IMAGE-3c599f",
+    "LINK-9d3f4f",
+    "LINK-d16d1b",
+    "CODE-e0603c",
+    "CODE-c4d322",
+    "CODE-5c39d7",
+    "CODE-d6299b",
+    "CODE-0ab3cc",
+    "CODEBLOCK-d63fb1",
+    "CODE-5c43f8",
+    "CODE-e46548",
+    "CODE-5c43f8",
+    "LINK-1d282a",
+    "CODE-5c43f8",
+    "CODE-e46548",
+    "CODE-e7a027",
+    "CODE-5b7e6b",
+    "CODE-a20b52",
+    "CODE-a8fa7f",
+    "CODE-5c43f8",
+    "CODE-f6a214",
+    "CODE-cd55ad",
+    "CODEBLOCK-ce7388",
+    "CODE-98f38f",
+    "CODE-e1f797",
+    "CODE-b5bea4",
+    "CODE-d80c9b",
+    "CODE-f013aa",
+    "CODE-74234e",
+    "CODE-74234e",
+    "CODE-4f53cd",
+    "CODE-014afd",
+    "CODE-9fe610",
+    "CODE-c44525",
+    "CODE-6f3060",
+    "LINK-63dbf5",
+    "CODE-0da00b",
+    "CODEBLOCK-49eb51",
+    "CODE-fa3eb9",
+    "CODEBLOCK-3cd95a",
+    "LINK-7d6815",
+    "CODE-be88b3",
+    "CODE-8fd853",
+    "CODE-636558",
+    "CODE-3f3e6a",
+    "CODE-e46548",
+    "CODE-5c43f8",
+    "CODE-b5bea4",
+    "CODE-fcbcf1",
+    "CODE-e46548",
+    "CODEBLOCK-eae897",
+    "LINK-9d7f22",
+    "LINK-f728fb",
+    "LINK-36ee50"
+  ],
+  "placeholderMap": {
+    "CODEBLOCK-26908b": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-d63fb1": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-ce7388": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-49eb51": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-3cd95a": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODEBLOCK-eae897": {
+      "type": "code-fence",
+      "values": {}
+    },
+    "CODE-4c61a5": {
+      "type": "inline-code",
+      "values": {
+        "content": "wss://<provider-host>/<your-api-key>"
+      }
+    },
+    "CODE-29f7ca": {
+      "type": "inline-code",
+      "values": {
+        "content": "wss://eth-mainnet.g.alchemy.com/v2/<your-api-key>"
+      }
+    },
+    "CODE-29f606": {
+      "type": "inline-code",
+      "values": {
+        "content": "wss://ethereum-rpc.publicnode.com"
+      }
+    },
+    "CODE-62b67e": {
+      "type": "inline-code",
+      "values": {
+        "content": ">"
+      }
+    },
+    "CODE-dabd3a": {
+      "type": "inline-code",
+      "values": {
+        "content": "<"
+      }
+    },
+    "CODE-a61d35": {
+      "type": "inline-code",
+      "values": {
+        "content": "wss://"
+      }
+    },
+    "CODE-66dfee": {
+      "type": "inline-code",
+      "values": {
+        "content": "https://"
+      }
+    },
+    "CODE-c4d322": {
+      "type": "inline-code",
+      "values": {
+        "content": "webSocket"
+      }
+    },
+    "CODE-e0603c": {
+      "type": "inline-code",
+      "values": {
+        "content": "http"
+      }
+    },
+    "CODE-5c39d7": {
+      "type": "inline-code",
+      "values": {
+        "content": "npm install viem"
+      }
+    },
+    "CODE-d6299b": {
+      "type": "inline-code",
+      "values": {
+        "content": "index.mjs"
+      }
+    },
+    "CODE-0ab3cc": {
+      "type": "inline-code",
+      "values": {
+        "content": "node index.mjs"
+      }
+    },
+    "CODE-5c43f8": {
+      "type": "inline-code",
+      "values": {
+        "content": "eth_subscribe"
+      }
+    },
+    "CODE-e46548": {
+      "type": "inline-code",
+      "values": {
+        "content": "eth_unsubscribe"
+      }
+    },
+    "CODE-e7a027": {
+      "type": "inline-code",
+      "values": {
+        "content": "jsonrpc"
+      }
+    },
+    "CODE-5b7e6b": {
+      "type": "inline-code",
+      "values": {
+        "content": "method"
+      }
+    },
+    "CODE-a20b52": {
+      "type": "inline-code",
+      "values": {
+        "content": "params"
+      }
+    },
+    "CODE-a8fa7f": {
+      "type": "inline-code",
+      "values": {
+        "content": "subscription"
+      }
+    },
+    "CODE-f6a214": {
+      "type": "inline-code",
+      "values": {
+        "content": "result"
+      }
+    },
+    "CODE-cd55ad": {
+      "type": "inline-code",
+      "values": {
+        "content": "newHeads"
+      }
+    },
+    "CODE-98f38f": {
+      "type": "inline-code",
+      "values": {
+        "content": "logs"
+      }
+    },
+    "CODE-e1f797": {
+      "type": "inline-code",
+      "values": {
+        "content": "removed"
+      }
+    },
+    "CODE-b5bea4": {
+      "type": "inline-code",
+      "values": {
+        "content": "true"
+      }
+    },
+    "CODE-d80c9b": {
+      "type": "inline-code",
+      "values": {
+        "content": "address"
+      }
+    },
+    "CODE-f013aa": {
+      "type": "inline-code",
+      "values": {
+        "content": "topics"
+      }
+    },
+    "CODE-74234e": {
+      "type": "inline-code",
+      "values": {
+        "content": "null"
+      }
+    },
+    "CODE-4f53cd": {
+      "type": "inline-code",
+      "values": {
+        "content": "[]"
+      }
+    },
+    "CODE-014afd": {
+      "type": "inline-code",
+      "values": {
+        "content": "[A]"
+      }
+    },
+    "CODE-9fe610": {
+      "type": "inline-code",
+      "values": {
+        "content": "[null, B]"
+      }
+    },
+    "CODE-c44525": {
+      "type": "inline-code",
+      "values": {
+        "content": "[A, B]"
+      }
+    },
+    "CODE-6f3060": {
+      "type": "inline-code",
+      "values": {
+        "content": "[[A, B], [A, B]]"
+      }
+    },
+    "CODE-0da00b": {
+      "type": "inline-code",
+      "values": {
+        "content": "Deposit"
+      }
+    },
+    "CODE-fa3eb9": {
+      "type": "inline-code",
+      "values": {
+        "content": "newPendingTransactions"
+      }
+    },
+    "CODE-be88b3": {
+      "type": "inline-code",
+      "values": {
+        "content": "alchemy_pendingTransactions"
+      }
+    },
+    "CODE-8fd853": {
+      "type": "inline-code",
+      "values": {
+        "content": "fromAddress"
+      }
+    },
+    "CODE-636558": {
+      "type": "inline-code",
+      "values": {
+        "content": "toAddress"
+      }
+    },
+    "CODE-3f3e6a": {
+      "type": "inline-code",
+      "values": {
+        "content": "hashesOnly"
+      }
+    },
+    "CODE-fcbcf1": {
+      "type": "inline-code",
+      "values": {
+        "content": "false"
+      }
+    },
+    "IMAGE-3c599f": {
+      "type": "image",
+      "values": {
+        "path": "./use-websockets.mp4#602x280"
+      }
+    },
+    "LINK-526327": {
+      "type": "link",
+      "values": {
+        "url": "https://viem.sh/docs/clients/transports/websocket"
+      }
+    },
+    "LINK-68f992": {
+      "type": "link",
+      "values": {
+        "url": "https://auth.alchemy.com/signup"
+      }
+    },
+    "LINK-a04871": {
+      "type": "link",
+      "values": {
+        "url": "/developers/docs/nodes-and-clients/nodes-as-a-service/"
+      }
+    },
+    "LINK-c11257": {
+      "type": "link",
+      "values": {
+        "url": "/developers/docs/nodes-and-clients/run-a-node/"
+      }
+    },
+    "LINK-f99ca4": {
+      "type": "link",
+      "values": {
+        "url": "https://github.com/websockets/wscat"
+      }
+    },
+    "LINK-177004": {
+      "type": "link",
+      "values": {
+        "url": "https://dashboard.alchemy.com/"
+      }
+    },
+    "LINK-9d3f4f": {
+      "type": "link",
+      "values": {
+        "url": "/developers/docs/apis/json-rpc/"
+      }
+    },
+    "LINK-d16d1b": {
+      "type": "link",
+      "values": {
+        "url": "https://viem.sh/"
+      }
+    },
+    "LINK-1d282a": {
+      "type": "link",
+      "values": {
+        "url": "https://geth.ethereum.org/docs/interacting-with-geth/rpc/pubsub"
+      }
+    },
+    "LINK-63dbf5": {
+      "type": "link",
+      "values": {
+        "url": "https://etherscan.io/address/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"
+      }
+    },
+    "LINK-7d6815": {
+      "type": "link",
+      "values": {
+        "url": "https://www.alchemy.com/docs/reference/alchemy-pendingtransactions"
+      }
+    },
+    "LINK-9d7f22": {
+      "type": "link",
+      "values": {
+        "url": "https://auth.alchemy.com"
+      }
+    },
+    "LINK-f728fb": {
+      "type": "link",
+      "values": {
+        "url": "https://www.alchemy.com/docs/"
+      }
+    },
+    "LINK-36ee50": {
+      "type": "link",
+      "values": {
+        "url": "https://x.com/Alchemy"
+      }
+    }
+  },
+  "sections": {
+    "_all": {
+      "translatedAt": "2026-10-26T17:18:51.632Z",
+      "status": "success"
+    }
+  }
+}

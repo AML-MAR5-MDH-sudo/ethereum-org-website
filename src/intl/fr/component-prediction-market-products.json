@@ -1,0 +1,8 @@
+{
+  "limitless-cta": "Explorez Limitless",
+  "limitless-description": "Un marché de prédiction construit sur Base, une couche 2 (l2) d'Ethereum. Les transactions sont réglées onchain en USDC, et la plupart des marchés de prix se résolvent automatiquement grâce à des flux de prix onchain. Non disponible dans tous les pays.",
+  "limitless-title": "Limitless",
+  "polymarket-cta": "Explorez Polymarket",
+  "polymarket-description": "L'un des plus grands marchés de prédiction. Les transactions sont réglées sur Polygon, et les résultats sont décidés via l'oracle UMA. Non disponible dans tous les pays.",
+  "polymarket-title": "Polymarket"
+}

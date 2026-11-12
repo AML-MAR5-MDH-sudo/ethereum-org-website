@@ -1,0 +1,8 @@
+{
+  "limitless-cta": "Prozkoumat Limitless",
+  "limitless-description": "Predikční trh postavený na Base, vrstvě 2 Etherea. Obchody se vypořádávají onchain v USDC a většina cenových trhů se vyhodnocuje automaticky prostřednictvím onchain cenových zdrojů. Není k dispozici ve všech zemích.",
+  "limitless-title": "Limitless",
+  "polymarket-cta": "Prozkoumat Polymarket",
+  "polymarket-description": "Jeden z největších predikčních trhů. Obchody se vypořádávají na Polygonu a o výsledcích se rozhoduje prostřednictvím orákula UMA. Není k dispozici ve všech zemích.",
+  "polymarket-title": "Polymarket"
+}

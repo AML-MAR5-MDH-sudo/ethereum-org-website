@@ -1,0 +1,85 @@
+import type { VideoFrontmatter } from "@/lib/interfaces"
+
+import PageJsonLD from "@/components/PageJsonLD"
+
+import { toIsoDuration } from "@/lib/utils/time"
+import { normalizeUrlForJsonLd } from "@/lib/utils/url"
+
+import { getBreadcrumbListJsonLd } from "@/lib/jsonld/breadcrumbs"
+import { BASE_GRAPH_NODES } from "@/lib/jsonld/constants"
+import { REFERENCE } from "@/lib/jsonld/references"
+import { resolveAuthorsFromFrontmatter } from "@/lib/jsonld/utils"
+
+export default async function VideoPageJsonLD({
+  locale,
+  slug,
+  frontmatter,
+}: {
+  locale: string
+  slug: string
+  frontmatter: VideoFrontmatter
+}) {
+  const url = normalizeUrlForJsonLd(locale, `/videos/${slug}/`)
+  const videoGalleryUrl = normalizeUrlForJsonLd(locale, "/videos/")
+
+  // Resolve a known Person or Organization if one matches the author
+  // string. Otherwise fall back to an anonymous Person using the raw
+  // value.
+  const { authorGraphNodes } = resolveAuthorsFromFrontmatter(frontmatter.author)
+  const creator =
+    authorGraphNodes.length > 0
+      ? { "@id": authorGraphNodes[0]["@id"] }
+      : { "@type": "Person" as const, name: frontmatter.author }
+
+  const videoObjectId = { "@id": `${url}#video` }
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      ...BASE_GRAPH_NODES,
+      ...authorGraphNodes,
+      // Type-assertion node for "isPartOf" references
+      { "@type": "VideoGallery", "@id": videoGalleryUrl },
+      {
+        "@type": "WebPage",
+        "@id": url,
+        name: frontmatter.title,
+        description: frontmatter.description,
+        url,
+        inLanguage: locale,
+        author: [REFERENCE.ETHEREUM_COMMUNITY],
+        isPartOf: REFERENCE.ETHEREUM_ORG_WEBSITE,
+        breadcrumb: await getBreadcrumbListJsonLd(
+          locale,
+          `/videos/${slug}`,
+          frontmatter.breadcrumb || slug.replaceAll("-", " ")
+        ),
+        publisher: REFERENCE.ETHEREUM_FOUNDATION,
+        reviewedBy: REFERENCE.ETHEREUM_FOUNDATION,
+        mainEntity: videoObjectId,
+      },
+      {
+        "@type": "VideoObject",
+        ...videoObjectId,
+        name: frontmatter.title,
+        description: frontmatter.description,
+        uploadDate: `${frontmatter.uploadDate}T00:00:00+00:00`,
+        duration: toIsoDuration(frontmatter.duration),
+        isPartOf: { "@id": videoGalleryUrl },
+        thumbnailUrl:
+          frontmatter.customThumbnailUrl ||
+          `https://img.youtube.com/vi/${frontmatter.youtubeId}/hqdefault.jpg`,
+        embedUrl: `https://www.youtube.com/embed/${frontmatter.youtubeId}`,
+        contentUrl: `https://www.youtube.com/watch?v=${frontmatter.youtubeId}`,
+        educationalLevel: frontmatter.educationLevel,
+        inLanguage: frontmatter.lang,
+        creator,
+        publisher: REFERENCE.ETHEREUM_FOUNDATION,
+        isAccessibleForFree: true,
+        isFamilyFriendly: true,
+      },
+    ],
+  }
+
+  return <PageJsonLD structuredData={jsonLd} />
+}
